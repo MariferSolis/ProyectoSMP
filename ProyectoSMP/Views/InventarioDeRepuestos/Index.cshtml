@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SMP.Models.InventarioDeRepuestos>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Requisición)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Maximos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Minimos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Almacen)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requisición)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Maximos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Minimos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Almacen)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdRepuesto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdRepuesto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdRepuesto })
+        </td>
+    </tr>
+}
+
+</table>

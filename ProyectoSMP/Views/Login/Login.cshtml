@@ -1,0 +1,68 @@
+﻿@model ProyectoSMP.Models.ExisteUsuario_Result
+
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SMPrats! | </title>
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="~/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+</head>
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <img src="~/production/images/logo.PNG" />
+                <h1>SMPrats Login</h1>
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-signin", role = "form" }))
+                {
+
+            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="header">
+                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group form-header input-group-lg">
+                                                                    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", placeholder = "Correo electronoco...", type = "email", tabindex = 1 })
+                                                                    @Html.ValidationMessageFor(m => m.Correo, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                                            <div class="form-group centerlook" style="text-align: center">
+                                                                                <div class="form-group form-header input-group-lg">
+                                                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña", tabindex = 2 })
+                                                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                                                </div>
+                                                                            </div>
+                                                                                            <div class="remember">
+                                                                                                @Html.CheckBoxFor(m => m.Recordarme, htmlAttributes: new { @id = "login-remember", tabindex = 3 })
+                                                                                                @Html.LabelFor(m => m.Recordarme)
+                                                                                            </div>
+                                                                                                            <button type="submit" id="LoginButton" class="btn btn-block btn-user btn-secondary" tabindex="4">Ingresar</button>}
+
+            </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+</body>
+</html> 

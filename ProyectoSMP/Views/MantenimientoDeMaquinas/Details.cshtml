@@ -1,0 +1,91 @@
+﻿@model SMP.Models.MantenimientoDeMaquina
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MantenimientoDeMaquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDeOrden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDeOrden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDeMantenimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDeMantenimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecuencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecuencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URLArchivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URLArchivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InventarioDeRepuestos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InventarioDeRepuestos.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maquina.NombreMaquina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maquina.NombreMaquina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol1.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol1.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdMantenimiento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

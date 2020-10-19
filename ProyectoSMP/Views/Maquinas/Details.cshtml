@@ -1,0 +1,83 @@
+﻿@model SMP.Models.Maquina
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Maquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreMaquina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreMaquina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proceso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proceso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cadencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cadencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AreaDeMaquina.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AreaDeMaquina.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDeSistemaDeMaquina.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDeSistemaDeMaquina.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdMaquina }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
