@@ -142,16 +142,6 @@
     <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_MantenimientoDeMaquina_Rol" FromRole="Rol" ToRole="MantenimientoDeMaquina" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="TipoDeIdentificacion">
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
@@ -349,7 +339,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SMPEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="SMPEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
     <EntitySet Name="Canton" EntityType="Self.Canton" />
@@ -361,7 +351,6 @@
     <EntitySet Name="ParoDeMaquina" EntityType="Self.ParoDeMaquina" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" />
     <EntitySet Name="Rol" EntityType="Self.Rol" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="TipoDeIdentificacion" EntityType="Self.TipoDeIdentificacion" />
     <EntitySet Name="TipoDeSistemaDeMaquina" EntityType="Self.TipoDeSistemaDeMaquina" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
@@ -508,7 +497,7 @@
       <Parameter Name="Provincia" Mode="In" Type="String" />
       <Parameter Name="Canton" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ExisteCorreo" ReturnType="Collection(String)">
+    <FunctionImport Name="ExisteCorreo" ReturnType="Collection(SMPModel.ExisteCorreo_Result)">
       <Parameter Name="Correo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ExisteUsuario" ReturnType="Collection(SMPModel.ExisteUsuario_Result)">
@@ -516,36 +505,6 @@
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Provincias" ReturnType="Collection(SMPModel.Provincias_Result)" />
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SMPModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SMPModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
   <ComplexType Name="Cantones_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
@@ -584,6 +543,21 @@
     <Property Type="String" Name="Distrito" Nullable="false" MaxLength="2" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <ComplexType Name="ExisteCorreo_Result">
+    <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+    <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdTipoDeIdentificacion" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TipoCarga" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Provincia" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Canton" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Distrito" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="ExisteUsuario_Result">
     <Property Type="Int32" Name="IdUsuario" Nullable="false" />
     <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="50" />
@@ -602,16 +576,5 @@
   <ComplexType Name="Provincias_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

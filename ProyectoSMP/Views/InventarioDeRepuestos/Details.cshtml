@@ -1,14 +1,14 @@
-﻿@model SMP.Models.InventarioDeRepuestos
+﻿@model ProyectoSMP.Models.InventarioDeRepuestos
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>InventarioDeRepuestos</h4>
+    <h4>Repuesto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -70,6 +70,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdRepuesto }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdRepuesto }) |
+    @Html.ActionLink("Regresar", "Index")
 </p>

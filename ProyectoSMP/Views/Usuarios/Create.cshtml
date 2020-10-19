@@ -1,4 +1,4 @@
-﻿@model SMP.Models.Usuario
+﻿@model ProyectoSMP.Models.Usuario
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,15 +14,9 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.Hidden("IdUsuario",0)
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Identificacion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Identificacion, new { htmlAttributes = new { @class = "form-control" } })
@@ -30,15 +24,15 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoDeIdentificacion, "IdTipoDeIdentificacion", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="item form-group">
+            @Html.LabelFor(model => model.IdTipoDeIdentificacion, "Tipo de Cedula", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IdTipoDeIdentificacion", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IdTipoDeIdentificacion, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
@@ -46,7 +40,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control" } })
@@ -54,7 +48,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
@@ -62,7 +56,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.TipoCarga, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TipoCarga, new { htmlAttributes = new { @class = "form-control" } })
@@ -70,28 +64,28 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Provincia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Provincia, new SelectList(ViewBag.ListaProvincias, "Provincia", "Nombre"), "--Provincia--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Canton, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Canton, new SelectList(string.Empty, "Canton", "Nombre"), "--Canton--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Distrito, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Distrito, new SelectList(string.Empty, "Distrito", "Nombre"), "--Distrito--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Rol, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Rol", null, htmlAttributes: new { @class = "form-control" })
@@ -99,7 +93,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="item form-group">
             @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -109,17 +103,18 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
+        <div class="item form-group">
+            <div>
+                <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>       
             </div>
+            <div>
+                <input type="submit" value="Crear" class="btn btn-success" />
+            </div>           
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Regresar", "Index")
-</div>
+
 @section Scripts
 {
     <script type="text/javascript">

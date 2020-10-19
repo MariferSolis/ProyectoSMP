@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class InventarioDeRepuestosController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: InventarioDeRepuestos
         public ActionResult Index()
@@ -46,11 +46,11 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdRepuesto,Nombre,Cantidad,Requisición,Maximos,Minimos,Tipo,Almacen")] InventarioDeRepuestos inventarioDeRepuestos)
+        public ActionResult Create(InventarioDeRepuestos inventarioDeRepuestos)
         {
             if (ModelState.IsValid)
             {
-                db.InventarioDeRepuestos.Add(inventarioDeRepuestos);
+                db.AgregarInventarioDeRepuestos(inventarioDeRepuestos.Nombre, inventarioDeRepuestos.Cantidad, inventarioDeRepuestos.Requisición, inventarioDeRepuestos.Maximos, inventarioDeRepuestos.Minimos, inventarioDeRepuestos.Tipo, inventarioDeRepuestos.Almacen);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

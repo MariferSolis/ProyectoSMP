@@ -11,7 +11,7 @@ namespace ProyectoSMP.Controllers
 {
     public class AreaDeMaquinasController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
         // GET: AreaDeMaquinas
         public ActionResult Index()
         {
@@ -48,7 +48,8 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AreaDeMaquina.Add(areaDeMaquina);
+
+                db.AgregarAreaDeMaquina(areaDeMaquina.Nombre, areaDeMaquina.Descripcion, areaDeMaquina.Estado);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

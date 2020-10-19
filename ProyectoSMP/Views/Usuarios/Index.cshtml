@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SMP.Models.ConsultarUsuarios_Result>
+﻿@model IEnumerable<ProyectoSMP.Models.ConsultarUsuarios_Result>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Lista de Usuarios</title>
 
     <!-- Custom fonts for this template -->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
         <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"> @Html.ActionLink("Nuevo usuario", "Create")</h6>
+                <h6 class="m-0 font-weight-bold text-primary"> @Html.ActionLink("Nuevo Usuario", "Create")</h6>
 
             </div>
             <div class="card-body">
@@ -70,9 +70,7 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Estado)
-                            </th>
-                            
-
+                            </th>                           
                             <th>
                                 Acciones
                             </th>

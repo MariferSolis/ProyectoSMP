@@ -1,4 +1,4 @@
-﻿@model SMP.Models.Usuario
+﻿@model ProyectoSMP.Models.Usuario
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +7,9 @@
 
 <h2>Eliminar Usuario</h2>
 <hr />
-<h3>Esa seguro de borar este usuario?</h3>
+<h3>Esa seguro de eliminar los datos?</h3>
 <div>
+    <h4>Usuario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -101,12 +102,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Borrar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar", "Index")
-        </div>
-    }
+                <div class="form-actions no-color">
+                    <input type="submit" value="Borrar" class="btn btn-default" /> |
+                    @Html.ActionLink("Regresar", "Index")
+                </div>}
 </div>

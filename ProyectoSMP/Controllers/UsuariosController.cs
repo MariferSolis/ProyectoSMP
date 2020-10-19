@@ -16,7 +16,7 @@ namespace ProyectoSMP.Controllers
 {
     public class UsuariosController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -59,18 +59,27 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdUsuario,Identificacion,IdTipoDeIdentificacion,Nombre,Apellidos,Correo,Password,TipoCarga,Provincia,Canton,Distrito,Rol,Estado")] Usuario usuario)
+        public ActionResult Create(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.Password = CreatePassword(10);
-                BtnCorreo(usuario.Correo, usuario.Password, usuario.Nombre, usuario.Apellidos);
                 var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
                 var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);
                 usuario.Password = ClaveEncriptada;
-                db.Usuario.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var dato = db.ExisteCorreo(usuario.Correo).FirstOrDefault();
+                if(dato == null)
+                {
+                    db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
+                    usuario.Password, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.Rol, usuario.Estado);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "El correo ya existe");
+                    return RedirectToAction("Create", usuario);
+                }
             }
 
             ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.Rol);

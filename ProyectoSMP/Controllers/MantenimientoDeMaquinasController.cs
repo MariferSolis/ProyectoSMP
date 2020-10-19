@@ -13,7 +13,7 @@ namespace ProyectoSMP.Controllers
     public class MantenimientoDeMaquinasController : Controller
     {
         // GET: MantenimientoDeMaquinas
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: MantenimientoDeMaquinas
         public ActionResult Index()
@@ -51,11 +51,13 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdMantenimiento,NumeroDeOrden,NumeroDeMantenimiento,Tipo,Fecuencia,Rol,IdUsuario,IdMaquina,IdRepuesto,URLArchivo")] MantenimientoDeMaquina mantenimientoDeMaquina)
+        public ActionResult Create(MantenimientoDeMaquina mantenimientoDeMaquina)
         {
             if (ModelState.IsValid)
             {
-                db.MantenimientoDeMaquina.Add(mantenimientoDeMaquina);
+                db.AgregarMantenimientoDeMaquina(mantenimientoDeMaquina.NumeroDeOrden, mantenimientoDeMaquina.NombreDeMantenimiento, 
+                    mantenimientoDeMaquina.Tipo, mantenimientoDeMaquina.Fecuencia,mantenimientoDeMaquina.Rol,mantenimientoDeMaquina.IdUsuario,
+                    mantenimientoDeMaquina.IdMaquina,mantenimientoDeMaquina.IdRepuesto, mantenimientoDeMaquina.URLArchivo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

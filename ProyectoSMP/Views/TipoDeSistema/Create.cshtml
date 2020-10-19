@@ -1,27 +1,21 @@
-﻿@model SMP.Models.TipoDeSistemaDeMaquina
+﻿@model ProyectoSMP.Models.TipoDeSistemaDeMaquina
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Crear</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TipoDeSistemaDeMaquina</h4>
+        <h4>Tipo de Sistema</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoSistema, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdTipoSistema, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdTipoSistema, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.Hidden("IdTipoSistema", 0)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -49,14 +43,14 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="item form-group">
+            <div>
+                <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
+            </div>
+            <div>
+                <input type="submit" value="Crear" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class TipoDeIdentificacionController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: TipoDeIdentificacions
         public ActionResult Index()
@@ -50,7 +50,7 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TipoDeIdentificacion.Add(tipoDeIdentificacion);
+                db.AgregarTipoDeIdentificacion(tipoDeIdentificacion.Descripcion,tipoDeIdentificacion.Estado);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

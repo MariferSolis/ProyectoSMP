@@ -13,7 +13,7 @@ namespace ProyectoSMP.Controllers
 {
     public class CumplimientoController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
         // GET: CumplimientoMantenimientoes
         public ActionResult Index()
         {
@@ -38,6 +38,7 @@ namespace ProyectoSMP.Controllers
         // GET: CumplimientoMantenimientoes/Create
         public ActionResult Create()
         {
+            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NombreDeMantenimiento");
             return View();
         }
 
@@ -46,46 +47,16 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdCumplimiento,IdMantenimiento,Estado,Fecha")] CumplimientoMantenimiento cumplimientoMantenimiento)
+        public ActionResult Create(CumplimientoMantenimiento cumplimientoMantenimiento)
         {
             if (ModelState.IsValid)
             {
-                db.CumplimientoMantenimiento.Add(cumplimientoMantenimiento);
+                cumplimientoMantenimiento.Fecha = DateTime.Now;
+                db.AgregarCumplimientoMantenimiento(cumplimientoMantenimiento.IdMantenimiento, cumplimientoMantenimiento.Estado,cumplimientoMantenimiento.Fecha);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(cumplimientoMantenimiento);
-        }
-
-        // GET: CumplimientoMantenimientoes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CumplimientoMantenimiento cumplimientoMantenimiento = db.CumplimientoMantenimiento.Find(id);
-            if (cumplimientoMantenimiento == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cumplimientoMantenimiento);
-        }
-
-        // POST: CumplimientoMantenimientoes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdCumplimiento,IdMantenimiento,Estado,Fecha")] CumplimientoMantenimiento cumplimientoMantenimiento)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cumplimientoMantenimiento).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NombreDeMantenimiento",cumplimientoMantenimiento.IdMantenimiento);
             return View(cumplimientoMantenimiento);
         }
 

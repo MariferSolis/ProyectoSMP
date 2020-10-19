@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class TipoDeSistemaController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: TipoDeSistemaDeMaquinas
         public ActionResult Index()
@@ -46,11 +46,11 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdTipoSistema,Nombre,Descripcion,Estado")] TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina)
+        public ActionResult Create(TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina)
         {
             if (ModelState.IsValid)
             {
-                db.TipoDeSistemaDeMaquina.Add(tipoDeSistemaDeMaquina);
+                db.AgregarTipoDeSistemaDeMaquina(tipoDeSistemaDeMaquina.Nombre,tipoDeSistemaDeMaquina.Descripcion,tipoDeSistemaDeMaquina.Estado);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

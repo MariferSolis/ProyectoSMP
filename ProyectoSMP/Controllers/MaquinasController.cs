@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class MaquinasController : Controller
     {     
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: Maquinas
         public ActionResult Index()
@@ -40,7 +40,7 @@ namespace ProyectoSMP.Controllers
         public ActionResult Create()
         {
             ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre");
-            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre");
+            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre");
             return View();
         }
 
@@ -49,17 +49,17 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdMaquina,NombreMaquina,IdTipDeSistema,IdArea,Codigo,Modelo,Proceso,Cadencia,Descripcion")] Maquina maquina)
+        public ActionResult Create(Maquina maquina)
         {
             if (ModelState.IsValid)
             {
-                db.Maquina.Add(maquina);
+                db.AgregarMaquina(maquina.NombreMaquina,maquina.IdTipoSistema,maquina.IdArea,maquina.Codigo,maquina.Modelo,maquina.Proceso,maquina.Cadencia,maquina.Descripcion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre", maquina.IdArea);
-            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
             return View(maquina);
         }
 

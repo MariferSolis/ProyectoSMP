@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class ParoDeMaquinasController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMPEntities2 db = new SMPEntities2();
 
         // GET: ParoDeMaquinas
         public ActionResult Index()
@@ -49,11 +49,12 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdParo,NombreParo,Tipo,Descripcion,FechaComienza,FechaFin,IdMaquina,IdMantenimiento")] ParoDeMaquina paroDeMaquina)
+        public ActionResult Create(ParoDeMaquina paroDeMaquina)
         {
             if (ModelState.IsValid)
             {
-                db.ParoDeMaquina.Add(paroDeMaquina);
+                db.AgregarParoDeMaquina(paroDeMaquina.NombreParo,paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,
+                    paroDeMaquina.FechaFin,paroDeMaquina.IdMaquina,paroDeMaquina.IdMantenimiento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

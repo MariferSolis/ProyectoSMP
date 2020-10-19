@@ -10,49 +10,21 @@
 namespace ProyectoSMP.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Usuario
+    
+    public partial class ExisteCorreo_Result
     {
         public int IdUsuario { get; set; }
-        [Required]
-        [Display(Name = "Numero de Cedula ")]
         public string Identificacion { get; set; }
-        [Required]
-        [Display(Name = "Tipo de Cedula ")]
-        public int? IdTipoDeIdentificacion { get; set; }
-        [Required]
-        [Display(Name = "Nombre ")]
+        public int IdTipoDeIdentificacion { get; set; }
         public string Nombre { get; set; }
-        [Required]
-        [Display(Name = "Apellidos ")]
         public string Apellidos { get; set; }
-        [Required]
-        [Display(Name = "Correo ")]
         public string Correo { get; set; }
         public string Password { get; set; }
-        [Required]
-        [Display(Name = "Cargo ")]
         public string TipoCarga { get; set; }
-        [Required]
-        [Display(Name = "Provincia ")]
         public string Provincia { get; set; }
-        [Required]
-        [Display(Name = "Canton ")]
         public string Canton { get; set; }
-        [Required]
-        [Display(Name = "Distrito ")]
         public string Distrito { get; set; }
-        [Required]
-        [Display(Name = "Rol ")]
         public int Rol { get; set; }
-        [Required]
-        [Display(Name = "Estado ")]
         public bool Estado { get; set; }
-
-        public virtual Rol Rol1 { get; set; }
-
-        public virtual TipoDeIdentificacion TipoDeIdentificacion { get; set; }
     }
 }
