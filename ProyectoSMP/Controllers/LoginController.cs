@@ -22,12 +22,13 @@ namespace ProyectoSMP.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(ExisteUsuario_Result existe)
         {
             var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
 
             var ClaveEncriptada = Seguridad.EncryptString(SecretKey, existe.Password);
-            var ClaveDesencriptada = Seguridad.DecryptString(SecretKey, ClaveEncriptada);
+            //var ClaveDesencriptada = Seguridad.DecryptString(SecretKey, ClaveEncriptada);
             var dato = bd.ExisteUsuario(existe.Correo, ClaveEncriptada).FirstOrDefault();
             if (dato == null)
             {
@@ -50,7 +51,7 @@ namespace ProyectoSMP.Controllers
         }
         public ActionResult Salir()
         {
-            Session.Remove("Identificacion");
+            Session.Remove("IdUsuario");
             Session.RemoveAll();
             Response.Cache.SetCacheability(HttpCacheability.Private);
             Session.Clear();

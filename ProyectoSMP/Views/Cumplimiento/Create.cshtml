@@ -40,16 +40,11 @@
             @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
         </div>
-    </div>
-
-    <div class="item form-group">
-        <div>
-            <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
-        </div>
-        <div>
-            <input type="submit" value="Crear" class="btn btn-success" />
-        </div>
-    </div>
+    </div>   
 </div>
 }
-
+<hr />
+<div class="item form-group">
+    <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
+    <input type="submit" value="Crear" class="btn btn-success" />
+</div>

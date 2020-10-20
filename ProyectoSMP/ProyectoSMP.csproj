@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaDeMaquinasController.cs" />
+    <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CumplimientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioDeRepuestosController.cs" />
@@ -249,7 +250,6 @@
     <Content Include="docs\fonts\css\font-awesome.min.css" />
     <Content Include="docs\fonts\fonts\fontawesome-webfont.svg" />
     <Content Include="docs\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="docs\images\layout.png" />
     <Content Include="docs\images\min_menu.png" />
     <Content Include="docs\images\min_menu.tiff" />
     <Content Include="docs\images\welcome.png" />
@@ -296,6 +296,7 @@
     <Content Include="production\images\favicon.ico" />
     <Content Include="production\images\img.jpg" />
     <Content Include="production\images\inbox.png" />
+    <Content Include="production\images\logis.PNG" />
     <Content Include="production\images\logo.PNG" />
     <Content Include="production\images\mastercard.png" />
     <Content Include="production\images\media.jpg" />
@@ -5165,6 +5166,7 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Calendario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
