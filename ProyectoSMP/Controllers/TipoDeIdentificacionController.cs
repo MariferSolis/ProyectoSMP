@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class TipoDeIdentificacionController : Controller
     {
-        private SMPEntities2 db = new SMPEntities2();
+        private SMPEntities4 db = new SMPEntities4();
 
         // GET: TipoDeIdentificacions
         public ActionResult Index()

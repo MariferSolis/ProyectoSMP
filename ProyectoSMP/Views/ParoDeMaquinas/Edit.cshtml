@@ -1,23 +1,21 @@
 ﻿@model ProyectoSMP.Models.ParoDeMaquina
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Edit";
-}
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+                ViewBag.Title = "Edit"; }
 
 <h2>Editar</h2>
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
+@Html.AntiForgeryToken()
+
 <div class="form-horizontal">
     <h4>Paro</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.IdParo)
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.NombreParo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.NombreParo, new { htmlAttributes = new { @class = "form-control" } })
@@ -25,7 +23,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
@@ -33,7 +31,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
@@ -41,7 +39,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.FechaComienza, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.FechaComienza, new { htmlAttributes = new { @class = "form-control" } })
@@ -49,7 +47,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
@@ -57,7 +55,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.IdMaquina, "IdMaquina", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdMaquina", null, htmlAttributes: new { @class = "form-control" })
@@ -65,14 +63,14 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="item form-group">
         @Html.LabelFor(model => model.IdMantenimiento, "IdMantenimiento", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdMantenimiento", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.IdMantenimiento, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <hr />
     <div class="item form-group">
         <div>
             <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
@@ -81,6 +79,5 @@
             <input type="submit" value="Guardar" class="btn btn-success" />
         </div>
     </div>
-</div>
-}
+</div>}
 

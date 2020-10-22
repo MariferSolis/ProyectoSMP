@@ -15,10 +15,10 @@ namespace ProyectoSMP.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SMPEntities2 : DbContext
+    public partial class SMPEntities4 : DbContext
     {
-        public SMPEntities2()
-            : base("name=SMPEntities2")
+        public SMPEntities4()
+            : base("name=SMPEntities4")
         {
         }
     
@@ -29,6 +29,7 @@ namespace ProyectoSMP.Models
     
         public virtual DbSet<AreaDeMaquina> AreaDeMaquina { get; set; }
         public virtual DbSet<Bitacora> Bitacora { get; set; }
+        public virtual DbSet<Calendario> Calendario { get; set; }
         public virtual DbSet<Canton> Canton { get; set; }
         public virtual DbSet<CumplimientoMantenimiento> CumplimientoMantenimiento { get; set; }
         public virtual DbSet<Distrito> Distrito { get; set; }
@@ -41,6 +42,39 @@ namespace ProyectoSMP.Models
         public virtual DbSet<TipoDeIdentificacion> TipoDeIdentificacion { get; set; }
         public virtual DbSet<TipoDeSistemaDeMaquina> TipoDeSistemaDeMaquina { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual int ActualizarCalendario(Nullable<int> idEvento, string asunto, string descripcion, Nullable<System.DateTime> comienza, Nullable<System.DateTime> fin, string color, Nullable<bool> todoDia)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            var asuntoParameter = asunto != null ?
+                new ObjectParameter("Asunto", asunto) :
+                new ObjectParameter("Asunto", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var comienzaParameter = comienza.HasValue ?
+                new ObjectParameter("Comienza", comienza) :
+                new ObjectParameter("Comienza", typeof(System.DateTime));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(System.DateTime));
+    
+            var colorParameter = color != null ?
+                new ObjectParameter("Color", color) :
+                new ObjectParameter("Color", typeof(string));
+    
+            var todoDiaParameter = todoDia.HasValue ?
+                new ObjectParameter("TodoDia", todoDia) :
+                new ObjectParameter("TodoDia", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarCalendario", idEventoParameter, asuntoParameter, descripcionParameter, comienzaParameter, finParameter, colorParameter, todoDiaParameter);
+        }
     
         public virtual ObjectResult<Nullable<int>> AgregarAreaDeMaquina(string nombre, string descripcion, Nullable<bool> estado)
         {
@@ -86,6 +120,35 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("Tipo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarBitacora", controladorParameter, metodoParameter, mensajeParameter, idUsuarioParameter, fechaParameter, tipoParameter);
+        }
+    
+        public virtual int AgregarCalendario(string asunto, string descripcion, Nullable<System.DateTime> comienza, Nullable<System.DateTime> fin, string color, Nullable<bool> todoDia)
+        {
+            var asuntoParameter = asunto != null ?
+                new ObjectParameter("Asunto", asunto) :
+                new ObjectParameter("Asunto", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var comienzaParameter = comienza.HasValue ?
+                new ObjectParameter("Comienza", comienza) :
+                new ObjectParameter("Comienza", typeof(System.DateTime));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(System.DateTime));
+    
+            var colorParameter = color != null ?
+                new ObjectParameter("Color", color) :
+                new ObjectParameter("Color", typeof(string));
+    
+            var todoDiaParameter = todoDia.HasValue ?
+                new ObjectParameter("TodoDia", todoDia) :
+                new ObjectParameter("TodoDia", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCalendario", asuntoParameter, descripcionParameter, comienzaParameter, finParameter, colorParameter, todoDiaParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> AgregarCumplimientoMantenimiento(Nullable<int> idMantenimiento, Nullable<bool> estado, Nullable<System.DateTime> fecha)
@@ -341,6 +404,11 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Cantones_Result>("Cantones", provinciaParameter);
         }
     
+        public virtual ObjectResult<ConsultarCalendario_Result> ConsultarCalendario()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCalendario_Result>("ConsultarCalendario");
+        }
+    
         public virtual ObjectResult<ConsultarUnUsuarios_Result> ConsultarUnUsuarios(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -366,6 +434,15 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("Canton", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Distritos_Result>("Distritos", provinciaParameter, cantonParameter);
+        }
+    
+        public virtual int EliminarCalendario(Nullable<int> idEvento)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarCalendario", idEventoParameter);
         }
     
         public virtual ObjectResult<ExisteCorreo_Result> ExisteCorreo(string correo)

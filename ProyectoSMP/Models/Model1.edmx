@@ -26,6 +26,18 @@
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Calendario">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="int" Nullable="false" />
+          <Property Name="Asunto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="Comienza" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" />
+          <Property Name="Color" Type="varchar" MaxLength="10" />
+          <Property Name="TodoDia" Type="bit" />
+        </EntityType>
         <EntityType Name="Canton">
           <Key>
             <PropertyRef Name="Provincia" />
@@ -318,6 +330,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ActualizarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvento" Type="int" Mode="In" />
+          <Parameter Name="Asunto" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Comienza" Type="datetime" Mode="In" />
+          <Parameter Name="Fin" Type="datetime" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="TodoDia" Type="bit" Mode="In" />
+        </Function>
         <Function Name="AgregarAreaDeMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -330,6 +351,14 @@
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
           <Parameter Name="Fecha" Type="datetime" Mode="In" />
           <Parameter Name="Tipo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AgregarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Asunto" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Comienza" Type="datetime" Mode="In" />
+          <Parameter Name="Fin" Type="datetime" Mode="In" />
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="TodoDia" Type="bit" Mode="In" />
         </Function>
         <Function Name="AgregarCumplimientoMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
@@ -401,6 +430,7 @@
         <Function Name="Cantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Provincia" Type="char" Mode="In" />
         </Function>
+        <Function Name="ConsultarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ConsultarUnUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
@@ -408,6 +438,9 @@
         <Function Name="Distritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Provincia" Type="char" Mode="In" />
           <Parameter Name="Canton" Type="char" Mode="In" />
+        </Function>
+        <Function Name="EliminarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvento" Type="int" Mode="In" />
         </Function>
         <Function Name="ExisteCorreo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
@@ -420,6 +453,7 @@
         <EntityContainer Name="SMPModelStoreContainer">
           <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calendario" EntityType="Self.Calendario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CumplimientoMantenimiento" EntityType="Self.CumplimientoMantenimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
@@ -511,6 +545,18 @@
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calendario">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="Int32" Nullable="false" />
+          <Property Name="Asunto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Comienza" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fin" Type="DateTime" Precision="3" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TodoDia" Type="Boolean" />
         </EntityType>
         <EntityType Name="Canton">
           <Key>
@@ -829,9 +875,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SMPEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SMPEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" />
           <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
+          <EntitySet Name="Calendario" EntityType="Self.Calendario" />
           <EntitySet Name="Canton" EntityType="Self.Canton" />
           <EntitySet Name="CumplimientoMantenimiento" EntityType="Self.CumplimientoMantenimiento" />
           <EntitySet Name="Distrito" EntityType="Self.Distrito" />
@@ -896,6 +943,15 @@
             <End Role="TipoDeIdentificacion" EntitySet="TipoDeIdentificacion" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <FunctionImport Name="ActualizarCalendario">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+            <Parameter Name="Asunto" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Comienza" Mode="In" Type="DateTime" />
+            <Parameter Name="Fin" Mode="In" Type="DateTime" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="TodoDia" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="AgregarAreaDeMaquina" ReturnType="Collection(Int32)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -908,6 +964,14 @@
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
             <Parameter Name="Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="Tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarCalendario">
+            <Parameter Name="Asunto" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Comienza" Mode="In" Type="DateTime" />
+            <Parameter Name="Fin" Mode="In" Type="DateTime" />
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="TodoDia" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="AgregarCumplimientoMantenimiento" ReturnType="Collection(Int32)">
             <Parameter Name="IdMantenimiento" Mode="In" Type="Int32" />
@@ -979,6 +1043,7 @@
           <FunctionImport Name="Cantones" ReturnType="Collection(SMPModel.Cantones_Result)">
             <Parameter Name="Provincia" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarCalendario" ReturnType="Collection(SMPModel.ConsultarCalendario_Result)" />
           <FunctionImport Name="ConsultarUnUsuarios" ReturnType="Collection(SMPModel.ConsultarUnUsuarios_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -986,6 +1051,9 @@
           <FunctionImport Name="Distritos" ReturnType="Collection(SMPModel.Distritos_Result)">
             <Parameter Name="Provincia" Mode="In" Type="String" />
             <Parameter Name="Canton" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCalendario">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ExisteCorreo" ReturnType="Collection(SMPModel.ExisteCorreo_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
@@ -1000,6 +1068,15 @@
           <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="Canton" Nullable="false" MaxLength="2" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ConsultarCalendario_Result">
+          <Property Type="Int32" Name="IdEvento" Nullable="false" />
+          <Property Type="String" Name="Asunto" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="Comienza" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fin" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="TodoDia" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ConsultarUnUsuarios_Result">
           <Property Type="Int32" Name="IdUsuario" Nullable="false" />
@@ -1072,7 +1149,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities2">
+        <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities4">
           <EntitySetMapping Name="AreaDeMaquina">
             <EntityTypeMapping TypeName="SMPModel.AreaDeMaquina">
               <MappingFragment StoreEntitySet="AreaDeMaquina">
@@ -1093,6 +1170,19 @@
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendario">
+            <EntityTypeMapping TypeName="SMPModel.Calendario">
+              <MappingFragment StoreEntitySet="Calendario">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1239,8 +1329,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActualizarCalendario" FunctionName="SMPModel.Store.ActualizarCalendario" />
           <FunctionImportMapping FunctionImportName="AgregarAreaDeMaquina" FunctionName="SMPModel.Store.AgregarAreaDeMaquina" />
           <FunctionImportMapping FunctionImportName="AgregarBitacora" FunctionName="SMPModel.Store.AgregarBitacora" />
+          <FunctionImportMapping FunctionImportName="AgregarCalendario" FunctionName="SMPModel.Store.AgregarCalendario" />
           <FunctionImportMapping FunctionImportName="AgregarCumplimientoMantenimiento" FunctionName="SMPModel.Store.AgregarCumplimientoMantenimiento" />
           <FunctionImportMapping FunctionImportName="AgregarInventarioDeRepuestos" FunctionName="SMPModel.Store.AgregarInventarioDeRepuestos" />
           <FunctionImportMapping FunctionImportName="AgregarMantenimientoDeMaquina" FunctionName="SMPModel.Store.AgregarMantenimientoDeMaquina" />
@@ -1255,6 +1347,19 @@
                 <ScalarProperty Name="Provincia" ColumnName="Provincia" />
                 <ScalarProperty Name="Canton" ColumnName="Canton" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarCalendario" FunctionName="SMPModel.Store.ConsultarCalendario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPModel.ConsultarCalendario_Result">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1302,6 +1407,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarCalendario" FunctionName="SMPModel.Store.EliminarCalendario" />
           <FunctionImportMapping FunctionImportName="ExisteCorreo" FunctionName="SMPModel.Store.ExisteCorreo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SMPModel.ExisteCorreo_Result">

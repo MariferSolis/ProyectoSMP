@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities2">
+  <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities4">
     <EntitySetMapping Name="AreaDeMaquina">
       <EntityTypeMapping TypeName="SMPModel.AreaDeMaquina">
         <MappingFragment StoreEntitySet="AreaDeMaquina">
@@ -21,6 +21,19 @@
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendario">
+      <EntityTypeMapping TypeName="SMPModel.Calendario">
+        <MappingFragment StoreEntitySet="Calendario">
+          <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Fin" ColumnName="Fin" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -167,8 +180,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActualizarCalendario" FunctionName="SMPModel.Store.ActualizarCalendario" />
     <FunctionImportMapping FunctionImportName="AgregarAreaDeMaquina" FunctionName="SMPModel.Store.AgregarAreaDeMaquina" />
     <FunctionImportMapping FunctionImportName="AgregarBitacora" FunctionName="SMPModel.Store.AgregarBitacora" />
+    <FunctionImportMapping FunctionImportName="AgregarCalendario" FunctionName="SMPModel.Store.AgregarCalendario" />
     <FunctionImportMapping FunctionImportName="AgregarCumplimientoMantenimiento" FunctionName="SMPModel.Store.AgregarCumplimientoMantenimiento" />
     <FunctionImportMapping FunctionImportName="AgregarInventarioDeRepuestos" FunctionName="SMPModel.Store.AgregarInventarioDeRepuestos" />
     <FunctionImportMapping FunctionImportName="AgregarMantenimientoDeMaquina" FunctionName="SMPModel.Store.AgregarMantenimientoDeMaquina" />
@@ -183,6 +198,19 @@
           <ScalarProperty Name="Provincia" ColumnName="Provincia" />
           <ScalarProperty Name="Canton" ColumnName="Canton" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarCalendario" FunctionName="SMPModel.Store.ConsultarCalendario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMPModel.ConsultarCalendario_Result">
+          <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Fin" ColumnName="Fin" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -230,6 +258,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarCalendario" FunctionName="SMPModel.Store.EliminarCalendario" />
     <FunctionImportMapping FunctionImportName="ExisteCorreo" FunctionName="SMPModel.Store.ExisteCorreo">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SMPModel.ExisteCorreo_Result">

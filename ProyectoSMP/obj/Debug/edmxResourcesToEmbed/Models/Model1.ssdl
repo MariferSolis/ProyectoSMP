@@ -21,6 +21,18 @@
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Calendario">
+    <Key>
+      <PropertyRef Name="IdEvento" />
+    </Key>
+    <Property Name="IdEvento" Type="int" Nullable="false" />
+    <Property Name="Asunto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+    <Property Name="Comienza" Type="datetime" Nullable="false" />
+    <Property Name="Fin" Type="datetime" />
+    <Property Name="Color" Type="varchar" MaxLength="10" />
+    <Property Name="TodoDia" Type="bit" />
+  </EntityType>
   <EntityType Name="Canton">
     <Key>
       <PropertyRef Name="Provincia" />
@@ -313,6 +325,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="ActualizarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEvento" Type="int" Mode="In" />
+    <Parameter Name="Asunto" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="Comienza" Type="datetime" Mode="In" />
+    <Parameter Name="Fin" Type="datetime" Mode="In" />
+    <Parameter Name="Color" Type="varchar" Mode="In" />
+    <Parameter Name="TodoDia" Type="bit" Mode="In" />
+  </Function>
   <Function Name="AgregarAreaDeMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="varchar" Mode="In" />
     <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -325,6 +346,14 @@
     <Parameter Name="IdUsuario" Type="int" Mode="In" />
     <Parameter Name="Fecha" Type="datetime" Mode="In" />
     <Parameter Name="Tipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AgregarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Asunto" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="Comienza" Type="datetime" Mode="In" />
+    <Parameter Name="Fin" Type="datetime" Mode="In" />
+    <Parameter Name="Color" Type="varchar" Mode="In" />
+    <Parameter Name="TodoDia" Type="bit" Mode="In" />
   </Function>
   <Function Name="AgregarCumplimientoMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
@@ -396,6 +425,7 @@
   <Function Name="Cantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Provincia" Type="char" Mode="In" />
   </Function>
+  <Function Name="ConsultarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ConsultarUnUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
@@ -403,6 +433,9 @@
   <Function Name="Distritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Provincia" Type="char" Mode="In" />
     <Parameter Name="Canton" Type="char" Mode="In" />
+  </Function>
+  <Function Name="EliminarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEvento" Type="int" Mode="In" />
   </Function>
   <Function Name="ExisteCorreo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Correo" Type="varchar" Mode="In" />
@@ -415,6 +448,7 @@
   <EntityContainer Name="SMPModelStoreContainer">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Calendario" EntityType="Self.Calendario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CumplimientoMantenimiento" EntityType="Self.CumplimientoMantenimiento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />

@@ -13,7 +13,7 @@ namespace ProyectoSMP.Controllers
     public class LoginController : Controller
     {
 
-        SMPEntities2 bd = new SMPEntities2();
+        SMPEntities4 bd = new SMPEntities4();
 
         [AllowAnonymous]
         public ActionResult Login()
@@ -39,6 +39,7 @@ namespace ProyectoSMP.Controllers
             else
             {
                 Session["IdUsuario"] = dato.IdUsuario.ToString();
+                System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString()+" "+dato.Apellidos.ToString();
                 var username = existe.Correo;
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
                 string hash = FormsAuthentication.Encrypt(ticket);
@@ -52,6 +53,7 @@ namespace ProyectoSMP.Controllers
         public ActionResult Salir()
         {
             Session.Remove("IdUsuario");
+            Session.Remove("Name");
             Session.RemoveAll();
             Response.Cache.SetCacheability(HttpCacheability.Private);
             Session.Clear();

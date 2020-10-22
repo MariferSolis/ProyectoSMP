@@ -13,7 +13,7 @@ namespace ProyectoSMP.Controllers
     public class MantenimientoDeMaquinasController : Controller
     {
         // GET: MantenimientoDeMaquinas
-        private SMPEntities2 db = new SMPEntities2();
+        private SMPEntities4 db = new SMPEntities4();
 
         // GET: MantenimientoDeMaquinas
         public ActionResult Index()

@@ -151,10 +151,16 @@
     <Compile Include="Models\Bitacora.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calendario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Canton.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cantones_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsultarCalendario_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConsultarUnUsuarios_Result.cs">
@@ -242,6 +248,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chart.css" />
+    <Content Include="Content\Chart.min.css" />
     <Content Include="docs\css\animate.min.css" />
     <Content Include="docs\css\bootstrap.min.css" />
     <Content Include="docs\css\docs.min.css" />
@@ -379,6 +387,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -4684,11 +4694,6 @@
     <Content Include="vendors\fontawesome\scss\_rotated-flipped.scss" />
     <Content Include="vendors\fontawesome\scss\_stacked.scss" />
     <Content Include="vendors\fontawesome\scss\_variables.scss" />
-    <Content Include="vendors\fullcalendar\.bower.json" />
-    <Content Include="vendors\fullcalendar\bower.json" />
-    <Content Include="vendors\fullcalendar\CHANGELOG.md" />
-    <Content Include="vendors\fullcalendar\CONTRIBUTING.md" />
-    <Content Include="vendors\fullcalendar\README.md" />
     <Content Include="vendors\gauge.js\.bower.json" />
     <Content Include="vendors\gauge.js\bower.json" />
     <Content Include="vendors\gauge.js\dist\gauge.coffee" />
@@ -5167,6 +5172,11 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Calendario\Index.cshtml" />
+    <Content Include="vendors\fullcalendar\.bower.json" />
+    <Content Include="vendors\fullcalendar\bower.json" />
+    <Content Include="vendors\fullcalendar\CHANGELOG.md" />
+    <Content Include="vendors\fullcalendar\CONTRIBUTING.md" />
+    <Content Include="vendors\fullcalendar\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
