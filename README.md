@@ -1,2 +1,2 @@
 # ProyectoSMP
- 
+Sistema de Mantenimiento Prats. El proyecto consiste en el desarrollo de un software para la gestión del mantenimiento de las máquinas de producción de la empresa Prats, lo cual contempla diversos tipos de máquinas industriales y robóticas que son utilizadas para la creación de lentes resetados. Con el desarrollo de esta herramienta se pretende mejorar el control de mantenimientos de cada máquina así como llevar un registro de cada operador encargado de realizar dichos mantenimientos y reparaciones, lo cual va a brindar un mejor control del estado de las máquinas de producción. Integrantes: Kevin Arrieta y Maria Fernanda Solis.
