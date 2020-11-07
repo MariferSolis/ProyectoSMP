@@ -1,0 +1,58 @@
+﻿@model ProyectoSMP.Models.PlanMantenimiento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlanMantenimiento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdPlan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdPlan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMantenimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdMantenimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeCreacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new {  id = Model.IdPlan }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -11,48 +11,33 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.Mantenimiento = new HashSet<Mantenimiento>();
+        }
+    
         public int IdUsuario { get; set; }
-        [Required]
-        [Display(Name = "Numero de Cedula ")]
         public string Identificacion { get; set; }
-        [Required]
-        [Display(Name = "Tipo de Cedula ")]
-        public int? IdTipoDeIdentificacion { get; set; }
-        [Required]
-        [Display(Name = "Nombre ")]
+        public int IdTipoDeIdentificacion { get; set; }
         public string Nombre { get; set; }
-        [Required]
-        [Display(Name = "Apellidos ")]
         public string Apellidos { get; set; }
-        [Required]
-        [Display(Name = "Correo ")]
         public string Correo { get; set; }
         public string Password { get; set; }
-        [Required]
-        [Display(Name = "Cargo ")]
         public string TipoCarga { get; set; }
-        [Required]
-        [Display(Name = "Provincia ")]
         public string Provincia { get; set; }
-        [Required]
-        [Display(Name = "Canton ")]
         public string Canton { get; set; }
-        [Required]
-        [Display(Name = "Distrito ")]
         public string Distrito { get; set; }
-        [Required]
-        [Display(Name = "Rol ")]
-        public int Rol { get; set; }
-        [Required]
-        [Display(Name = "Estado ")]
+        public int IdRol { get; set; }
         public bool Estado { get; set; }
-
-        public virtual Rol Rol1 { get; set; }
-
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }
+        public virtual Rol Rol { get; set; }
         public virtual TipoDeIdentificacion TipoDeIdentificacion { get; set; }
+
     }
 }

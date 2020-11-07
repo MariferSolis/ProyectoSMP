@@ -46,15 +46,16 @@
     <NavigationProperty Name="Provincia2" Relationship="Self.FK__Canton__Provinci__3F466844" FromRole="Canton" ToRole="Provincia" />
     <NavigationProperty Name="Distrito" Relationship="Self.FK__Distrito__403A8C7D" FromRole="Canton" ToRole="Distrito" />
   </EntityType>
-  <EntityType Name="CumplimientoMantenimiento">
+  <EntityType Name="Cumplimiento">
     <Key>
       <PropertyRef Name="IdCumplimiento" />
     </Key>
     <Property Name="IdCumplimiento" Type="Int32" Nullable="false" />
-    <Property Name="IdMantenimiento" Type="Int32" Nullable="false" />
+    <Property Name="IdPlan" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Estado" Type="Boolean" />
-    <Property Name="Fecha" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_CumplimientoMantenimiento_MantenimientoDeMaquina" FromRole="CumplimientoMantenimiento" ToRole="MantenimientoDeMaquina" />
+    <Property Name="Detalles" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PlanMantenimiento" Relationship="Self.FK_Cumplimiento_Plan" FromRole="Cumplimiento" ToRole="PlanMantenimiento" />
   </EntityType>
   <EntityType Name="Distrito">
     <Key>
@@ -80,27 +81,29 @@
     <Property Name="Minimos" Type="Int32" />
     <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Almacen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_MantenimientoDeMaquina_InventarioDeRepuestos" FromRole="InventarioDeRepuestos" ToRole="MantenimientoDeMaquina" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_InventarioDeRepuestos" FromRole="InventarioDeRepuestos" ToRole="Mantenimiento" />
   </EntityType>
-  <EntityType Name="MantenimientoDeMaquina">
+  <EntityType Name="Mantenimiento">
     <Key>
       <PropertyRef Name="IdMantenimiento" />
     </Key>
     <Property Name="IdMantenimiento" Type="Int32" Nullable="false" />
-    <Property Name="NumeroDeOrden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NombreDeMantenimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Fecuencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Rol" Type="Int32" />
+    <Property Name="IdMaquina" Type="Int32" Nullable="false" />
+    <Property Name="Seccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroOperacion" Type="Int32" />
+    <Property Name="NombreOperacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Frecuencia" Type="Int32" />
+    <Property Name="IdRol" Type="Int32" />
     <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="IdMaquina" Type="Int32" />
     <Property Name="IdRepuesto" Type="Int32" />
+    <Property Name="Detalles" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="URLArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CumplimientoMantenimiento" Relationship="Self.FK_CumplimientoMantenimiento_MantenimientoDeMaquina" FromRole="MantenimientoDeMaquina" ToRole="CumplimientoMantenimiento" />
-    <NavigationProperty Name="InventarioDeRepuestos" Relationship="Self.FK_MantenimientoDeMaquina_InventarioDeRepuestos" FromRole="MantenimientoDeMaquina" ToRole="InventarioDeRepuestos" />
-    <NavigationProperty Name="Maquina" Relationship="Self.FK_MantenimientoDeMaquina_Maquina" FromRole="MantenimientoDeMaquina" ToRole="Maquina" />
-    <NavigationProperty Name="Rol1" Relationship="Self.FK_MantenimientoDeMaquina_Rol" FromRole="MantenimientoDeMaquina" ToRole="Rol" />
-    <NavigationProperty Name="ParoDeMaquina" Relationship="Self.FK_ParoDeMaquina_MantenimientoDeMaquina" FromRole="MantenimientoDeMaquina" ToRole="ParoDeMaquina" />
+    <NavigationProperty Name="InventarioDeRepuestos" Relationship="Self.FK_Mantenimiento_InventarioDeRepuestos" FromRole="Mantenimiento" ToRole="InventarioDeRepuestos" />
+    <NavigationProperty Name="Maquina" Relationship="Self.FK_Mantenimiento_Maquina" FromRole="Mantenimiento" ToRole="Maquina" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_Mantenimiento_Rol" FromRole="Mantenimiento" ToRole="Rol" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Mantenimiento_Usuario" FromRole="Mantenimiento" ToRole="Usuario" />
+    <NavigationProperty Name="ParoDeMaquina" Relationship="Self.FK_ParoDeMaquina_Mantenimiento" FromRole="Mantenimiento" ToRole="ParoDeMaquina" />
+    <NavigationProperty Name="PlanMantenimiento" Relationship="Self.FK_PlanMantenimiento_Mantenimiento" FromRole="Mantenimiento" ToRole="PlanMantenimiento" />
   </EntityType>
   <EntityType Name="Maquina">
     <Key>
@@ -117,7 +120,7 @@
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Estado" Type="Boolean" />
     <NavigationProperty Name="AreaDeMaquina" Relationship="Self.FK_Maquina_AreaDeMaquina" FromRole="Maquina" ToRole="AreaDeMaquina" />
-    <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_MantenimientoDeMaquina_Maquina" FromRole="Maquina" ToRole="MantenimientoDeMaquina" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_Maquina" FromRole="Maquina" ToRole="Mantenimiento" />
     <NavigationProperty Name="TipoDeSistemaDeMaquina" Relationship="Self.FK_Maquina_TipoDeSistemaDeMaquina" FromRole="Maquina" ToRole="TipoDeSistemaDeMaquina" />
     <NavigationProperty Name="ParoDeMaquina" Relationship="Self.FK_ParoDeMaquina_Maquina" FromRole="Maquina" ToRole="ParoDeMaquina" />
   </EntityType>
@@ -133,8 +136,20 @@
     <Property Name="FechaFin" Type="DateTime" Precision="3" />
     <Property Name="IdMaquina" Type="Int32" Nullable="false" />
     <Property Name="IdMantenimiento" Type="Int32" />
-    <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_ParoDeMaquina_MantenimientoDeMaquina" FromRole="ParoDeMaquina" ToRole="MantenimientoDeMaquina" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_ParoDeMaquina_Mantenimiento" FromRole="ParoDeMaquina" ToRole="Mantenimiento" />
     <NavigationProperty Name="Maquina" Relationship="Self.FK_ParoDeMaquina_Maquina" FromRole="ParoDeMaquina" ToRole="Maquina" />
+  </EntityType>
+  <EntityType Name="PlanMantenimiento">
+    <Key>
+      <PropertyRef Name="IdPlan" />
+    </Key>
+    <Property Name="IdPlan" Type="Int32" Nullable="false" />
+    <Property Name="IdMantenimiento" Type="Int32" Nullable="false" />
+    <Property Name="Duracion" Type="Int32" Nullable="false" />
+    <Property Name="FechaDeInicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Cumplimiento" Relationship="Self.FK_Cumplimiento_Plan" FromRole="PlanMantenimiento" ToRole="Cumplimiento" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_PlanMantenimiento_Mantenimiento" FromRole="PlanMantenimiento" ToRole="Mantenimiento" />
   </EntityType>
   <EntityType Name="Provincia">
     <Key>
@@ -151,8 +166,18 @@
     </Key>
     <Property Name="IdRol" Type="Int32" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="MantenimientoDeMaquina" Relationship="Self.FK_MantenimientoDeMaquina_Rol" FromRole="Rol" ToRole="MantenimientoDeMaquina" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_Rol" FromRole="Rol" ToRole="Mantenimiento" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TipoDeIdentificacion">
     <Key>
@@ -188,9 +213,10 @@
     <Property Name="Provincia" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="Canton" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
     <Property Name="Distrito" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="Rol" Type="Int32" Nullable="false" />
+    <Property Name="IdRol" Type="Int32" Nullable="false" />
     <Property Name="Estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Rol1" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+    <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_Usuario" FromRole="Usuario" ToRole="Mantenimiento" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
     <NavigationProperty Name="TipoDeIdentificacion" Relationship="Self.FK_Usuario_TipoDeIdentificacion" FromRole="Usuario" ToRole="TipoDeIdentificacion" />
   </EntityType>
   <Association Name="FK_Maquina_AreaDeMaquina">
@@ -243,62 +269,86 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CumplimientoMantenimiento_MantenimientoDeMaquina">
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="1" />
-    <End Role="CumplimientoMantenimiento" Type="Self.CumplimientoMantenimiento" Multiplicity="*" />
+  <Association Name="FK_Cumplimiento_Plan">
+    <End Role="PlanMantenimiento" Type="Self.PlanMantenimiento" Multiplicity="1" />
+    <End Role="Cumplimiento" Type="Self.Cumplimiento" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="MantenimientoDeMaquina">
-        <PropertyRef Name="IdMantenimiento" />
+      <Principal Role="PlanMantenimiento">
+        <PropertyRef Name="IdPlan" />
       </Principal>
-      <Dependent Role="CumplimientoMantenimiento">
-        <PropertyRef Name="IdMantenimiento" />
+      <Dependent Role="Cumplimiento">
+        <PropertyRef Name="IdPlan" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_InventarioDeRepuestos">
+  <Association Name="FK_Mantenimiento_InventarioDeRepuestos">
     <End Role="InventarioDeRepuestos" Type="Self.InventarioDeRepuestos" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InventarioDeRepuestos">
         <PropertyRef Name="IdRepuesto" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
+      <Dependent Role="Mantenimiento">
         <PropertyRef Name="IdRepuesto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_Maquina">
-    <End Role="Maquina" Type="Self.Maquina" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+  <Association Name="FK_Mantenimiento_Maquina">
+    <End Role="Maquina" Type="Self.Maquina" Multiplicity="1" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Maquina">
         <PropertyRef Name="IdMaquina" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
+      <Dependent Role="Mantenimiento">
         <PropertyRef Name="IdMaquina" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_Rol">
+  <Association Name="FK_Mantenimiento_Rol">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rol">
         <PropertyRef Name="IdRol" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
-        <PropertyRef Name="Rol" />
+      <Dependent Role="Mantenimiento">
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ParoDeMaquina_MantenimientoDeMaquina">
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="0..1" />
+  <Association Name="FK_Mantenimiento_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Mantenimiento">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ParoDeMaquina_Mantenimiento">
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="0..1" />
     <End Role="ParoDeMaquina" Type="Self.ParoDeMaquina" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="MantenimientoDeMaquina">
+      <Principal Role="Mantenimiento">
         <PropertyRef Name="IdMantenimiento" />
       </Principal>
       <Dependent Role="ParoDeMaquina">
+        <PropertyRef Name="IdMantenimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlanMantenimiento_Mantenimiento">
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="1" />
+    <End Role="PlanMantenimiento" Type="Self.PlanMantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mantenimiento">
+        <PropertyRef Name="IdMantenimiento" />
+      </Principal>
+      <Dependent Role="PlanMantenimiento">
         <PropertyRef Name="IdMantenimiento" />
       </Dependent>
     </ReferentialConstraint>
@@ -335,7 +385,7 @@
         <PropertyRef Name="IdRol" />
       </Principal>
       <Dependent Role="Usuario">
-        <PropertyRef Name="Rol" />
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -351,19 +401,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SMPEntities4" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="SMPEntities14" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
     <EntitySet Name="Calendario" EntityType="Self.Calendario" />
     <EntitySet Name="Canton" EntityType="Self.Canton" />
-    <EntitySet Name="CumplimientoMantenimiento" EntityType="Self.CumplimientoMantenimiento" />
+    <EntitySet Name="Cumplimiento" EntityType="Self.Cumplimiento" />
     <EntitySet Name="Distrito" EntityType="Self.Distrito" />
     <EntitySet Name="InventarioDeRepuestos" EntityType="Self.InventarioDeRepuestos" />
-    <EntitySet Name="MantenimientoDeMaquina" EntityType="Self.MantenimientoDeMaquina" />
+    <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" />
     <EntitySet Name="Maquina" EntityType="Self.Maquina" />
     <EntitySet Name="ParoDeMaquina" EntityType="Self.ParoDeMaquina" />
+    <EntitySet Name="PlanMantenimiento" EntityType="Self.PlanMantenimiento" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" />
     <EntitySet Name="Rol" EntityType="Self.Rol" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="TipoDeIdentificacion" EntityType="Self.TipoDeIdentificacion" />
     <EntitySet Name="TipoDeSistemaDeMaquina" EntityType="Self.TipoDeSistemaDeMaquina" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
@@ -383,25 +435,33 @@
       <End Role="Canton" EntitySet="Canton" />
       <End Role="Distrito" EntitySet="Distrito" />
     </AssociationSet>
-    <AssociationSet Name="FK_CumplimientoMantenimiento_MantenimientoDeMaquina" Association="Self.FK_CumplimientoMantenimiento_MantenimientoDeMaquina">
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
-      <End Role="CumplimientoMantenimiento" EntitySet="CumplimientoMantenimiento" />
+    <AssociationSet Name="FK_Cumplimiento_Plan" Association="Self.FK_Cumplimiento_Plan">
+      <End Role="PlanMantenimiento" EntitySet="PlanMantenimiento" />
+      <End Role="Cumplimiento" EntitySet="Cumplimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_InventarioDeRepuestos" Association="Self.FK_MantenimientoDeMaquina_InventarioDeRepuestos">
+    <AssociationSet Name="FK_Mantenimiento_InventarioDeRepuestos" Association="Self.FK_Mantenimiento_InventarioDeRepuestos">
       <End Role="InventarioDeRepuestos" EntitySet="InventarioDeRepuestos" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_Maquina" Association="Self.FK_MantenimientoDeMaquina_Maquina">
+    <AssociationSet Name="FK_Mantenimiento_Maquina" Association="Self.FK_Mantenimiento_Maquina">
       <End Role="Maquina" EntitySet="Maquina" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_Rol" Association="Self.FK_MantenimientoDeMaquina_Rol">
+    <AssociationSet Name="FK_Mantenimiento_Rol" Association="Self.FK_Mantenimiento_Rol">
       <End Role="Rol" EntitySet="Rol" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_ParoDeMaquina_MantenimientoDeMaquina" Association="Self.FK_ParoDeMaquina_MantenimientoDeMaquina">
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+    <AssociationSet Name="FK_Mantenimiento_Usuario" Association="Self.FK_Mantenimiento_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParoDeMaquina_Mantenimiento" Association="Self.FK_ParoDeMaquina_Mantenimiento">
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
       <End Role="ParoDeMaquina" EntitySet="ParoDeMaquina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanMantenimiento_Mantenimiento" Association="Self.FK_PlanMantenimiento_Mantenimiento">
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+      <End Role="PlanMantenimiento" EntitySet="PlanMantenimiento" />
     </AssociationSet>
     <AssociationSet Name="FK_Maquina_TipoDeSistemaDeMaquina" Association="Self.FK_Maquina_TipoDeSistemaDeMaquina">
       <End Role="TipoDeSistemaDeMaquina" EntitySet="TipoDeSistemaDeMaquina" />
@@ -450,9 +510,10 @@
       <Parameter Name="TodoDia" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="AgregarCumplimientoMantenimiento" ReturnType="Collection(Int32)">
-      <Parameter Name="IdMantenimiento" Mode="In" Type="Int32" />
-      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+      <Parameter Name="IdPlan" Mode="In" Type="Int32" />
       <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+      <Parameter Name="Detalles" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AgregarInventarioDeRepuestos" ReturnType="Collection(Int32)">
       <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -463,15 +524,16 @@
       <Parameter Name="Tipo" Mode="In" Type="String" />
       <Parameter Name="Almacen" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="AgregarMantenimientoDeMaquina" ReturnType="Collection(Int32)">
-      <Parameter Name="NumeroDeOrden" Mode="In" Type="String" />
-      <Parameter Name="NombreDeMantenimiento" Mode="In" Type="String" />
-      <Parameter Name="Tipo" Mode="In" Type="String" />
-      <Parameter Name="Fecuentia" Mode="In" Type="String" />
-      <Parameter Name="Rol" Mode="In" Type="Int32" />
-      <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+    <FunctionImport Name="AgregarMantenimiento" ReturnType="Collection(Int32)">
       <Parameter Name="IdMaquina" Mode="In" Type="Int32" />
+      <Parameter Name="Seccion" Mode="In" Type="String" />
+      <Parameter Name="NumeroOperacion" Mode="In" Type="Int32" />
+      <Parameter Name="NombreOperacion" Mode="In" Type="String" />
+      <Parameter Name="Frecuencia" Mode="In" Type="Int32" />
+      <Parameter Name="IdRol" Mode="In" Type="Int32" />
+      <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
       <Parameter Name="IdRepuesto" Mode="In" Type="Int32" />
+      <Parameter Name="Detalles" Mode="In" Type="String" />
       <Parameter Name="URLArchivo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AgregarMaquina" ReturnType="Collection(Int32)">
@@ -493,6 +555,12 @@
       <Parameter Name="IdMaquina" Mode="In" Type="Int32" />
       <Parameter Name="IdMantenimiento" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="AgregarPlanMantenimiento" ReturnType="Collection(Int32)">
+      <Parameter Name="IdMantenimiento" Mode="In" Type="Int32" />
+      <Parameter Name="Duracion" Mode="In" Type="Int32" />
+      <Parameter Name="FechaDeInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaDeCreacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
     <FunctionImport Name="AgregarTipoDeIdentificacion" ReturnType="Collection(Int32)">
       <Parameter Name="Descripcion" Mode="In" Type="String" />
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
@@ -513,17 +581,24 @@
       <Parameter Name="Provincia" Mode="In" Type="String" />
       <Parameter Name="Canton" Mode="In" Type="String" />
       <Parameter Name="Distrito" Mode="In" Type="String" />
-      <Parameter Name="Rol" Mode="In" Type="Int32" />
+      <Parameter Name="IdRol" Mode="In" Type="Int32" />
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="Cantones" ReturnType="Collection(SMPModel.Cantones_Result)">
       <Parameter Name="Provincia" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ConsultarCalendario" ReturnType="Collection(SMPModel.ConsultarCalendario_Result)" />
+    <FunctionImport Name="ConsultarRolxUsuario" ReturnType="Collection(String)">
+      <Parameter Name="correo" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="ConsultarUnUsuarios" ReturnType="Collection(SMPModel.ConsultarUnUsuarios_Result)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(SMPModel.ConsultarUsuarios_Result)" />
+    <FunctionImport Name="ConsultarUsuariosxRol" ReturnType="Collection(SMPModel.ConsultarUsuariosxRol_Result)">
+      <Parameter Name="IdRol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CumpNoCump" ReturnType="Collection(SMPModel.CumpNoCump_Result)" />
     <FunctionImport Name="Distritos" ReturnType="Collection(SMPModel.Distritos_Result)">
       <Parameter Name="Provincia" Mode="In" Type="String" />
       <Parameter Name="Canton" Mode="In" Type="String" />
@@ -538,7 +613,45 @@
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="InformesBasic">
+      <Parameter Name="CantidadMaquina" Mode="InOut" Type="Double" />
+      <Parameter Name="CantidadMantenimiento" Mode="InOut" Type="Double" />
+      <Parameter Name="MantenimientoCumplido" Mode="InOut" Type="Double" />
+      <Parameter Name="CantidadParo" Mode="InOut" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="MantenimientoxMaquina" ReturnType="Collection(SMPModel.MantenimientoxMaquina_Result)" />
+    <FunctionImport Name="ParoxMaquina" ReturnType="Collection(SMPModel.ParoxMaquina_Result)" />
     <FunctionImport Name="Provincias" ReturnType="Collection(SMPModel.Provincias_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SMPModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SMPModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
   <ComplexType Name="Cantones_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
@@ -580,6 +693,25 @@
     <Property Type="String" Name="Rol" Nullable="false" MaxLength="50" />
     <Property Type="Boolean" Name="Estado" Nullable="false" />
   </ComplexType>
+  <ComplexType Name="ConsultarUsuariosxRol_Result">
+    <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+    <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdTipoDeIdentificacion" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TipoCarga" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Provincia" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Canton" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Distrito" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="IdRol" Nullable="false" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="CumpNoCump_Result">
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="Distritos_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="Canton" Nullable="false" MaxLength="2" />
@@ -598,7 +730,7 @@
     <Property Type="String" Name="Provincia" Nullable="true" MaxLength="1" />
     <Property Type="String" Name="Canton" Nullable="true" MaxLength="2" />
     <Property Type="String" Name="Distrito" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="Rol" Nullable="false" />
+    <Property Type="Int32" Name="IdRol" Nullable="false" />
     <Property Type="Boolean" Name="Estado" Nullable="false" />
   </ComplexType>
   <ComplexType Name="ExisteUsuario_Result">
@@ -613,11 +745,30 @@
     <Property Type="String" Name="Provincia" Nullable="true" MaxLength="1" />
     <Property Type="String" Name="Canton" Nullable="true" MaxLength="2" />
     <Property Type="String" Name="Distrito" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="Rol" Nullable="false" />
+    <Property Type="Int32" Name="IdRol" Nullable="false" />
     <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="MantenimientoxMaquina_Result">
+    <Property Type="Int32" Name="Mantenimiento" Nullable="true" />
+    <Property Type="String" Name="NombreMaquina" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ParoxMaquina_Result">
+    <Property Type="Int32" Name="Paro" Nullable="true" />
+    <Property Type="String" Name="NombreMaquina" Nullable="false" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="Provincias_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

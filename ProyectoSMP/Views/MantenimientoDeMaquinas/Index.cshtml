@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoSMP.Models.MantenimientoDeMaquina>
+﻿@model IEnumerable<ProyectoSMP.Models.Mantenimiento>
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index"; }
@@ -43,31 +43,37 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.NumeroDeOrden)
+                                <h7>Id</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.NombreDeMantenimiento)
+                                <h7>Máquina</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tipo)
+                                <h7>Sección</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Fecuencia)
+                                <h7>Número Operación</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Rol1.Descripcion)
+                                <h7>Nombre Operación</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.IdUsuario)
+                                <h7>Frecuencia</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.InventarioDeRepuestos.Nombre)
+                                <h7>Rol</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Maquina.NombreMaquina)
+                                <h7>Usuario</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.URLArchivo)
+                                <h7>Repuesto</h7>
+                            </th>
+                            <th>
+                                <h7>Detalles</h7>
+                            </th>
+                            <th>
+                                <h7>Archivo</h7>
                             </th>
                             <th>Acciones</th>
                         </tr>
@@ -76,28 +82,34 @@
                         {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NumeroDeOrden)
+                            @Html.DisplayFor(modelItem => item.IdMantenimiento)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NombreDeMantenimiento)
+                            @Html.DisplayFor(modelItem => item.IdMaquina)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Tipo)
+                            @Html.DisplayFor(modelItem => item.Seccion)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Fecuencia)
+                            @Html.DisplayFor(modelItem => item.NumeroOperacion)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Rol1.Descripcion)
+                            @Html.DisplayFor(modelItem => item.NombreOperacion)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IdUsuario)
+                            @Html.DisplayFor(modelItem => item.Frecuencia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.InventarioDeRepuestos.Nombre)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                            @Html.DisplayFor(modelItem => item.Detalles)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.URLArchivo)

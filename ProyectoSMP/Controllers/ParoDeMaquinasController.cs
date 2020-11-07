@@ -12,12 +12,12 @@ namespace ProyectoSMP.Controllers
 {
     public class ParoDeMaquinasController : Controller
     {
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
 
         // GET: ParoDeMaquinas
         public ActionResult Index()
         {
-            var paroDeMaquina = db.ParoDeMaquina.Include(p => p.MantenimientoDeMaquina).Include(p => p.Maquina);
+            var paroDeMaquina = db.ParoDeMaquina.Include(p => p.Mantenimiento).Include(p => p.Maquina);
             return View(paroDeMaquina.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace ProyectoSMP.Controllers
         // GET: ParoDeMaquinas/Create
         public ActionResult Create()
         {
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NumeroDeOrden");
+            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
             return View();
         }
@@ -59,7 +59,7 @@ namespace ProyectoSMP.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NumeroDeOrden", paroDeMaquina.IdMantenimiento);
+            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
         }
@@ -76,7 +76,7 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NumeroDeOrden", paroDeMaquina.IdMantenimiento);
+            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
         }
@@ -86,7 +86,7 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdParo,NombreParo,Tipo,Descripcion,FechaComienza,FechaFin,IdMaquina,IdMantenimiento")] ParoDeMaquina paroDeMaquina)
+        public ActionResult Edit(ParoDeMaquina paroDeMaquina)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace ProyectoSMP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NumeroDeOrden", paroDeMaquina.IdMantenimiento);
+            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
         }

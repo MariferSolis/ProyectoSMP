@@ -1,16 +1,14 @@
-﻿@model ProyectoSMP.Models.MantenimientoDeMaquina
+﻿@model ProyectoSMP.Models.Mantenimiento
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Create";
-}
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+                ViewBag.Title = "Create"; }
 
 <h2>Crear</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
+@Html.AntiForgeryToken()
+
 <div class="form-horizontal">
     <h4>Mantenimiento</h4>
     <hr />
@@ -18,55 +16,7 @@
     @Html.Hidden("IdMantenimiento", 0)
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.NumeroDeOrden, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NumeroDeOrden, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NumeroDeOrden, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.NombreDeMantenimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NombreDeMantenimiento, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NombreDeMantenimiento, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.Fecuencia, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Fecuencia, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Fecuencia, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.Rol, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Rol", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="item form-group">
-        @Html.LabelFor(model => model.IdMaquina, "IdMaquina", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IdMaquina, "Máquina", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdMaquina", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.IdMaquina, "", new { @class = "text-danger" })
@@ -74,13 +24,63 @@
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.IdRepuesto, "IdRepuesto", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Seccion, "Sección", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Seccion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Seccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.NumeroOperacion, "Número de Operación", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumeroOperacion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NumeroOperacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="item form-group">
+        @Html.LabelFor(model => model.NombreOperacion, "Nombre de Operación", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NombreOperacion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NombreOperacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="item form-group">
+        @Html.LabelFor(model => model.Frecuencia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Frecuencia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Frecuencia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.IdRol, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdRol, ViewBag.IdRol as SelectList, "--Seleccione un Rol--", new { @class="form-control" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdUsuario, new SelectList(" "), "--Seleccione un Usuario--", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.IdRepuesto, "Repuesto disponible", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdRepuesto", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.IdRepuesto, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <div class="item form-group">
+        @Html.LabelFor(model => model.Detalles, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Detalles, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Detalles, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="item form-group">
         @Html.LabelFor(model => model.URLArchivo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -93,6 +93,30 @@
         <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
         <input type="submit" value="Crear" class="btn btn-success" />
     </div>
-</div>
-}
+</div>}
 <hr />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@section Scripts
+{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#IdRol").change(function () {
+            $("#IdUsuario").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CargaUsuarios")',
+                dataType: 'json',
+                data: { IdRol: $("#IdRol").val() },
+                success: function (usuarios) {
+                    $.each(usuarios, function (i, usuario) {
+                        $("#IdUsuario").append('<option value="' + usuario.IdUsuario + '">' +
+                            usuario.Nombre + " " + usuario.Apellidos + '</option>');
+
+                    });
+                },
+            })
+        });
+    });
+    </script>
+}

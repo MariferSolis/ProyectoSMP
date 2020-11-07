@@ -4,31 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="08dacc1f49ff4af785fcf4f5a03369f4" Name="Diagram1">
-        <EntityTypeShape EntityType="SMPModel.AreaDeMaquina" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.Bitacora" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+      <Diagram DiagramId="fb56731d42ed4e75a2d8b94a145d99e2" Name="Diagram1">
+        <EntityTypeShape EntityType="SMPModel.AreaDeMaquina" Width="1.5" PointX="1.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Bitacora" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPModel.Calendario" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPModel.Canton" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.CumplimientoMantenimiento" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Cumplimiento" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPModel.Distrito" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.InventarioDeRepuestos" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.MantenimientoDeMaquina" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.Maquina" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.ParoDeMaquina" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.InventarioDeRepuestos" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Mantenimiento" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Maquina" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.ParoDeMaquina" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.PlanMantenimiento" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPModel.Provincia" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.Rol" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.TipoDeIdentificacion" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Rol" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.sysdiagrams" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.TipoDeIdentificacion" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPModel.TipoDeSistemaDeMaquina" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPModel.Usuario" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPModel.Usuario" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="SMPModel.FK_Maquina_AreaDeMaquina" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK__Canton__Provinci__3E52440B" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK__Canton__Provinci__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK__Distrito__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="SMPModel.FK_CumplimientoMantenimiento_MantenimientoDeMaquina" ManuallyRouted="false" />
-        <AssociationConnector Association="SMPModel.FK_MantenimientoDeMaquina_InventarioDeRepuestos" ManuallyRouted="false" />
-        <AssociationConnector Association="SMPModel.FK_MantenimientoDeMaquina_Maquina" ManuallyRouted="false" />
-        <AssociationConnector Association="SMPModel.FK_MantenimientoDeMaquina_Rol" ManuallyRouted="false" />
-        <AssociationConnector Association="SMPModel.FK_ParoDeMaquina_MantenimientoDeMaquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_Cumplimiento_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_Mantenimiento_InventarioDeRepuestos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_Mantenimiento_Maquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_Mantenimiento_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_Mantenimiento_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_ParoDeMaquina_Mantenimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPModel.FK_PlanMantenimiento_Mantenimiento" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK_Maquina_TipoDeSistemaDeMaquina" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK_ParoDeMaquina_Maquina" ManuallyRouted="false" />
         <AssociationConnector Association="SMPModel.FK_Usuario_Rol" ManuallyRouted="false" />

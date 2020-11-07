@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class InventarioDeRepuestosController : Controller
     {
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
 
         // GET: InventarioDeRepuestos
         public ActionResult Index()

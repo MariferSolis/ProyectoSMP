@@ -17,7 +17,7 @@ namespace ProyectoSMP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rol()
         {
-            this.MantenimientoDeMaquina = new HashSet<MantenimientoDeMaquina>();
+            this.Mantenimiento = new HashSet<Mantenimiento>();
             this.Usuario = new HashSet<Usuario>();
         }
     
@@ -25,7 +25,7 @@ namespace ProyectoSMP.Models
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MantenimientoDeMaquina> MantenimientoDeMaquina { get; set; }
+        public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

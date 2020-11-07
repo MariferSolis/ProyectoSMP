@@ -12,32 +12,34 @@ namespace ProyectoSMP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MantenimientoDeMaquina
+    public partial class Mantenimiento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MantenimientoDeMaquina()
+        public Mantenimiento()
         {
-            this.CumplimientoMantenimiento = new HashSet<CumplimientoMantenimiento>();
             this.ParoDeMaquina = new HashSet<ParoDeMaquina>();
+            this.PlanMantenimiento = new HashSet<PlanMantenimiento>();
         }
     
         public int IdMantenimiento { get; set; }
-        public string NumeroDeOrden { get; set; }
-        public string NombreDeMantenimiento { get; set; }
-        public string Tipo { get; set; }
-        public string Fecuencia { get; set; }
-        public Nullable<int> Rol { get; set; }
+        public int IdMaquina { get; set; }
+        public string Seccion { get; set; }
+        public Nullable<int> NumeroOperacion { get; set; }
+        public string NombreOperacion { get; set; }
+        public Nullable<int> Frecuencia { get; set; }
+        public Nullable<int> IdRol { get; set; }
         public Nullable<int> IdUsuario { get; set; }
-        public Nullable<int> IdMaquina { get; set; }
         public Nullable<int> IdRepuesto { get; set; }
+        public string Detalles { get; set; }
         public string URLArchivo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CumplimientoMantenimiento> CumplimientoMantenimiento { get; set; }
         public virtual InventarioDeRepuestos InventarioDeRepuestos { get; set; }
         public virtual Maquina Maquina { get; set; }
-        public virtual Rol Rol1 { get; set; }
+        public virtual Rol Rol { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ParoDeMaquina> ParoDeMaquina { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanMantenimiento> PlanMantenimiento { get; set; }
     }
 }

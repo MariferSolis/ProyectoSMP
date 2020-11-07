@@ -42,35 +42,35 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Identificacion)
+                                <h7>Identificación</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tipo_Identificacion)
+                                <h7>Tipo de Identificación</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
+                                <h7>Nombre</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Correo)
+                                <h7>Correo</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TipoCarga)
+                                <h7>Cargo</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Provincia)
+                                <h7>Provincia</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Canton)
+                                <h7>Cantón</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Distrito)
+                                <h7>Distrito</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Rol)
+                                <h7>Rol</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Estado)
-                            </th>                           
+                                <h7>Estado</h7>
+                            </th>
                             <th>
                                 Acciones
                             </th>
@@ -79,53 +79,49 @@
                         @foreach (var item in Model)
                         {
 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Identificacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tipo_Identificacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Correo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoCarga)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Provincia)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Canton)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Distrito)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rol)
-                        </td>
-                        <td>
-                            @if (item.Estado == true)
-                            {
-                                @Html.Label("Activo")
-
-                            }
-                            else
-                            {
-                                @Html.Label("Inactivo")
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
-                            @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdUsuario })
-                        </td>
-                    </tr>
-                        }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Identificacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo_Identificacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoCarga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Provincia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Canton)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Distrito)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol)
+                    </td>
+                    <td>
+                        @if (item.Estado == true)
+                        {
+                @Html.Label("Activo") }
+                                else
+                                {
+                @Html.Label("Inactivo")}
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario }) 
+                    </td>
+                </tr>}
                     </table>
+                    @Html.ActionLink("Ver inactivos", "Todos")
                 </div>
             </div>
         </div>

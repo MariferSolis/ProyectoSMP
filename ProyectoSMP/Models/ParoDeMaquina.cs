@@ -23,7 +23,7 @@ namespace ProyectoSMP.Models
         public int IdMaquina { get; set; }
         public Nullable<int> IdMantenimiento { get; set; }
     
-        public virtual MantenimientoDeMaquina MantenimientoDeMaquina { get; set; }
+        public virtual Mantenimiento Mantenimiento { get; set; }
         public virtual Maquina Maquina { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<ProyectoSMP.Models.MantenimientoxMaquina_Result>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Inicio"; }
 
 <!DOCTYPE html>
@@ -6,169 +8,204 @@
 
 <head>
 
-    </head>
-    <body id="page-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-6  ">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Chart 1<small>Sessions</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li>
-                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Settings 1</a>
-                                        <a class="dropdown-item" href="#">Settings 2</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <canvas id="myPieChart"></canvas>
-                        </div>
+</head>
+<body id="page-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-6  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Mantenimientos que existen por Maquina</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="myPieChart"></canvas>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6  ">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Chart 2<small>Sessions</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li>
-                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Settings 1</a>
-                                        <a class="dropdown-item" href="#">Settings 2</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <canvas id="myBarChart" width="400" height="200"></canvas>
-                        </div>
+            </div>
+            <div class="col-md-6 col-sm-6  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Mantenimientos Cumplidos y No Cumplidos</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="myBarChart"></canvas>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6  ">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Chart 3<small>Sessions</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li>
-                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Settings 1</a>
-                                        <a class="dropdown-item" href="#">Settings 2</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <canvas id="chart"></canvas>
-                        </div>
+            </div>
+            <div class="col-md-6 col-sm-6  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Paros<small>por maquina</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="chart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
-    @section Scripts{
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                var ctx = document.getElementById("myPieChart").getContext('2d');
-                var myPieChart = new Chart(ctx, {
 
-                    type: 'pie',
-                    data: {
-                        labels: ["Green", "Blue", "Gray", "Purple"],
-                        datasets: [{
-                            backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6"],
-                            data: [12, 20, 18, 50]
-                        }]
-                    }
-                });
-                var option = {
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var ctx = document.getElementById("myPieChart").getContext('2d');
+            var Nombremaq = @Html.Raw(Json.Encode(ViewBag.NombreMaq));
+            var man = @Html.Raw(Json.Encode(ViewBag.Mantenimiento));
+            var Cump = @Html.Raw(Json.Encode(ViewBag.Cump)) ;
+            var NoCump = @Html.Raw(Json.Encode(ViewBag.NoCump));
+            var NombreMaquina = @Html.Raw(Json.Encode(ViewBag.NombreMaquina)) ;
+            var Paro = @Html.Raw(Json.Encode(ViewBag.Paro));
+            var myPieChart = new Chart(ctx, {
+
+                type: 'pie',
+                data: {
+                    labels: Nombremaq,
+                    datasets: [{
+                        backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#2ecc71", "#3498db", "#95a5a6", "#9b59b6"],
+                        data: man
+                    }]
+                }
+            });
+            var option = {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            };
+            var ctx_bchart = document.getElementById("myBarChart");
+            var myBarChart = new Chart(ctx_bchart, {
+                type: 'bar',
+                data: {
+
+                    labels: ["Mantenimiento"],
+
+                    datasets: [{
+
+                            label: 'Cumplido',
+                            fillColor: "rgba(220,220,220,0.5)",
+                            backgroundColor: "rgba(46, 44, 211, 0.7)",
+                            highlightFill: "rgba(220,220,220,0.75)",
+                            highlightStroke: "rgba(220,220,220,1)",
+                            data: Cump
+                    },
+
+                        {
+                            label: 'Sin Cumplir',
+                            fillColor: "rgba(0,0,0,0.5)",
+                            backgroundColor: "rgba(215, 44, 44, 0.7)",
+                            highlightFill: "rgba(0,0,0,0.5)",
+                            highlightStroke: "rgba(0,0,0,0.5)",
+                            data: NoCump
+                        }
+                        ]
+
+                },
+
+                options: {
+                    responsive: false,
                     scales: {
+                        xAxes: [{
+                            stacked: true,
+                        }],
                         yAxes: [{
+                            stacked: true,
                             ticks: {
                                 beginAtZero: true
                             }
                         }]
                     }
-                };
-                var ctx_bchart = document.getElementById("myBarChart");
-                var myBarChart = new Chart(ctx_bchart, {
-                    type: 'bar',
-                    data: {
-                        labels: ["Jan", "Feb", "Mar"],
-                        datasets: [{
-                            label: "Earning",
-                            backgroundColor: "rgba(255,99,132,0.2)",
-                            borderColor: "rgba(255,99,132,1)",
-                            borderWidth: 2,
-                            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                            hoverBorderColor: "rgba(255,99,132,1)",
-                            data: [65, 56, 45]
-                        }]
-                    },
-                    options: option
-                });
-
-                var ctx_bbchart = document.getElementById("chart");
-                var chart = new Chart(ctx_bbchart, {
-                    type: 'bar',
-
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: option
-                });
-
+                }
             });
 
-        </script>
+            var ctx_bbchart = document.getElementById("chart");
+            var chart = new Chart(ctx_bbchart, {
+                type: 'bar',
+
+                data: {
+                    labels: NombreMaquina,
+                    datasets: [{
+                        label: '# de Paros',
+                        data: Paro,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: option
+            });
+
+        });
+
+    </script>
 
 
-    }
+}

@@ -15,10 +15,10 @@ namespace ProyectoSMP.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SMPEntities4 : DbContext
+    public partial class SMPEntities14 : DbContext
     {
-        public SMPEntities4()
-            : base("name=SMPEntities4")
+        public SMPEntities14()
+            : base("name=SMPEntities14")
         {
         }
     
@@ -31,14 +31,16 @@ namespace ProyectoSMP.Models
         public virtual DbSet<Bitacora> Bitacora { get; set; }
         public virtual DbSet<Calendario> Calendario { get; set; }
         public virtual DbSet<Canton> Canton { get; set; }
-        public virtual DbSet<CumplimientoMantenimiento> CumplimientoMantenimiento { get; set; }
+        public virtual DbSet<Cumplimiento> Cumplimiento { get; set; }
         public virtual DbSet<Distrito> Distrito { get; set; }
         public virtual DbSet<InventarioDeRepuestos> InventarioDeRepuestos { get; set; }
-        public virtual DbSet<MantenimientoDeMaquina> MantenimientoDeMaquina { get; set; }
+        public virtual DbSet<Mantenimiento> Mantenimiento { get; set; }
         public virtual DbSet<Maquina> Maquina { get; set; }
         public virtual DbSet<ParoDeMaquina> ParoDeMaquina { get; set; }
+        public virtual DbSet<PlanMantenimiento> PlanMantenimiento { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoDeIdentificacion> TipoDeIdentificacion { get; set; }
         public virtual DbSet<TipoDeSistemaDeMaquina> TipoDeSistemaDeMaquina { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -151,21 +153,25 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCalendario", asuntoParameter, descripcionParameter, comienzaParameter, finParameter, colorParameter, todoDiaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarCumplimientoMantenimiento(Nullable<int> idMantenimiento, Nullable<bool> estado, Nullable<System.DateTime> fecha)
+        public virtual ObjectResult<Nullable<int>> AgregarCumplimientoMantenimiento(Nullable<int> idPlan, Nullable<System.DateTime> fecha, Nullable<bool> estado, string detalles)
         {
-            var idMantenimientoParameter = idMantenimiento.HasValue ?
-                new ObjectParameter("IdMantenimiento", idMantenimiento) :
-                new ObjectParameter("IdMantenimiento", typeof(int));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
+            var idPlanParameter = idPlan.HasValue ?
+                new ObjectParameter("IdPlan", idPlan) :
+                new ObjectParameter("IdPlan", typeof(int));
     
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
                 new ObjectParameter("Fecha", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarCumplimientoMantenimiento", idMantenimientoParameter, estadoParameter, fechaParameter);
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            var detallesParameter = detalles != null ?
+                new ObjectParameter("Detalles", detalles) :
+                new ObjectParameter("Detalles", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarCumplimientoMantenimiento", idPlanParameter, fechaParameter, estadoParameter, detallesParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> AgregarInventarioDeRepuestos(string nombre, Nullable<int> cantidad, Nullable<int> requisición, Nullable<int> maximos, Nullable<int> minimos, string tipo, string almacen)
@@ -201,45 +207,49 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarInventarioDeRepuestos", nombreParameter, cantidadParameter, requisiciónParameter, maximosParameter, minimosParameter, tipoParameter, almacenParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarMantenimientoDeMaquina(string numeroDeOrden, string nombreDeMantenimiento, string tipo, string fecuentia, Nullable<int> rol, Nullable<int> idUsuario, Nullable<int> idMaquina, Nullable<int> idRepuesto, string uRLArchivo)
+        public virtual ObjectResult<Nullable<int>> AgregarMantenimiento(Nullable<int> idMaquina, string seccion, Nullable<int> numeroOperacion, string nombreOperacion, Nullable<int> frecuencia, Nullable<int> idRol, Nullable<int> idUsuario, Nullable<int> idRepuesto, string detalles, string uRLArchivo)
         {
-            var numeroDeOrdenParameter = numeroDeOrden != null ?
-                new ObjectParameter("NumeroDeOrden", numeroDeOrden) :
-                new ObjectParameter("NumeroDeOrden", typeof(string));
+            var idMaquinaParameter = idMaquina.HasValue ?
+                new ObjectParameter("IdMaquina", idMaquina) :
+                new ObjectParameter("IdMaquina", typeof(int));
     
-            var nombreDeMantenimientoParameter = nombreDeMantenimiento != null ?
-                new ObjectParameter("NombreDeMantenimiento", nombreDeMantenimiento) :
-                new ObjectParameter("NombreDeMantenimiento", typeof(string));
+            var seccionParameter = seccion != null ?
+                new ObjectParameter("Seccion", seccion) :
+                new ObjectParameter("Seccion", typeof(string));
     
-            var tipoParameter = tipo != null ?
-                new ObjectParameter("Tipo", tipo) :
-                new ObjectParameter("Tipo", typeof(string));
+            var numeroOperacionParameter = numeroOperacion.HasValue ?
+                new ObjectParameter("NumeroOperacion", numeroOperacion) :
+                new ObjectParameter("NumeroOperacion", typeof(int));
     
-            var fecuentiaParameter = fecuentia != null ?
-                new ObjectParameter("Fecuentia", fecuentia) :
-                new ObjectParameter("Fecuentia", typeof(string));
+            var nombreOperacionParameter = nombreOperacion != null ?
+                new ObjectParameter("NombreOperacion", nombreOperacion) :
+                new ObjectParameter("NombreOperacion", typeof(string));
     
-            var rolParameter = rol.HasValue ?
-                new ObjectParameter("Rol", rol) :
-                new ObjectParameter("Rol", typeof(int));
+            var frecuenciaParameter = frecuencia.HasValue ?
+                new ObjectParameter("Frecuencia", frecuencia) :
+                new ObjectParameter("Frecuencia", typeof(int));
+    
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
     
             var idUsuarioParameter = idUsuario.HasValue ?
                 new ObjectParameter("IdUsuario", idUsuario) :
                 new ObjectParameter("IdUsuario", typeof(int));
     
-            var idMaquinaParameter = idMaquina.HasValue ?
-                new ObjectParameter("IdMaquina", idMaquina) :
-                new ObjectParameter("IdMaquina", typeof(int));
-    
             var idRepuestoParameter = idRepuesto.HasValue ?
                 new ObjectParameter("IdRepuesto", idRepuesto) :
                 new ObjectParameter("IdRepuesto", typeof(int));
+    
+            var detallesParameter = detalles != null ?
+                new ObjectParameter("Detalles", detalles) :
+                new ObjectParameter("Detalles", typeof(string));
     
             var uRLArchivoParameter = uRLArchivo != null ?
                 new ObjectParameter("URLArchivo", uRLArchivo) :
                 new ObjectParameter("URLArchivo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarMantenimientoDeMaquina", numeroDeOrdenParameter, nombreDeMantenimientoParameter, tipoParameter, fecuentiaParameter, rolParameter, idUsuarioParameter, idMaquinaParameter, idRepuestoParameter, uRLArchivoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarMantenimiento", idMaquinaParameter, seccionParameter, numeroOperacionParameter, nombreOperacionParameter, frecuenciaParameter, idRolParameter, idUsuarioParameter, idRepuestoParameter, detallesParameter, uRLArchivoParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> AgregarMaquina(string nombreMaquina, Nullable<int> idTipoSistema, Nullable<int> idArea, string codigo, string modelo, string proceso, Nullable<int> cadencia, string descripcion)
@@ -312,6 +322,27 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarParoDeMaquina", nombreParoParameter, tipoParameter, descripcionParameter, fechaComienzaParameter, fechaFinParameter, idMaquinaParameter, idMantenimientoParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> AgregarPlanMantenimiento(Nullable<int> idMantenimiento, Nullable<int> duracion, Nullable<System.DateTime> fechaDeInicio, Nullable<System.DateTime> fechaDeCreacion)
+        {
+            var idMantenimientoParameter = idMantenimiento.HasValue ?
+                new ObjectParameter("IdMantenimiento", idMantenimiento) :
+                new ObjectParameter("IdMantenimiento", typeof(int));
+    
+            var duracionParameter = duracion.HasValue ?
+                new ObjectParameter("Duracion", duracion) :
+                new ObjectParameter("Duracion", typeof(int));
+    
+            var fechaDeInicioParameter = fechaDeInicio.HasValue ?
+                new ObjectParameter("FechaDeInicio", fechaDeInicio) :
+                new ObjectParameter("FechaDeInicio", typeof(System.DateTime));
+    
+            var fechaDeCreacionParameter = fechaDeCreacion.HasValue ?
+                new ObjectParameter("FechaDeCreacion", fechaDeCreacion) :
+                new ObjectParameter("FechaDeCreacion", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarPlanMantenimiento", idMantenimientoParameter, duracionParameter, fechaDeInicioParameter, fechaDeCreacionParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> AgregarTipoDeIdentificacion(string descripcion, Nullable<bool> estado)
         {
             var descripcionParameter = descripcion != null ?
@@ -342,7 +373,7 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarTipoDeSistemaDeMaquina", nombreParameter, descripcionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarUsuario(string identificacion, Nullable<int> idTipoDeIdentificacion, string nombre, string apellidos, string correo, string password, string tipoCarga, string provincia, string canton, string distrito, Nullable<int> rol, Nullable<bool> estado)
+        public virtual ObjectResult<Nullable<int>> AgregarUsuario(string identificacion, Nullable<int> idTipoDeIdentificacion, string nombre, string apellidos, string correo, string password, string tipoCarga, string provincia, string canton, string distrito, Nullable<int> idRol, Nullable<bool> estado)
         {
             var identificacionParameter = identificacion != null ?
                 new ObjectParameter("Identificacion", identificacion) :
@@ -384,15 +415,15 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("Distrito", distrito) :
                 new ObjectParameter("Distrito", typeof(string));
     
-            var rolParameter = rol.HasValue ?
-                new ObjectParameter("Rol", rol) :
-                new ObjectParameter("Rol", typeof(int));
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
     
             var estadoParameter = estado.HasValue ?
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarUsuario", identificacionParameter, idTipoDeIdentificacionParameter, nombreParameter, apellidosParameter, correoParameter, passwordParameter, tipoCargaParameter, provinciaParameter, cantonParameter, distritoParameter, rolParameter, estadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarUsuario", identificacionParameter, idTipoDeIdentificacionParameter, nombreParameter, apellidosParameter, correoParameter, passwordParameter, tipoCargaParameter, provinciaParameter, cantonParameter, distritoParameter, idRolParameter, estadoParameter);
         }
     
         public virtual ObjectResult<Cantones_Result> Cantones(string provincia)
@@ -409,6 +440,15 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCalendario_Result>("ConsultarCalendario");
         }
     
+        public virtual ObjectResult<string> ConsultarRolxUsuario(string correo)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ConsultarRolxUsuario", correoParameter);
+        }
+    
         public virtual ObjectResult<ConsultarUnUsuarios_Result> ConsultarUnUsuarios(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -421,6 +461,20 @@ namespace ProyectoSMP.Models
         public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios");
+        }
+    
+        public virtual ObjectResult<ConsultarUsuariosxRol_Result> ConsultarUsuariosxRol(Nullable<int> idRol)
+        {
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuariosxRol_Result>("ConsultarUsuariosxRol", idRolParameter);
+        }
+    
+        public virtual ObjectResult<CumpNoCump_Result> CumpNoCump()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CumpNoCump_Result>("CumpNoCump");
         }
     
         public virtual ObjectResult<Distritos_Result> Distritos(string provincia, string canton)
@@ -467,9 +521,127 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ExisteUsuario_Result>("ExisteUsuario", correoParameter, passwordParameter);
         }
     
+        public virtual int InformesBasic(ObjectParameter cantidadMaquina, ObjectParameter cantidadMantenimiento, ObjectParameter mantenimientoCumplido, ObjectParameter cantidadParo)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InformesBasic", cantidadMaquina, cantidadMantenimiento, mantenimientoCumplido, cantidadParo);
+        }
+    
+        public virtual ObjectResult<MantenimientoxMaquina_Result> MantenimientoxMaquina()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MantenimientoxMaquina_Result>("MantenimientoxMaquina");
+        }
+    
+        public virtual ObjectResult<ParoxMaquina_Result> ParoxMaquina()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParoxMaquina_Result>("ParoxMaquina");
+        }
+    
         public virtual ObjectResult<Provincias_Result> Provincias()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Provincias_Result>("Provincias");
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     }
 }

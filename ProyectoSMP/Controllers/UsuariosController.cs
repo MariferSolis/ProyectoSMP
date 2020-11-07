@@ -16,16 +16,19 @@ namespace ProyectoSMP.Controllers
 {
     public class UsuariosController : Controller
     {
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
 
         // GET: Usuarios
         public ActionResult Index()
         {
-            var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
 
             var usuario = db.ConsultarUsuarios();
-            //var ClaveDesencriptada = Seguridad.DecryptString(SecretKey, password);
             return View(usuario.ToList());
+        }
+        public ActionResult Todos()
+        {
+
+            return View(db.Usuario.ToList());
         }
 
         // GET: Usuarios/Details/5
@@ -47,7 +50,7 @@ namespace ProyectoSMP.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion");
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion");
             ViewBag.ListaProvincias = CargaProvincias();
             return View();
@@ -71,8 +74,9 @@ namespace ProyectoSMP.Controllers
                 if(dato == null)
                 {
                     db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
-                    usuario.Password, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.Rol, usuario.Estado);
+                    usuario.Password, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado);
                     db.SaveChanges();
+                   
                     return RedirectToAction("Index");
                 }
                 else
@@ -82,7 +86,7 @@ namespace ProyectoSMP.Controllers
                 }
             }
 
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             return View(usuario);
@@ -100,7 +104,7 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             return View(usuario);
@@ -111,7 +115,7 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdUsuario,Identificacion,IdTipoDeIdentificacion,Nombre,Apellidos,Correo,Password,TipoCarga,Provincia,Canton,Distrito,Rol,Estado")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "IdUsuario,Identificacion,IdTipoDeIdentificacion,Nombre,Apellidos,Correo,Password,TipoCarga,Provincia,Canton,Distrito,IdRol,Estado")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +123,7 @@ namespace ProyectoSMP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             return View(usuario);

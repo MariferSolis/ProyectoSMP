@@ -13,12 +13,12 @@ namespace ProyectoSMP.Controllers
     public class MantenimientoDeMaquinasController : Controller
     {
         // GET: MantenimientoDeMaquinas
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
 
         // GET: MantenimientoDeMaquinas
         public ActionResult Index()
         {
-            var mantenimientoDeMaquina = db.MantenimientoDeMaquina.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol1);
+            var mantenimientoDeMaquina = db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol);
             return View(mantenimientoDeMaquina.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MantenimientoDeMaquina mantenimientoDeMaquina = db.MantenimientoDeMaquina.Find(id);
+            Mantenimiento mantenimientoDeMaquina = db.Mantenimiento.Find(id);
             if (mantenimientoDeMaquina == null)
             {
                 return HttpNotFound();
@@ -42,7 +42,7 @@ namespace ProyectoSMP.Controllers
         {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion");
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
             return View();
         }
 
@@ -51,21 +51,20 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MantenimientoDeMaquina mantenimientoDeMaquina)
+        public ActionResult Create(Mantenimiento mantenimiento)
         {
             if (ModelState.IsValid)
             {
-                db.AgregarMantenimientoDeMaquina(mantenimientoDeMaquina.NumeroDeOrden, mantenimientoDeMaquina.NombreDeMantenimiento, 
-                    mantenimientoDeMaquina.Tipo, mantenimientoDeMaquina.Fecuencia,mantenimientoDeMaquina.Rol,mantenimientoDeMaquina.IdUsuario,
-                    mantenimientoDeMaquina.IdMaquina,mantenimientoDeMaquina.IdRepuesto, mantenimientoDeMaquina.URLArchivo);
+                db.AgregarMantenimiento(mantenimiento.IdMaquina,mantenimiento.Seccion,mantenimiento.NumeroOperacion,mantenimiento.NombreOperacion,
+                    mantenimiento.Frecuencia,mantenimiento.IdRol,mantenimiento.IdUsuario,mantenimiento.IdRepuesto,mantenimiento.Detalles,mantenimiento.URLArchivo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
-            ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
-            return View(mantenimientoDeMaquina);
+            ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
+            ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.Rol);
+            return View(mantenimiento);
         }
 
         // GET: MantenimientoDeMaquinas/Edit/5
@@ -75,14 +74,14 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MantenimientoDeMaquina mantenimientoDeMaquina = db.MantenimientoDeMaquina.Find(id);
+            Mantenimiento mantenimientoDeMaquina = db.Mantenimiento.Find(id);
             if (mantenimientoDeMaquina == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
             return View(mantenimientoDeMaquina);
         }
 
@@ -91,7 +90,7 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdMantenimiento,NumeroDeOrden,NumeroDeMantenimiento,Tipo,Fecuencia,Rol,IdUsuario,IdMaquina,IdRepuesto,URLArchivo")] MantenimientoDeMaquina mantenimientoDeMaquina)
+        public ActionResult Edit(Mantenimiento mantenimientoDeMaquina)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +111,7 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MantenimientoDeMaquina mantenimientoDeMaquina = db.MantenimientoDeMaquina.Find(id);
+            Mantenimiento mantenimientoDeMaquina = db.Mantenimiento.Find(id);
             if (mantenimientoDeMaquina == null)
             {
                 return HttpNotFound();
@@ -125,8 +124,8 @@ namespace ProyectoSMP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MantenimientoDeMaquina mantenimientoDeMaquina = db.MantenimientoDeMaquina.Find(id);
-            db.MantenimientoDeMaquina.Remove(mantenimientoDeMaquina);
+            Mantenimiento mantenimientoDeMaquina = db.Mantenimiento.Find(id);
+            db.Mantenimiento.Remove(mantenimientoDeMaquina);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -138,6 +137,18 @@ namespace ProyectoSMP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public List<ConsultarUsuariosxRol_Result> CargaUsuario(int IdRol)
+        {
+            List<ConsultarUsuariosxRol_Result> usuarios = db.ConsultarUsuariosxRol(IdRol).ToList();
+            return usuarios;
+        }
+        public JsonResult CargaUsuarios(int IdRol)
+        {
+            List<ConsultarUsuariosxRol_Result> usuarios = db.ConsultarUsuariosxRol(IdRol).ToList();
+
+            return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -13,11 +13,11 @@ namespace ProyectoSMP.Controllers
 {
     public class CumplimientoController : Controller
     {
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
         // GET: CumplimientoMantenimientoes
         public ActionResult Index()
         {
-            return View(db.CumplimientoMantenimiento.ToList());
+            return View(db.Cumplimiento.ToList());
         }
 
         // GET: CumplimientoMantenimientoes/Details/5
@@ -27,18 +27,17 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CumplimientoMantenimiento cumplimientoMantenimiento = db.CumplimientoMantenimiento.Find(id);
-            if (cumplimientoMantenimiento == null)
+            Cumplimiento cumplimiento = db.Cumplimiento.Find(id);
+            if (cumplimiento == null)
             {
                 return HttpNotFound();
             }
-            return View(cumplimientoMantenimiento);
+            return View(cumplimiento);
         }
 
         // GET: CumplimientoMantenimientoes/Create
         public ActionResult Create()
         {
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NombreDeMantenimiento");
             return View();
         }
 
@@ -47,17 +46,16 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CumplimientoMantenimiento cumplimientoMantenimiento)
+        public ActionResult Create(Cumplimiento cumplimiento)
         {
             if (ModelState.IsValid)
             {
-                cumplimientoMantenimiento.Fecha = DateTime.Now;
-                db.AgregarCumplimientoMantenimiento(cumplimientoMantenimiento.IdMantenimiento, cumplimientoMantenimiento.Estado,cumplimientoMantenimiento.Fecha);
+                cumplimiento.Fecha = DateTime.Now;
+                db.AgregarCumplimientoMantenimiento(cumplimiento.IdPlan, cumplimiento.Fecha,cumplimiento.Estado,cumplimiento.Detalles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMantenimiento = new SelectList(db.MantenimientoDeMaquina, "IdMantenimiento", "NombreDeMantenimiento",cumplimientoMantenimiento.IdMantenimiento);
-            return View(cumplimientoMantenimiento);
+            return View(cumplimiento);
         }
 
         // GET: CumplimientoMantenimientoes/Delete/5
@@ -67,7 +65,7 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CumplimientoMantenimiento cumplimientoMantenimiento = db.CumplimientoMantenimiento.Find(id);
+            Cumplimiento cumplimientoMantenimiento = db.Cumplimiento.Find(id);
             if (cumplimientoMantenimiento == null)
             {
                 return HttpNotFound();
@@ -80,8 +78,8 @@ namespace ProyectoSMP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CumplimientoMantenimiento cumplimientoMantenimiento = db.CumplimientoMantenimiento.Find(id);
-            db.CumplimientoMantenimiento.Remove(cumplimientoMantenimiento);
+            Cumplimiento cumplimiento = db.Cumplimiento.Find(id);
+            db.Cumplimiento.Remove(cumplimiento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

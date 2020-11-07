@@ -42,14 +42,15 @@
     <Property Name="Canton" Type="char" MaxLength="2" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="CumplimientoMantenimiento">
+  <EntityType Name="Cumplimiento">
     <Key>
       <PropertyRef Name="IdCumplimiento" />
     </Key>
     <Property Name="IdCumplimiento" Type="int" Nullable="false" />
-    <Property Name="IdMantenimiento" Type="int" Nullable="false" />
+    <Property Name="IdPlan" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
     <Property Name="Estado" Type="bit" />
-    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Detalles" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Distrito">
     <Key>
@@ -75,19 +76,20 @@
     <Property Name="Tipo" Type="varchar" MaxLength="50" />
     <Property Name="Almacen" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="MantenimientoDeMaquina">
+  <EntityType Name="Mantenimiento">
     <Key>
       <PropertyRef Name="IdMantenimiento" />
     </Key>
     <Property Name="IdMantenimiento" Type="int" Nullable="false" />
-    <Property Name="NumeroDeOrden" Type="varchar" MaxLength="50" />
-    <Property Name="NombreDeMantenimiento" Type="varchar" MaxLength="50" />
-    <Property Name="Tipo" Type="varchar" MaxLength="50" />
-    <Property Name="Fecuencia" Type="varchar" MaxLength="50" />
-    <Property Name="Rol" Type="int" />
+    <Property Name="IdMaquina" Type="int" Nullable="false" />
+    <Property Name="Seccion" Type="varchar" MaxLength="50" />
+    <Property Name="NumeroOperacion" Type="int" />
+    <Property Name="NombreOperacion" Type="varchar" MaxLength="50" />
+    <Property Name="Frecuencia" Type="int" />
+    <Property Name="IdRol" Type="int" />
     <Property Name="IdUsuario" Type="int" />
-    <Property Name="IdMaquina" Type="int" />
     <Property Name="IdRepuesto" Type="int" />
+    <Property Name="Detalles" Type="varchar(max)" />
     <Property Name="URLArchivo" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Maquina">
@@ -118,6 +120,16 @@
     <Property Name="IdMaquina" Type="int" Nullable="false" />
     <Property Name="IdMantenimiento" Type="int" />
   </EntityType>
+  <EntityType Name="PlanMantenimiento">
+    <Key>
+      <PropertyRef Name="IdPlan" />
+    </Key>
+    <Property Name="IdPlan" Type="int" Nullable="false" />
+    <Property Name="IdMantenimiento" Type="int" Nullable="false" />
+    <Property Name="Duracion" Type="int" Nullable="false" />
+    <Property Name="FechaDeInicio" Type="date" Nullable="false" />
+    <Property Name="FechaDeCreacion" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="Provincia">
     <Key>
       <PropertyRef Name="Provincia" />
@@ -131,6 +143,16 @@
     </Key>
     <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TipoDeIdentificacion">
     <Key>
@@ -164,7 +186,7 @@
     <Property Name="Provincia" Type="char" MaxLength="1" />
     <Property Name="Canton" Type="char" MaxLength="2" />
     <Property Name="Distrito" Type="char" MaxLength="2" />
-    <Property Name="Rol" Type="int" Nullable="false" />
+    <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK__Canton__Provinci__3E52440B">
@@ -205,51 +227,63 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CumplimientoMantenimiento_MantenimientoDeMaquina">
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="1" />
-    <End Role="CumplimientoMantenimiento" Type="Self.CumplimientoMantenimiento" Multiplicity="*" />
+  <Association Name="FK_Cumplimiento_Plan">
+    <End Role="PlanMantenimiento" Type="Self.PlanMantenimiento" Multiplicity="1" />
+    <End Role="Cumplimiento" Type="Self.Cumplimiento" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="MantenimientoDeMaquina">
-        <PropertyRef Name="IdMantenimiento" />
+      <Principal Role="PlanMantenimiento">
+        <PropertyRef Name="IdPlan" />
       </Principal>
-      <Dependent Role="CumplimientoMantenimiento">
-        <PropertyRef Name="IdMantenimiento" />
+      <Dependent Role="Cumplimiento">
+        <PropertyRef Name="IdPlan" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_InventarioDeRepuestos">
+  <Association Name="FK_Mantenimiento_InventarioDeRepuestos">
     <End Role="InventarioDeRepuestos" Type="Self.InventarioDeRepuestos" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InventarioDeRepuestos">
         <PropertyRef Name="IdRepuesto" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
+      <Dependent Role="Mantenimiento">
         <PropertyRef Name="IdRepuesto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_Maquina">
-    <End Role="Maquina" Type="Self.Maquina" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+  <Association Name="FK_Mantenimiento_Maquina">
+    <End Role="Maquina" Type="Self.Maquina" Multiplicity="1" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Maquina">
         <PropertyRef Name="IdMaquina" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
+      <Dependent Role="Mantenimiento">
         <PropertyRef Name="IdMaquina" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MantenimientoDeMaquina_Rol">
+  <Association Name="FK_Mantenimiento_Rol">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="*" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rol">
         <PropertyRef Name="IdRol" />
       </Principal>
-      <Dependent Role="MantenimientoDeMaquina">
-        <PropertyRef Name="Rol" />
+      <Dependent Role="Mantenimiento">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mantenimiento_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Mantenimiento">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -277,11 +311,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ParoDeMaquina_MantenimientoDeMaquina">
-    <End Role="MantenimientoDeMaquina" Type="Self.MantenimientoDeMaquina" Multiplicity="0..1" />
+  <Association Name="FK_ParoDeMaquina_Mantenimiento">
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="0..1" />
     <End Role="ParoDeMaquina" Type="Self.ParoDeMaquina" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="MantenimientoDeMaquina">
+      <Principal Role="Mantenimiento">
         <PropertyRef Name="IdMantenimiento" />
       </Principal>
       <Dependent Role="ParoDeMaquina">
@@ -301,6 +335,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PlanMantenimiento_Mantenimiento">
+    <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="1" />
+    <End Role="PlanMantenimiento" Type="Self.PlanMantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mantenimiento">
+        <PropertyRef Name="IdMantenimiento" />
+      </Principal>
+      <Dependent Role="PlanMantenimiento">
+        <PropertyRef Name="IdMantenimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Usuario_Rol">
     <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -309,7 +355,7 @@
         <PropertyRef Name="IdRol" />
       </Principal>
       <Dependent Role="Usuario">
-        <PropertyRef Name="Rol" />
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -356,9 +402,10 @@
     <Parameter Name="TodoDia" Type="bit" Mode="In" />
   </Function>
   <Function Name="AgregarCumplimientoMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
-    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="IdPlan" Type="int" Mode="In" />
     <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="Detalles" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="AgregarInventarioDeRepuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -369,15 +416,16 @@
     <Parameter Name="Tipo" Type="varchar" Mode="In" />
     <Parameter Name="Almacen" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="AgregarMantenimientoDeMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="NumeroDeOrden" Type="varchar" Mode="In" />
-    <Parameter Name="NombreDeMantenimiento" Type="varchar" Mode="In" />
-    <Parameter Name="Tipo" Type="varchar" Mode="In" />
-    <Parameter Name="Fecuentia" Type="varchar" Mode="In" />
-    <Parameter Name="Rol" Type="int" Mode="In" />
-    <Parameter Name="IdUsuario" Type="int" Mode="In" />
+  <Function Name="AgregarMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdMaquina" Type="int" Mode="In" />
+    <Parameter Name="Seccion" Type="varchar" Mode="In" />
+    <Parameter Name="NumeroOperacion" Type="int" Mode="In" />
+    <Parameter Name="NombreOperacion" Type="varchar" Mode="In" />
+    <Parameter Name="Frecuencia" Type="int" Mode="In" />
+    <Parameter Name="IdRol" Type="int" Mode="In" />
+    <Parameter Name="IdUsuario" Type="int" Mode="In" />
     <Parameter Name="IdRepuesto" Type="int" Mode="In" />
+    <Parameter Name="Detalles" Type="varchar(max)" Mode="In" />
     <Parameter Name="URLArchivo" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="AgregarMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -399,6 +447,12 @@
     <Parameter Name="IdMaquina" Type="int" Mode="In" />
     <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
   </Function>
+  <Function Name="AgregarPlanMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
+    <Parameter Name="Duracion" Type="int" Mode="In" />
+    <Parameter Name="FechaDeInicio" Type="date" Mode="In" />
+    <Parameter Name="FechaDeCreacion" Type="date" Mode="In" />
+  </Function>
   <Function Name="AgregarTipoDeIdentificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Descripcion" Type="varchar" Mode="In" />
     <Parameter Name="Estado" Type="bit" Mode="In" />
@@ -419,17 +473,24 @@
     <Parameter Name="Provincia" Type="char" Mode="In" />
     <Parameter Name="Canton" Type="char" Mode="In" />
     <Parameter Name="Distrito" Type="char" Mode="In" />
-    <Parameter Name="Rol" Type="int" Mode="In" />
+    <Parameter Name="IdRol" Type="int" Mode="In" />
     <Parameter Name="Estado" Type="bit" Mode="In" />
   </Function>
   <Function Name="Cantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Provincia" Type="char" Mode="In" />
   </Function>
   <Function Name="ConsultarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ConsultarRolxUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="ConsultarUnUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
   <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ConsultarUsuariosxRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CumpNoCump" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Distritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Provincia" Type="char" Mode="In" />
     <Parameter Name="Canton" Type="char" Mode="In" />
@@ -444,20 +505,61 @@
     <Parameter Name="Correo" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="InformesBasic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CantidadMaquina" Type="float" Mode="InOut" />
+    <Parameter Name="CantidadMantenimiento" Type="float" Mode="InOut" />
+    <Parameter Name="MantenimientoCumplido" Type="float" Mode="InOut" />
+    <Parameter Name="CantidadParo" Type="float" Mode="InOut" />
+  </Function>
+  <Function Name="MantenimientoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ParoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Provincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SMPModelStoreContainer">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Calendario" EntityType="Self.Calendario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CumplimientoMantenimiento" EntityType="Self.CumplimientoMantenimiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cumplimiento" EntityType="Self.Cumplimiento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioDeRepuestos" EntityType="Self.InventarioDeRepuestos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="MantenimientoDeMaquina" EntityType="Self.MantenimientoDeMaquina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Maquina" EntityType="Self.Maquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParoDeMaquina" EntityType="Self.ParoDeMaquina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlanMantenimiento" EntityType="Self.PlanMantenimiento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDeIdentificacion" EntityType="Self.TipoDeIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDeSistemaDeMaquina" EntityType="Self.TipoDeSistemaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -473,21 +575,25 @@
       <End Role="Canton" EntitySet="Canton" />
       <End Role="Distrito" EntitySet="Distrito" />
     </AssociationSet>
-    <AssociationSet Name="FK_CumplimientoMantenimiento_MantenimientoDeMaquina" Association="Self.FK_CumplimientoMantenimiento_MantenimientoDeMaquina">
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
-      <End Role="CumplimientoMantenimiento" EntitySet="CumplimientoMantenimiento" />
+    <AssociationSet Name="FK_Cumplimiento_Plan" Association="Self.FK_Cumplimiento_Plan">
+      <End Role="PlanMantenimiento" EntitySet="PlanMantenimiento" />
+      <End Role="Cumplimiento" EntitySet="Cumplimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_InventarioDeRepuestos" Association="Self.FK_MantenimientoDeMaquina_InventarioDeRepuestos">
+    <AssociationSet Name="FK_Mantenimiento_InventarioDeRepuestos" Association="Self.FK_Mantenimiento_InventarioDeRepuestos">
       <End Role="InventarioDeRepuestos" EntitySet="InventarioDeRepuestos" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_Maquina" Association="Self.FK_MantenimientoDeMaquina_Maquina">
+    <AssociationSet Name="FK_Mantenimiento_Maquina" Association="Self.FK_Mantenimiento_Maquina">
       <End Role="Maquina" EntitySet="Maquina" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
-    <AssociationSet Name="FK_MantenimientoDeMaquina_Rol" Association="Self.FK_MantenimientoDeMaquina_Rol">
+    <AssociationSet Name="FK_Mantenimiento_Rol" Association="Self.FK_Mantenimiento_Rol">
       <End Role="Rol" EntitySet="Rol" />
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mantenimiento_Usuario" Association="Self.FK_Mantenimiento_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
     </AssociationSet>
     <AssociationSet Name="FK_Maquina_AreaDeMaquina" Association="Self.FK_Maquina_AreaDeMaquina">
       <End Role="AreaDeMaquina" EntitySet="AreaDeMaquina" />
@@ -497,13 +603,17 @@
       <End Role="TipoDeSistemaDeMaquina" EntitySet="TipoDeSistemaDeMaquina" />
       <End Role="Maquina" EntitySet="Maquina" />
     </AssociationSet>
-    <AssociationSet Name="FK_ParoDeMaquina_MantenimientoDeMaquina" Association="Self.FK_ParoDeMaquina_MantenimientoDeMaquina">
-      <End Role="MantenimientoDeMaquina" EntitySet="MantenimientoDeMaquina" />
+    <AssociationSet Name="FK_ParoDeMaquina_Mantenimiento" Association="Self.FK_ParoDeMaquina_Mantenimiento">
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
       <End Role="ParoDeMaquina" EntitySet="ParoDeMaquina" />
     </AssociationSet>
     <AssociationSet Name="FK_ParoDeMaquina_Maquina" Association="Self.FK_ParoDeMaquina_Maquina">
       <End Role="Maquina" EntitySet="Maquina" />
       <End Role="ParoDeMaquina" EntitySet="ParoDeMaquina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanMantenimiento_Mantenimiento" Association="Self.FK_PlanMantenimiento_Mantenimiento">
+      <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+      <End Role="PlanMantenimiento" EntitySet="PlanMantenimiento" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
       <End Role="Rol" EntitySet="Rol" />

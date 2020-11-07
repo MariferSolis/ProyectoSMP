@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
 {
     public class TipoDeSistemaController : Controller
     {
-        private SMPEntities4 db = new SMPEntities4();
+        private SMPEntities14 db = new SMPEntities14();
 
         // GET: TipoDeSistemaDeMaquinas
         public ActionResult Index()
