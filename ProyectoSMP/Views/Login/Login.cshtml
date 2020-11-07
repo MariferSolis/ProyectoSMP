@@ -29,37 +29,38 @@
         <a class="hiddenanchor" id="signin"></a>
 
         <div class="login_wrapper">
-            <div class="animate form login_form">                  
+            <div class="animate form login_form">
                 <section class="login_content">
 
                     <img src="~/production/images/logo.PNG" />
                     <h1>SMPrats</h1>
                 </section>
-                        @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-signin", role = "form" }))
-                        {
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-signin", role = "form" }))
+                {
 
-                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                                <div class="header">
-                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="form-group form-header input-group-lg">
-                                                                        @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", placeholder = "Correo electronoco...", type = "email", tabindex = 1 })
-                                                                        @Html.ValidationMessageFor(m => m.Correo, "", new { @class = "text-danger" })
-                                                                    </div>
+            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="header">
+                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group form-header input-group-lg">
+                                                                    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", placeholder = "Correo electronoco...", type = "email", tabindex = 1 })
+                                                                    @Html.ValidationMessageFor(m => m.Correo, "", new { @class = "text-danger" })
                                                                 </div>
-                                                                                <div class="form-group centerlook" style="text-align: center">
-                                                                                    <div class="form-group form-header input-group-lg">
-                                                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña", tabindex = 2 })
-                                                                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                                                                    </div>
+                                                            </div>
+                                                                            <div class="form-group centerlook" style="text-align: center">
+                                                                                <div class="form-group form-header input-group-lg">
+                                                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña", tabindex = 2 })
+                                                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                                                                 </div>
-                                                                                                <div class="remember">
-                                                                                                    @Html.CheckBoxFor(m => m.Recordarme, htmlAttributes: new { @id = "login-remember", tabindex = 3 })
-                                                                                                    @Html.LabelFor(m => m.Recordarme)
-                                                                                                </div>
-                                                                                                                <button type="submit" id="LoginButton" class="btn btn-block btn-user btn-secondary" tabindex="4">Ingresar</button>}
-                   
+                                                                            </div>
+                                                                                            <div class="remember">
+                                                                                                @Html.CheckBoxFor(m => m.Recordarme, htmlAttributes: new { @id = "login-remember", tabindex = 3 })
+                                                                                                @Html.LabelFor(m => m.Recordarme)
+                                                                                            </div>
+                                                                                                            <a href="@Url.Action("Reenviar", "Login")" class="text-center">Olvide mi contraseña?</a>
+                                                                                                                            <button type="submit" id="LoginButton" class="btn btn-block btn-user btn-secondary" tabindex="4">Ingresar</button>}
+
             </div>
         </div>
     </div>

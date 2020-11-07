@@ -50,6 +50,12 @@ namespace ProyectoSMP.Controllers
             }
 
         }
+        public ActionResult Reenviar()
+        {
+
+
+            return View();
+        }
         public ActionResult Salir()
         {
             Session.Remove("IdUsuario");

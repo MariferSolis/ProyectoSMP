@@ -46,6 +46,7 @@ namespace ProyectoSMP.Controllers
             }
             return View(consu);
         }
+       
 
         // GET: Usuarios/Create
         public ActionResult Create()
@@ -107,6 +108,8 @@ namespace ProyectoSMP.Controllers
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
+            ViewBag.ListaCantones = CargaCanton(Convert.ToChar(usuario.Provincia));
+            ViewBag.ListaDistritos = CargaDistrito(Convert.ToChar(usuario.Provincia), usuario.Canton);
             return View(usuario);
         }
 
@@ -126,33 +129,8 @@ namespace ProyectoSMP.Controllers
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
+         
             return View(usuario);
-        }
-
-        // GET: Usuarios/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

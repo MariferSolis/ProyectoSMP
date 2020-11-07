@@ -63,14 +63,14 @@
                     <div class="item form-group">
                         @Html.LabelFor(model => model.Canton, "Cantón", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Canton, new SelectList(string.Empty, "Canton", "Nombre"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+                            @Html.DropDownListFor(model => model.Canton, new SelectList(ViewBag.ListaCantones, "Canton", "Nombre"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
                         </div>
                     </div>
 
                     <div class="item form-group">
                         @Html.LabelFor(model => model.Distrito, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Distrito, new SelectList(string.Empty, "Distrito", "Nombre"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+                            @Html.DropDownListFor(model => model.Distrito, new SelectList(ViewBag.ListaDistritos, "Distrito", "Nombre"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
                         </div>
                     </div>
 
