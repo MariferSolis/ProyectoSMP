@@ -33,11 +33,11 @@ namespace ProyectoSMP.Models
         public string Distrito { get; set; }
         public int IdRol { get; set; }
         public bool Estado { get; set; }
+        public string token_recovery { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }
         public virtual Rol Rol { get; set; }
         public virtual TipoDeIdentificacion TipoDeIdentificacion { get; set; }
-
     }
 }

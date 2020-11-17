@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities14">
+  <EntityContainerMapping StorageEntityContainer="SMPModelStoreContainer" CdmEntityContainer="SMPEntities">
     <EntitySetMapping Name="AreaDeMaquina">
       <EntityTypeMapping TypeName="SMPModel.AreaDeMaquina">
         <MappingFragment StoreEntitySet="AreaDeMaquina">
@@ -30,10 +30,10 @@
           <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
           <ScalarProperty Name="Asunto" ColumnName="Asunto" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
-          <ScalarProperty Name="Fin" ColumnName="Fin" />
+          <ScalarProperty Name="Inicia" ColumnName="Inicia" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="TodoElDia" ColumnName="TodoElDia" />
           <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -50,10 +50,13 @@
       <EntityTypeMapping TypeName="SMPModel.Cumplimiento">
         <MappingFragment StoreEntitySet="Cumplimiento">
           <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
-          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -128,17 +131,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PlanMantenimiento">
-      <EntityTypeMapping TypeName="SMPModel.PlanMantenimiento">
-        <MappingFragment StoreEntitySet="PlanMantenimiento">
-          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
-          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
-          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-          <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
-          <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Provincia">
       <EntityTypeMapping TypeName="SMPModel.Provincia">
         <MappingFragment StoreEntitySet="Provincia">
@@ -201,6 +193,7 @@
           <ScalarProperty Name="Distrito" ColumnName="Distrito" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -208,7 +201,7 @@
     <FunctionImportMapping FunctionImportName="AgregarAreaDeMaquina" FunctionName="SMPModel.Store.AgregarAreaDeMaquina" />
     <FunctionImportMapping FunctionImportName="AgregarBitacora" FunctionName="SMPModel.Store.AgregarBitacora" />
     <FunctionImportMapping FunctionImportName="AgregarCalendario" FunctionName="SMPModel.Store.AgregarCalendario" />
-    <FunctionImportMapping FunctionImportName="AgregarCumplimientoMantenimiento" FunctionName="SMPModel.Store.AgregarCumplimientoMantenimiento" />
+    <FunctionImportMapping FunctionImportName="AgregarCumplimiento" FunctionName="SMPModel.Store.AgregarCumplimiento" />
     <FunctionImportMapping FunctionImportName="AgregarInventarioDeRepuestos" FunctionName="SMPModel.Store.AgregarInventarioDeRepuestos" />
     <FunctionImportMapping FunctionImportName="AgregarMantenimiento" FunctionName="SMPModel.Store.AgregarMantenimiento" />
     <FunctionImportMapping FunctionImportName="AgregarMaquina" FunctionName="SMPModel.Store.AgregarMaquina" />
@@ -232,10 +225,32 @@
           <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
           <ScalarProperty Name="Asunto" ColumnName="Asunto" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
-          <ScalarProperty Name="Fin" ColumnName="Fin" />
+          <ScalarProperty Name="Inicia" ColumnName="Inicia" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="TodoElDia" ColumnName="TodoElDia" />
           <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="TodoDia" ColumnName="TodoDia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarCumplixUsuario" FunctionName="SMPModel.Store.ConsultarCumplixUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMPModel.ConsultarCumplixUsuario_Result">
+          <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Detalles1" ColumnName="Detalles1" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Detalles2" ColumnName="Detalles2" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -290,6 +305,7 @@
           <ScalarProperty Name="Distrito" ColumnName="Distrito" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -328,6 +344,7 @@
           <ScalarProperty Name="Distrito" ColumnName="Distrito" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -347,6 +364,7 @@
           <ScalarProperty Name="Distrito" ColumnName="Distrito" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

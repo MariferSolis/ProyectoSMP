@@ -1,0 +1,14 @@
+En el mantenimiento el numero de orden no es correcto debe de ser numero de operación.
+1.Secccion
+2.Maquina
+3.Numero de operación.
+4.Nombre de operación.
+5.Frecuencia.
+Tiempo de operacion minutos float.
+6.Personal.
+7.Operario.
+Agregar una descripcion.
+Despues subir el archivi.
+
+
+las tareas se pregunten por rol.

@@ -83,8 +83,11 @@ C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.resources.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csprojAssemblyReference.cache
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csproj.CoreCompileInputs.cache
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csproj.CopyComplete
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.pdb
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\BouncyCastle.Crypto.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.xml
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csprojAssemblyReference.cache

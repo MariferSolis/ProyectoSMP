@@ -5,7 +5,7 @@
 
 <h2>Editar</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "MantenimientoDeMaquinas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 @Html.AntiForgeryToken()
 
@@ -62,9 +62,9 @@
                     </div>
 
                     <div class="item form-group">
-                        @Html.LabelFor(model => model.IdUsuario,"Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.IdUsuario, "Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.IdUsuario, new SelectList(" "), new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.IdUsuario, new SelectList(ViewBag.ListaIdUsuario, "IdUsuario", "Nombre"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -84,10 +84,10 @@
                         </div>
                     </div>
                     <div class="item form-group">
-                        @Html.LabelFor(model => model.URLArchivo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Archivo, "Manual de Mantenimiento", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.URLArchivo, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.URLArchivo, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(m => m.Archivo, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.Archivo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <hr />
@@ -105,7 +105,7 @@
 {
     <script type="text/javascript">
 
-    $(document).ready(function () {
+      $(document).ready(function () {
         $("#IdRol").change(function () {
             $("#IdUsuario").empty();
             $.ajax({

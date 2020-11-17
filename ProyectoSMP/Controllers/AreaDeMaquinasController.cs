@@ -9,11 +9,16 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class AreaDeMaquinasController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
         // GET: AreaDeMaquinas
         public ActionResult Index()
+        {
+            return View(db.AreaDeMaquina.ToList().Where(x => x.Estado == true).ToList());
+        }
+        public ActionResult Todos()
         {
             return View(db.AreaDeMaquina.ToList());
         }
@@ -88,31 +93,6 @@ namespace ProyectoSMP.Controllers
             return View(areaDeMaquina);
         }
 
-        // GET: AreaDeMaquinas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AreaDeMaquina areaDeMaquina = db.AreaDeMaquina.Find(id);
-            if (areaDeMaquina == null)
-            {
-                return HttpNotFound();
-            }
-            return View(areaDeMaquina);
-        }
-
-        // POST: AreaDeMaquinas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            AreaDeMaquina areaDeMaquina = db.AreaDeMaquina.Find(id);
-            db.AreaDeMaquina.Remove(areaDeMaquina);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

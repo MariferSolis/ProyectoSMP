@@ -10,15 +10,20 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class MaquinasController : Controller
     {     
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
 
         // GET: Maquinas
         public ActionResult Index()
         {
-            var maquina = db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina);
+            var maquina = db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).Where(x => x.Estado == true).ToList();
             return View(maquina.ToList());
+        }
+        public ActionResult Todos()
+        {
+            return View(db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).ToList());
         }
 
         // GET: Maquinas/Details/5

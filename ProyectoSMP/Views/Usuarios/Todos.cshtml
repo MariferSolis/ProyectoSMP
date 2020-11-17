@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoSMP.Models.Usuario>
 
 @{
-    ViewBag.Title = "Todos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
                             <th>
                                 <h7>Estado</h7>
                             </th>
-                            <th></th>
+                            <th>Acciones</th>
                         </tr>
 
                         @foreach (var item in Model)
@@ -98,6 +98,7 @@
                         }
 
                     </table>
+                    @Html.ActionLink("Regresar", "Index")
                 </div>
             </div>
         </div>

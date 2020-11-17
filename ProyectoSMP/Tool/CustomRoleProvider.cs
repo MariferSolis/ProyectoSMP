@@ -7,9 +7,9 @@ using System.Web.Security;
 
 namespace ProyectoSMP.Tool
 {
-    public class CustomerRoleProvider : RoleProvider
+    public class CustomRoleProvider : RoleProvider
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
@@ -39,16 +39,9 @@ namespace ProyectoSMP.Tool
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
-            //List<Rol> lista = db.ConsultarRolxUsuario(username);
-
-            //string[] arreglo = new string[lista.Count];
-
-            //for (int i = 0; i < arreglo.Length; i++)
-            //{
-            //    arreglo[i] = lista.ElementAt(i).Descripcion;
-            //}
-            //return arreglo;
+      
+            var roles = db.ConsultarRolxUsuario(username);
+            return roles.ToArray();
         }
 
         public override string[] GetUsersInRole(string roleName)

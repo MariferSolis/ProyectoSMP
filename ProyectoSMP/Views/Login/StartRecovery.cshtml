@@ -1,0 +1,55 @@
+﻿@model ProyectoSMP.Models.ViewModels.RecoveryViewModel
+
+@{ ViewBag.Title = "StartRecovery";
+                Layout = null; }
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SMPrats! | </title>
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="~/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+</head>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="form-style">
+            <h1>SMPrats</h1>
+            <h2>Recuperar su contraseña</h2>
+            <hr/>
+            <form action="@Url.Content("~/Login/StartRecovery")" method="post">
+
+                <h4>Digite su correo electrónico</h4>
+
+                @Html.TextBoxFor(d => d.Email, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Email, null, new { style = "color:red;" })
+                <br />
+                @if (ViewBag.Message != null)
+                {
+            <div class="alert alert-error" role="alert">
+                @ViewBag.Message
+            </div>
+                            <hr />}
+                @if (ViewBag.Message1 != null)
+                {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Message1
+            </div>
+                            <hr />}
+                <button class="btn btn-dark" type="button">@Html.ActionLink("Regresar", "Login")</button>
+
+                <button class="btn btn-primary">Recuperar</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>

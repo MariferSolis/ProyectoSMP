@@ -15,10 +15,10 @@ namespace ProyectoSMP.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SMPEntities14 : DbContext
+    public partial class SMPEntities : DbContext
     {
-        public SMPEntities14()
-            : base("name=SMPEntities14")
+        public SMPEntities()
+            : base("name=SMPEntities")
         {
         }
     
@@ -37,7 +37,6 @@ namespace ProyectoSMP.Models
         public virtual DbSet<Mantenimiento> Mantenimiento { get; set; }
         public virtual DbSet<Maquina> Maquina { get; set; }
         public virtual DbSet<ParoDeMaquina> ParoDeMaquina { get; set; }
-        public virtual DbSet<PlanMantenimiento> PlanMantenimiento { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -124,7 +123,7 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarBitacora", controladorParameter, metodoParameter, mensajeParameter, idUsuarioParameter, fechaParameter, tipoParameter);
         }
     
-        public virtual int AgregarCalendario(string asunto, string descripcion, Nullable<System.DateTime> comienza, Nullable<System.DateTime> fin, string color, Nullable<bool> todoDia)
+        public virtual int AgregarCalendario(string asunto, string descripcion, Nullable<System.DateTime> inicia, Nullable<System.DateTime> fin, string color, Nullable<bool> todoDia)
         {
             var asuntoParameter = asunto != null ?
                 new ObjectParameter("Asunto", asunto) :
@@ -134,9 +133,9 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("Descripcion", descripcion) :
                 new ObjectParameter("Descripcion", typeof(string));
     
-            var comienzaParameter = comienza.HasValue ?
-                new ObjectParameter("Comienza", comienza) :
-                new ObjectParameter("Comienza", typeof(System.DateTime));
+            var iniciaParameter = inicia.HasValue ?
+                new ObjectParameter("Inicia", inicia) :
+                new ObjectParameter("Inicia", typeof(System.DateTime));
     
             var finParameter = fin.HasValue ?
                 new ObjectParameter("Fin", fin) :
@@ -150,28 +149,28 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("TodoDia", todoDia) :
                 new ObjectParameter("TodoDia", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCalendario", asuntoParameter, descripcionParameter, comienzaParameter, finParameter, colorParameter, todoDiaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCalendario", asuntoParameter, descripcionParameter, iniciaParameter, finParameter, colorParameter, todoDiaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarCumplimientoMantenimiento(Nullable<int> idPlan, Nullable<System.DateTime> fecha, Nullable<bool> estado, string detalles)
+        public virtual ObjectResult<Nullable<int>> AgregarCumplimiento(Nullable<int> idMantenimiento, Nullable<System.DateTime> comienza, Nullable<System.DateTime> finaliza, string color)
         {
-            var idPlanParameter = idPlan.HasValue ?
-                new ObjectParameter("IdPlan", idPlan) :
-                new ObjectParameter("IdPlan", typeof(int));
+            var idMantenimientoParameter = idMantenimiento.HasValue ?
+                new ObjectParameter("IdMantenimiento", idMantenimiento) :
+                new ObjectParameter("IdMantenimiento", typeof(int));
     
-            var fechaParameter = fecha.HasValue ?
-                new ObjectParameter("Fecha", fecha) :
-                new ObjectParameter("Fecha", typeof(System.DateTime));
+            var comienzaParameter = comienza.HasValue ?
+                new ObjectParameter("Comienza", comienza) :
+                new ObjectParameter("Comienza", typeof(System.DateTime));
     
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
+            var finalizaParameter = finaliza.HasValue ?
+                new ObjectParameter("Finaliza", finaliza) :
+                new ObjectParameter("Finaliza", typeof(System.DateTime));
     
-            var detallesParameter = detalles != null ?
-                new ObjectParameter("Detalles", detalles) :
-                new ObjectParameter("Detalles", typeof(string));
+            var colorParameter = color != null ?
+                new ObjectParameter("Color", color) :
+                new ObjectParameter("Color", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarCumplimientoMantenimiento", idPlanParameter, fechaParameter, estadoParameter, detallesParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarCumplimiento", idMantenimientoParameter, comienzaParameter, finalizaParameter, colorParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> AgregarInventarioDeRepuestos(string nombre, Nullable<int> cantidad, Nullable<int> requisición, Nullable<int> maximos, Nullable<int> minimos, string tipo, string almacen)
@@ -322,25 +321,25 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarParoDeMaquina", nombreParoParameter, tipoParameter, descripcionParameter, fechaComienzaParameter, fechaFinParameter, idMaquinaParameter, idMantenimientoParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarPlanMantenimiento(Nullable<int> idMantenimiento, Nullable<int> duracion, Nullable<System.DateTime> fechaDeInicio, Nullable<System.DateTime> fechaDeCreacion)
+        public virtual int AgregarPlanMantenimiento(Nullable<int> idMantenimiento, Nullable<System.DateTime> comienza, Nullable<System.DateTime> finaliza, string color)
         {
             var idMantenimientoParameter = idMantenimiento.HasValue ?
                 new ObjectParameter("IdMantenimiento", idMantenimiento) :
                 new ObjectParameter("IdMantenimiento", typeof(int));
     
-            var duracionParameter = duracion.HasValue ?
-                new ObjectParameter("Duracion", duracion) :
-                new ObjectParameter("Duracion", typeof(int));
+            var comienzaParameter = comienza.HasValue ?
+                new ObjectParameter("Comienza", comienza) :
+                new ObjectParameter("Comienza", typeof(System.DateTime));
     
-            var fechaDeInicioParameter = fechaDeInicio.HasValue ?
-                new ObjectParameter("FechaDeInicio", fechaDeInicio) :
-                new ObjectParameter("FechaDeInicio", typeof(System.DateTime));
+            var finalizaParameter = finaliza.HasValue ?
+                new ObjectParameter("Finaliza", finaliza) :
+                new ObjectParameter("Finaliza", typeof(System.DateTime));
     
-            var fechaDeCreacionParameter = fechaDeCreacion.HasValue ?
-                new ObjectParameter("FechaDeCreacion", fechaDeCreacion) :
-                new ObjectParameter("FechaDeCreacion", typeof(System.DateTime));
+            var colorParameter = color != null ?
+                new ObjectParameter("Color", color) :
+                new ObjectParameter("Color", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarPlanMantenimiento", idMantenimientoParameter, duracionParameter, fechaDeInicioParameter, fechaDeCreacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarPlanMantenimiento", idMantenimientoParameter, comienzaParameter, finalizaParameter, colorParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> AgregarTipoDeIdentificacion(string descripcion, Nullable<bool> estado)
@@ -438,6 +437,15 @@ namespace ProyectoSMP.Models
         public virtual ObjectResult<ConsultarCalendario_Result> ConsultarCalendario()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCalendario_Result>("ConsultarCalendario");
+        }
+    
+        public virtual ObjectResult<ConsultarCumplixUsuario_Result> ConsultarCumplixUsuario(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCumplixUsuario_Result>("ConsultarCumplixUsuario", idUsuarioParameter);
         }
     
         public virtual ObjectResult<string> ConsultarRolxUsuario(string correo)

@@ -10,9 +10,10 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class InventarioDeRepuestosController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
 
         // GET: InventarioDeRepuestos
         public ActionResult Index()

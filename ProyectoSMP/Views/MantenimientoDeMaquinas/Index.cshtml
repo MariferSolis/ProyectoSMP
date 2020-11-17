@@ -31,7 +31,12 @@
         <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-
+                @if(ViewBag.Message != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @ViewBag.Message
+                    </div> 
+                }
                 <h6 class="m-0 font-weight-bold text-primary">
                     @Html.ActionLink("Nuevo Mantenimiento", "Create")
                 </h6>
@@ -42,9 +47,6 @@
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
-                            <th>
-                                <h7>Id</h7>
-                            </th>
                             <th>
                                 <h7>Máquina</h7>
                             </th>
@@ -73,7 +75,7 @@
                                 <h7>Detalles</h7>
                             </th>
                             <th>
-                                <h7>Archivo</h7>
+                                <h7>Manual de Mantenimiento</h7>
                             </th>
                             <th>Acciones</th>
                         </tr>
@@ -82,10 +84,7 @@
                         {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IdMantenimiento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdMaquina)
+                            @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Seccion)
@@ -112,12 +111,19 @@
                             @Html.DisplayFor(modelItem => item.Detalles)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.URLArchivo)
+                            @if (item.URLArchivo != null)
+                            {
+                                @Html.ActionLink("Ver Archivo", "Descargar", new { id = item.IdMantenimiento })
+                            }
+                            else
+                            {
+                            <h7>No hay Archivo</h7>
+                            }
+                            
                         </td>
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.IdMantenimiento }) |
-                            @Html.ActionLink("Detalles", "Details", new { id = item.IdMantenimiento }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdMantenimiento })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.IdMantenimiento })
                         </td>
                     </tr>}
 

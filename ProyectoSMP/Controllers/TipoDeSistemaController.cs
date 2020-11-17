@@ -10,13 +10,21 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class TipoDeSistemaController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        
+        private SMPEntities db = new SMPEntities();
 
         // GET: TipoDeSistemaDeMaquinas
         public ActionResult Index()
         {
+            var tipoDeSistema = db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList();
+            return View(tipoDeSistema);
+        }
+        public ActionResult Todos()
+        {
+
             return View(db.TipoDeSistemaDeMaquina.ToList());
         }
 

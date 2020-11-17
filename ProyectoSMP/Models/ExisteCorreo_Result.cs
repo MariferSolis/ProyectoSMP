@@ -26,5 +26,6 @@ namespace ProyectoSMP.Models
         public string Distrito { get; set; }
         public int IdRol { get; set; }
         public bool Estado { get; set; }
+        public string token_recovery { get; set; }
     }
 }

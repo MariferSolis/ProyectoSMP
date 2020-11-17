@@ -1,7 +1,8 @@
-﻿@model IEnumerable<ProyectoSMP.Models.CumplimientoMantenimiento>
+﻿@model IEnumerable<ProyectoSMP.Models.Cumplimiento>
 
-@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index"; }
+@{
+    ViewBag.Title = "Index";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +33,8 @@
         <h1 class="h3 mb-2 text-gray-800">Lista de Cumplimientos</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-
                 <h6 class="m-0 font-weight-bold text-primary">
-                    @Html.ActionLink("Nuevo Cumplimiento", "Create")
+                    @Html.ActionLink("Nueva Cumplimiento", "Create")
                 </h6>
 
             </div>
@@ -44,33 +44,72 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.IdMantenimiento)
+                                Mantenimiento
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Estado)
+                                Comienza
                             </th>
-                            <th>Acciones</th>
+                            <th>
+                                Finaliza
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Detalles
+                            </th>
+                            <th>
+                                Color
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdMantenimiento)
-                </td>
-                <td>
-                    @if (item.Estado == true)
-                    {
-        @Html.Label("Activo") }
-    else
-    {
-        @Html.Label("Inactivo")}
-                </td>
-                <td>
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdCumplimiento }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCumplimiento })
-                </td>
-            </tr>}
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Comienza)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Finaliza)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fecha)
+                                </td>
+                                <td>
+                                    @if (item.Estado == true)
+                                    {
+                                        @Html.Label("Activo")}
+                                    @if (item.Estado == null)
+                                    {
+                                        @Html.Label("Sin Registro")
+                                    }
+                                    else
+                                    {
+
+                                        @Html.Label("Inactivo")
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Detalles)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Color)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.IdCumplimiento }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.IdCumplimiento })
+                                </td>
+                            </tr>
+                        }
 
                     </table>
                 </div>

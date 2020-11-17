@@ -15,11 +15,14 @@ namespace ProyectoSMP.Models
     public partial class Cumplimiento
     {
         public int IdCumplimiento { get; set; }
-        public int IdPlan { get; set; }
-        public System.DateTime Fecha { get; set; }
+        public int IdMantenimiento { get; set; }
+        public System.DateTime Comienza { get; set; }
+        public System.DateTime Finaliza { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<bool> Estado { get; set; }
         public string Detalles { get; set; }
+        public string Color { get; set; }
     
-        public virtual PlanMantenimiento PlanMantenimiento { get; set; }
+        public virtual Mantenimiento Mantenimiento { get; set; }
     }
 }

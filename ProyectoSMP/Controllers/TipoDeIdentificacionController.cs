@@ -10,16 +10,20 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class TipoDeIdentificacionController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
 
         // GET: TipoDeIdentificacions
         public ActionResult Index()
         {
+            return View(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList());
+        }
+        public ActionResult Todos()
+        {
             return View(db.TipoDeIdentificacion.ToList());
         }
-
         // GET: TipoDeIdentificacions/Details/5
         public ActionResult Details(int? id)
         {
@@ -87,32 +91,6 @@ namespace ProyectoSMP.Controllers
                 return RedirectToAction("Index");
             }
             return View(tipoDeIdentificacion);
-        }
-
-        // GET: TipoDeIdentificacions/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TipoDeIdentificacion tipoDeIdentificacion = db.TipoDeIdentificacion.Find(id);
-            if (tipoDeIdentificacion == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tipoDeIdentificacion);
-        }
-
-        // POST: TipoDeIdentificacions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TipoDeIdentificacion tipoDeIdentificacion = db.TipoDeIdentificacion.Find(id);
-            db.TipoDeIdentificacion.Remove(tipoDeIdentificacion);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

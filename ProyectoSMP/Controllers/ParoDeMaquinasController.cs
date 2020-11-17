@@ -10,9 +10,11 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class ParoDeMaquinasController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        
+        private SMPEntities db = new SMPEntities();
 
         // GET: ParoDeMaquinas
         public ActionResult Index()

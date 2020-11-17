@@ -42,44 +42,45 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
+                                <h7>Nombre</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Descripcion)
+                                <h7>Descripción</h7>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Estado)
+                                <h7>Estado</h7>
                             </th>
                             <th>
-                                Acciones
+                                <h7>Acciones</h7>
                             </th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @if (item.Estado == true)
-                    {
-                    @Html.Label("Activo") }
-                    else
-                    {
-                    @Html.Label("Inactivo")}
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdTipoSistema }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdTipoSistema }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdTipoSistema })
-                </td>
-            </tr>}
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @if (item.Estado == true)
+                        {
+                @Html.Label("Activo") }
+            else
+            {
+                @Html.Label("Inactivo")}
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdTipoSistema }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdTipoSistema })
+                    </td>
+                </tr>
+}
 
                     </table>
+                    @Html.ActionLink("Ver inactivos", "Todos")
                 </div>
             </div>
         </div>

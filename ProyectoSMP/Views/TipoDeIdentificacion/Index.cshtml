@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<ProyectoSMP.Models.TipoDeIdentificacion>
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index";
-    }
+    ViewBag.Title = "Index"; }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,52 +30,54 @@
 <body id="page-top">
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800">Lista de Tipo de Identificación</h1>
-        <div class="card shadow mb-4"> 
+        <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
                     @Html.ActionLink("Nuevo Tipo de Identificación", "Create")
                 </h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Descripcion)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Estado)
-                                </th>
-                                <th>Acciones</th>
-                            </tr>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tr>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
 
-                            @foreach (var item in Model)
-                            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
-                        @if (item.Estado == true)
+                        @foreach (var item in Model)
                         {
-            @Html.Label("Activo") }
-        else
-        {
-            @Html.Label("Inactivo")}
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IdTipoIdentificacion }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdTipoIdentificacion }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdTipoIdentificacion })
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @if (item.Estado == true)
+                    {
+    @Html.Label("Activo") }
+else
+{
+@Html.Label("Inactivo")}
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdTipoIdentificacion }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdTipoIdentificacion })
+                </td>
+            </tr>
 }
 
-                        </table>
-                    </div>
+                    </table>
+                    @Html.ActionLink("Ver inactivos", "Todos")
                 </div>
             </div>
+        </div>
     </div>
 
 

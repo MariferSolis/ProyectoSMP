@@ -47,11 +47,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -139,7 +145,6 @@
     <Compile Include="Controllers\MantenimientoDeMaquinasController.cs" />
     <Compile Include="Controllers\MaquinasController.cs" />
     <Compile Include="Controllers\ParoDeMaquinasController.cs" />
-    <Compile Include="Controllers\PlanMantenimientoController.cs" />
     <Compile Include="Controllers\TipoDeIdentificacionController.cs" />
     <Compile Include="Controllers\TipoDeSistemaController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -162,6 +167,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConsultarCalendario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsultarCumplixUsuario_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ConsultarUnUsuarios_Result.cs">
@@ -224,9 +232,6 @@
     <Compile Include="Models\ParoxMaquina_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlanMantenimiento.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -254,8 +259,11 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\ArchivoViewModel.cs" />
+    <Compile Include="Models\ViewModels\RecoveryPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\RecoveryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tool\CustomerRoleProvider.cs" />
+    <Compile Include="Tool\CustomRoleProvider.cs" />
     <Compile Include="Tool\Seguridad.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -5154,26 +5162,18 @@
     <Content Include="vendors\validator\README.md" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\AreaDeMaquinas\Create.cshtml" />
-    <Content Include="Views\AreaDeMaquinas\Delete.cshtml" />
     <Content Include="Views\AreaDeMaquinas\Details.cshtml" />
     <Content Include="Views\AreaDeMaquinas\Edit.cshtml" />
     <Content Include="Views\AreaDeMaquinas\Index.cshtml" />
-    <Content Include="Views\Cumplimiento\Create.cshtml" />
-    <Content Include="Views\Cumplimiento\Delete.cshtml" />
-    <Content Include="Views\Cumplimiento\Details.cshtml" />
-    <Content Include="Views\Cumplimiento\Index.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Create.cshtml" />
-    <Content Include="Views\InventarioDeRepuestos\Delete.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Details.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Edit.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Index.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Create.cshtml" />
-    <Content Include="Views\MantenimientoDeMaquinas\Delete.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Details.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Edit.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Index.cshtml" />
     <Content Include="Views\Maquinas\Create.cshtml" />
-    <Content Include="Views\Maquinas\Delete.cshtml" />
     <Content Include="Views\Maquinas\Details.cshtml" />
     <Content Include="Views\Maquinas\Edit.cshtml" />
     <Content Include="Views\Maquinas\Index.cshtml" />
@@ -5183,34 +5183,39 @@
     <Content Include="Views\ParoDeMaquinas\Edit.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Index.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Create.cshtml" />
-    <Content Include="Views\TipoDeIdentificacion\Delete.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Details.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Edit.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Index.cshtml" />
     <Content Include="Views\TipoDeSistema\Create.cshtml" />
-    <Content Include="Views\TipoDeSistema\Delete.cshtml" />
     <Content Include="Views\TipoDeSistema\Details.cshtml" />
     <Content Include="Views\TipoDeSistema\Edit.cshtml" />
     <Content Include="Views\TipoDeSistema\Index.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Calendario\Index.cshtml" />
     <Content Include="vendors\fullcalendar\.bower.json" />
     <Content Include="vendors\fullcalendar\bower.json" />
     <Content Include="vendors\fullcalendar\CHANGELOG.md" />
     <Content Include="vendors\fullcalendar\CONTRIBUTING.md" />
     <Content Include="vendors\fullcalendar\README.md" />
-    <Content Include="Views\PlanMantenimiento\Index.cshtml" />
-    <Content Include="Views\PlanMantenimiento\Create.cshtml" />
-    <Content Include="Views\PlanMantenimiento\Edit.cshtml" />
-    <Content Include="Views\PlanMantenimiento\Details.cshtml" />
-    <Content Include="Views\PlanMantenimiento\Delete.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Todos.cshtml" />
+    <Content Include="Views\TipoDeSistema\Todos.cshtml" />
+    <Content Include="Views\TipoDeIdentificacion\Todos.cshtml" />
+    <Content Include="Views\AreaDeMaquinas\Todos.cshtml" />
+    <Content Include="Views\Maquinas\Todos.cshtml" />
+    <Content Include="Views\Calendario\Index.cshtml" />
+    <Content Include="Views\Cumplimiento\Index.cshtml" />
+    <Content Include="Views\Cumplimiento\Create.cshtml" />
+    <Content Include="Views\Cumplimiento\Edit.cshtml" />
+    <Content Include="Views\Cumplimiento\Index2.cshtml" />
+    <Content Include="Views\Cumplimiento\Realizar.cshtml" />
+    <Content Include="Views\Login\Recovery.cshtml" />
+    <Content Include="Views\Login\StartRecovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Archivos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

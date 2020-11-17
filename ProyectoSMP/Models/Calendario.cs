@@ -17,9 +17,9 @@ namespace ProyectoSMP.Models
         public int IdEvento { get; set; }
         public string Asunto { get; set; }
         public string Descripcion { get; set; }
-        public System.DateTime Comienza { get; set; }
-        public Nullable<System.DateTime> Fin { get; set; }
+        public Nullable<System.DateTime> Inicia { get; set; }
+        public Nullable<System.DateTime> Finaliza { get; set; }
+        public Nullable<bool> TodoElDia { get; set; }
         public string Color { get; set; }
-        public Nullable<bool> TodoDia { get; set; }
     }
 }

@@ -12,13 +12,11 @@ namespace ProyectoSMP.Models
     using System;
     using System.Data.SqlClient;
 
-    public class MantenimientoxMaquina_Result
+    public partial class MantenimientoxMaquina_Result
     {
         public SqlConnection Conexion = new SqlConnection("Server=DESKTOP-PC5S6Q1\\MARIA;Database= SMP;Integrated Security =true ");
         public SqlCommand cmd;
         public SqlDataReader dr;
-
-
         public Nullable<int> Mantenimiento { get; set; }
         public string NombreMaquina { get; set; }
     }

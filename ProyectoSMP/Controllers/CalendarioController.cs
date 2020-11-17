@@ -7,51 +7,62 @@ using System.Web.Mvc;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class CalendarioController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
         // GET: Calendario
         public ActionResult Index()
         {
             return View();
         }
-        public JsonResult GetEvents()
+        public ActionResult GetEvents()
         {
-            var events = db.ConsultarCalendario().ToString();
+            var events = db.Calendario.ToList();
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
         }
         [HttpPost]
-        public JsonResult SaveEvent(Calendario calendario)
+        public JsonResult SaveEvent(Calendario e)
         {
             var status = false;
-
-            if (calendario.IdEvento > 0)
-            {
-
-                db.ActualizarCalendario(calendario.IdEvento, calendario.Asunto,
-                    calendario.Descripcion, calendario.Comienza, calendario.Fin,
-                    calendario.Color, calendario.TodoDia);
-
-                     status = true;                        
-            }
-            else
-            {
-                db.AgregarCalendario(calendario.Asunto,
-                    calendario.Descripcion, calendario.Comienza, calendario.Fin,
-                    calendario.Color, calendario.TodoDia);              
-                    status = true;  
-
-            }
+           
+                if (e.IdEvento > 0)
+                {
+                    //Update the event
+                    var v = db.Calendario.Where(a => a.IdEvento == e.IdEvento).FirstOrDefault();
+                    if (v != null)
+                    {
+                        v.Asunto = e.Asunto;
+                        v.Inicia = e.Inicia;
+                        v.Finaliza = e.Finaliza;
+                        v.Descripcion = e.Descripcion;
+                        v.TodoElDia = e.TodoElDia;
+                        v.Color = e.Color;
+                    }
+                
+                
+            }else
+                {
+                   
+                    db.AgregarCalendario(e.Asunto,e.Descripcion,e.Inicia,e.Finaliza,e.Color,e.TodoElDia);
+                }
+                db.SaveChanges();
+                status = true;
             return new JsonResult { Data = new { status = status } };
         }
         [HttpPost]
-        public JsonResult DeleteEvent(int IdEvento)
+        public JsonResult DeleteEvent(int idEvento)
         {
-            var status = false;          
-             db.EliminarCalendario(IdEvento);
-           
-                status = true;
-          
+            var status = false;
+         
+                var v = db.Calendario.Where(a => a.IdEvento == idEvento).FirstOrDefault();
+                if (v != null)
+                {
+                    db.Calendario.Remove(v);
+                    db.SaveChanges();
+                    status = true;
+                }            
             return new JsonResult { Data = new { status = status } };
         }
     }

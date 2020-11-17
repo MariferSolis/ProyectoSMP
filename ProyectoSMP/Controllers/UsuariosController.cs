@@ -14,15 +14,16 @@ using ProyectoSMP.Tool;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
 
         // GET: Usuarios
         public ActionResult Index()
         {
 
-            var usuario = db.ConsultarUsuarios();
+            var usuario = db.ConsultarUsuarios().Where(x => x.Estado == true).ToList();
             return View(usuario.ToList());
         }
         public ActionResult Todos()
@@ -52,7 +53,7 @@ namespace ProyectoSMP.Controllers
         public ActionResult Create()
         {
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
-            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion");
+            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion");
             ViewBag.ListaProvincias = CargaProvincias();
             return View();
 
@@ -88,7 +89,7 @@ namespace ProyectoSMP.Controllers
             }
 
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
-            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
+            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             return View(usuario);
         }
@@ -106,7 +107,7 @@ namespace ProyectoSMP.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
-            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
+            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             ViewBag.ListaCantones = CargaCanton(Convert.ToChar(usuario.Provincia));
             ViewBag.ListaDistritos = CargaDistrito(Convert.ToChar(usuario.Provincia), usuario.Canton);
@@ -127,7 +128,7 @@ namespace ProyectoSMP.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
-            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion, "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
+            ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
          
             return View(usuario);

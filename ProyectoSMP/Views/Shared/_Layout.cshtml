@@ -91,7 +91,8 @@
                                         <ul class="nav child_menu">
                                             <li><a href="@Url.Action("Index", "MantenimientoDeMaquinas")">Lista</a></li>
                                             <li><a href="@Url.Action("Create", "MantenimientoDeMaquinas")">Crear</a></li>
-                                            <li><a href="@Url.Action("Index", "Cumplimiento")">Cumplimientos</a></li>
+                                            <li><a href="@Url.Action("Index", "Cumplimiento")">Generar Cumplimientos</a></li>
+                                            <li><a href="@Url.Action("Index2", "Cumplimiento")">Cumplir</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -137,7 +138,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/production/images/logo.PNG" alt="">@Session["Name"]
+                                    <img src="~/production/images/logo.PNG" alt="">@Html.ViewContext.HttpContext.User.Identity.Name
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>

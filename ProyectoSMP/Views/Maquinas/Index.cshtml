@@ -29,7 +29,7 @@
 </head>
 <body id="page-top">
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
+        <h1 class="h3 mb-2 text-gray-800">Lista de Máquinas</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
 
@@ -42,36 +42,39 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.NombreMaquina)
+                                Nombre de Máquina
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Codigo)
+                                Código
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Modelo)
+                                Modelo
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Proceso)
+                                Proceso
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Cadencia)
+                                Cadencia
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Descripcion)
+                                Descripción
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.AreaDeMaquina.Nombre)
+                                Área
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TipoDeSistemaDeMaquina.Nombre)
+                                Tipo de Sistema
+                            </th>
+                            <th>
+                                Estado
                             </th>
                             <th>
                                 Acciones
                             </th>
                         </tr>
 
-                            @foreach (var item in Model)
-                            {
+                        @foreach (var item in Model)
+                        {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.NombreMaquina)
@@ -98,13 +101,22 @@
                         @Html.DisplayFor(modelItem => item.TipoDeSistemaDeMaquina.Nombre)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IdMaquina }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdMaquina }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdMaquina })
+                        @if (item.Estado == true)
+                        {
+                @Html.Label("Activo") }
+            else
+            {
+                @Html.Label("Inactivo")}
                     </td>
-                </tr>}
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdMaquina }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdMaquina })
+                    </td>
+                </tr>
+}
 
-                        </table>
+                    </table>
+                    @Html.ActionLink("Ver inactivos", "Todos")
                 </div>
             </div>
         </div>

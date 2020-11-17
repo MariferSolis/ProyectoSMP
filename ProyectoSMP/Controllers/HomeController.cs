@@ -19,9 +19,11 @@ using System.Data.Entity.ModelConfiguration.Configuration;
 
 namespace ProyectoSMP.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private SMPEntities14 db = new SMPEntities14();
+        private SMPEntities db = new SMPEntities();
+        [Authorize(Roles = "Admin")]
         public ActionResult Index(MantenimientoxMaquina_Result man)
         {
 
@@ -47,10 +49,6 @@ namespace ProyectoSMP.Controllers
 
             }
             man.dr.Close();
-
-
-
-
             man.cmd = new SqlCommand("CumpNoCump", man.Conexion);
             man.cmd.CommandType = CommandType.StoredProcedure;
 
@@ -64,13 +62,8 @@ namespace ProyectoSMP.Controllers
 
             }
             man.dr.Close();
-
-
-
             man.cmd = new SqlCommand("ParoxMaquina", man.Conexion);
             man.cmd.CommandType = CommandType.StoredProcedure;
-
-
             man.dr = man.cmd.ExecuteReader();
             while (man.dr.Read())
             {
@@ -80,9 +73,6 @@ namespace ProyectoSMP.Controllers
 
             }
             man.dr.Close();
-
-
-
             ViewBag.NombreMaq = NombreMaq;
             ViewBag.Mantenimiento = Mantenimiento;
             ViewBag.Cump = Cump;

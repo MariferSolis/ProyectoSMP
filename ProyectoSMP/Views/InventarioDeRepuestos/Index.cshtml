@@ -44,25 +44,25 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
+                                Nombre
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Cantidad)
+                                Cantidad
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Requisición)
+                                Requisición
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Maximos)
+                                Máximos
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Minimos)
+                                Minimos
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tipo)
+                                Tipo
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Almacen)
+                                Almacén
                             </th>
                             <th>Acciones</th>
                         </tr>
@@ -93,8 +93,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.IdRepuesto }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdRepuesto }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRepuesto })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdRepuesto })
                 </td>
             </tr>}
 

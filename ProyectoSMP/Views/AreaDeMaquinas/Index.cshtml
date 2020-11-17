@@ -42,42 +42,43 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
+                                Nombre
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Descripcion)
+                                Descripción
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Estado)
+                                Estado
                             </th>
                             <th>Acciones</th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @if (item.Estado == true)
-                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @if (item.Estado == true)
+                        {
                 @Html.Label("Activo") }
-                                else
-                                {
+            else
+            {
                 @Html.Label("Inactivo")}
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdArea }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdArea })
-                </td>
-            </tr>}
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdArea })
+                    </td>
+                </tr>
+}
 
                     </table>
+                    @Html.ActionLink("Ver inactivos", "Todos")
                 </div>
             </div>
         </div>
