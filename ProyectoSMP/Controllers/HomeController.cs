@@ -23,10 +23,8 @@ namespace ProyectoSMP.Controllers
     public class HomeController : Controller
     {
         private SMPEntities db = new SMPEntities();
-        [Authorize(Roles = "Admin")]
         public ActionResult Index(MantenimientoxMaquina_Result man)
         {
-
 
             List<String> NombreMaq = new List<String>();
             List<int> Mantenimiento = new List<int>();

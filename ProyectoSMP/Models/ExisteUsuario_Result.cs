@@ -10,7 +10,8 @@
 namespace ProyectoSMP.Models
 {
     using System;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ExisteUsuario_Result
     {
         public int IdUsuario { get; set; }
@@ -18,7 +19,12 @@ namespace ProyectoSMP.Models
         public int IdTipoDeIdentificacion { get; set; }
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
+        [Required]
+        [MaxLength(200)]
+        [EmailAddress]
         public string Correo { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Password { get; set; }
         public string TipoCarga { get; set; }
         public string Provincia { get; set; }
@@ -26,7 +32,7 @@ namespace ProyectoSMP.Models
         public string Distrito { get; set; }
         public int IdRol { get; set; }
         public bool Estado { get; set; }
-        public string token_recovery { get; set; }
         public bool Recordarme { get; set; }
+        public string token_recovery { get; set; }
     }
 }

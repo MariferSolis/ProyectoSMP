@@ -15,12 +15,13 @@ namespace ProyectoSMP.Controllers
     {
         private SMPEntities db = new SMPEntities();
 
+        [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos
         public ActionResult Index()
         {
             return View(db.InventarioDeRepuestos.ToList());
         }
-
+        [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +36,7 @@ namespace ProyectoSMP.Controllers
             }
             return View(inventarioDeRepuestos);
         }
-
+        [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos/Create
         public ActionResult Create()
         {
@@ -58,7 +59,7 @@ namespace ProyectoSMP.Controllers
 
             return View(inventarioDeRepuestos);
         }
-
+        [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,33 +90,6 @@ namespace ProyectoSMP.Controllers
             }
             return View(inventarioDeRepuestos);
         }
-
-        // GET: InventarioDeRepuestos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            InventarioDeRepuestos inventarioDeRepuestos = db.InventarioDeRepuestos.Find(id);
-            if (inventarioDeRepuestos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(inventarioDeRepuestos);
-        }
-
-        // POST: InventarioDeRepuestos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            InventarioDeRepuestos inventarioDeRepuestos = db.InventarioDeRepuestos.Find(id);
-            db.InventarioDeRepuestos.Remove(inventarioDeRepuestos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

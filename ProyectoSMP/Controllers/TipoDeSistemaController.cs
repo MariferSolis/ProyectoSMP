@@ -17,11 +17,13 @@ namespace ProyectoSMP.Controllers
         private SMPEntities db = new SMPEntities();
 
         // GET: TipoDeSistemaDeMaquinas
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var tipoDeSistema = db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList();
             return View(tipoDeSistema);
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Todos()
         {
 
@@ -29,6 +31,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: TipoDeSistemaDeMaquinas/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: TipoDeSistemaDeMaquinas/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -67,6 +71,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: TipoDeSistemaDeMaquinas/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,7 +91,7 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdTipoSistema,Nombre,Descripcion,Estado")] TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina)
+        public ActionResult Edit(TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina)
         {
             if (ModelState.IsValid)
             {
@@ -95,32 +100,6 @@ namespace ProyectoSMP.Controllers
                 return RedirectToAction("Index");
             }
             return View(tipoDeSistemaDeMaquina);
-        }
-
-        // GET: TipoDeSistemaDeMaquinas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina = db.TipoDeSistemaDeMaquina.Find(id);
-            if (tipoDeSistemaDeMaquina == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tipoDeSistemaDeMaquina);
-        }
-
-        // POST: TipoDeSistemaDeMaquinas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TipoDeSistemaDeMaquina tipoDeSistemaDeMaquina = db.TipoDeSistemaDeMaquina.Find(id);
-            db.TipoDeSistemaDeMaquina.Remove(tipoDeSistemaDeMaquina);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

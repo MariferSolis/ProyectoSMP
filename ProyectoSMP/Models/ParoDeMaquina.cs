@@ -11,18 +11,21 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ParoDeMaquina
     {
         public int IdParo { get; set; }
-        public string NombreParo { get; set; }
-        public string Tipo { get; set; }
-        public string Descripcion { get; set; }
-        public Nullable<System.DateTime> FechaComienza { get; set; }
-        public Nullable<System.DateTime> FechaFin { get; set; }
+        [Required]
+
         public int IdMaquina { get; set; }
         public Nullable<int> IdMantenimiento { get; set; }
-    
+        [MaxLength(200)]
+        public string Tipo { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime FechaComienza { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
+
         public virtual Mantenimiento Mantenimiento { get; set; }
         public virtual Maquina Maquina { get; set; }
     }

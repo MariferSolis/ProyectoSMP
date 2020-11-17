@@ -41,34 +41,36 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.NombreParo)
+                                Máquina
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tipo)
+                                Mantenimiento asociado
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Descripcion)
+                                Tipo
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FechaComienza)
+                                Descripción
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FechaFin)
+                                Fecha de Inicio
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.MantenimientoDeMaquina.NumeroDeOrden)
-                            </th>
+                                Fecha de Finalización
+                            </th>                                                       
                             <th>
-                                @Html.DisplayNameFor(model => model.Maquina.NombreMaquina)
+                            Acciones
                             </th>
-                            <th>Acciones</th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NombreParo)
+                    @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
@@ -81,17 +83,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaFin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MantenimientoDeMaquina.NumeroDeOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
-                </td>
+                </td>                                
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.IdParo }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdParo }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdParo })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdParo }) 
                 </td>
             </tr>}
 

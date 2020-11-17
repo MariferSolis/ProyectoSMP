@@ -10,14 +10,18 @@
 namespace ProyectoSMP.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class ExisteCodigo_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int IdMaquina { get; set; }
+        public string NombreMaquina { get; set; }
+        public Nullable<int> IdTipoSistema { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public string Codigo { get; set; }
+        public string Modelo { get; set; }
+        public string Proceso { get; set; }
+        public Nullable<int> Cadencia { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<bool> Estado { get; set; }
     }
 }

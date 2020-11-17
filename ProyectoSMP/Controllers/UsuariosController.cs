@@ -20,12 +20,14 @@ namespace ProyectoSMP.Controllers
         private SMPEntities db = new SMPEntities();
 
         // GET: Usuarios
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
 
             var usuario = db.ConsultarUsuarios().Where(x => x.Estado == true).ToList();
             return View(usuario.ToList());
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Todos()
         {
 
@@ -33,6 +35,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: Usuarios/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -47,11 +50,16 @@ namespace ProyectoSMP.Controllers
             }
             return View(consu);
         }
-       
+
 
         // GET: Usuarios/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            if (TempData["MessageCorreo"] != null)
+            {
+                ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();
+            }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion");
             ViewBag.ListaProvincias = CargaProvincias();
@@ -83,11 +91,14 @@ namespace ProyectoSMP.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "El correo ya existe");
+                    @TempData["MessageCorreo"]= "El correo ya existe debe de ingresar otro";                   
                     return RedirectToAction("Create", usuario);
                 }
             }
-
+            if (TempData["MessageCorreo"] != null)
+            {
+                ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();
+            }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
@@ -95,6 +106,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: Usuarios/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

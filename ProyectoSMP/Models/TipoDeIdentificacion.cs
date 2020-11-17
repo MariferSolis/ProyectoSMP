@@ -11,7 +11,8 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TipoDeIdentificacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +20,13 @@ namespace ProyectoSMP.Models
         {
             this.Usuario = new HashSet<Usuario>();
         }
-    
+
         public int IdTipoIdentificacion { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

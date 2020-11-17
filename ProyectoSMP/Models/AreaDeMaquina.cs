@@ -11,7 +11,8 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AreaDeMaquina
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,16 @@ namespace ProyectoSMP.Models
         {
             this.Maquina = new HashSet<Maquina>();
         }
-    
+
         public int IdArea { get; set; }
+        [Required]
+        [MaxLength(20)]
         public string Nombre { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Maquina> Maquina { get; set; }
     }

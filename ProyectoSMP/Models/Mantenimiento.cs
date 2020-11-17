@@ -11,6 +11,7 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class Mantenimiento
@@ -21,12 +22,17 @@ namespace ProyectoSMP.Models
             this.Cumplimiento = new HashSet<Cumplimiento>();
             this.ParoDeMaquina = new HashSet<ParoDeMaquina>();
         }
-    
+
         public int IdMantenimiento { get; set; }
+        [Required]
         public int IdMaquina { get; set; }
+        [MaxLength(50)]
         public string Seccion { get; set; }
+        [Range(1, 1000000000000000000)]
         public Nullable<int> NumeroOperacion { get; set; }
+        [MaxLength(50)]
         public string NombreOperacion { get; set; }
+        [Range(1, 100)]
         public Nullable<int> Frecuencia { get; set; }
         public Nullable<int> IdRol { get; set; }
         public Nullable<int> IdUsuario { get; set; }

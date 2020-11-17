@@ -11,7 +11,8 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,22 +20,33 @@ namespace ProyectoSMP.Models
         {
             this.Mantenimiento = new HashSet<Mantenimiento>();
         }
-    
+
         public int IdUsuario { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Identificacion { get; set; }
+        [Required]
         public int IdTipoDeIdentificacion { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Nombre { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Apellidos { get; set; }
+        [Required]
         public string Correo { get; set; }
         public string Password { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string TipoCarga { get; set; }
         public string Provincia { get; set; }
         public string Canton { get; set; }
         public string Distrito { get; set; }
+        [Required]
         public int IdRol { get; set; }
         public bool Estado { get; set; }
         public string token_recovery { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }
         public virtual Rol Rol { get; set; }

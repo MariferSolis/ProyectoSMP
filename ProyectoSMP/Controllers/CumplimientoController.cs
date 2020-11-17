@@ -17,11 +17,13 @@ namespace ProyectoSMP.Controllers
         private SMPEntities db = new SMPEntities();
 
         // GET: CumplimientoMantenimientoes
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var cumpli = db.Cumplimiento.Include(m => m.Mantenimiento).ToList();  
             return View(cumpli);
         }
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Index2()
         {
             var usuario = Session["IdUsuario"];
@@ -29,8 +31,17 @@ namespace ProyectoSMP.Controllers
             var plan = db.ConsultarCumplixUsuario(Convert.ToInt32(usuario)).ToList();
             return View(plan);
         }
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
+        public FileResult Descargar(int? id)
+        {
 
+            Mantenimiento mantenimientoDeMaquina = db.Mantenimiento.Find(id);
+            var ruta = mantenimientoDeMaquina.URLArchivo;
+            return File(ruta, ruta);
+
+        }
         // GET: CumplimientoMantenimientoes/Details/5
+        [Authorize(Roles = "Admin,Tecnico")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +55,7 @@ namespace ProyectoSMP.Controllers
             }
             return View(cumplimiento);
         }
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Realizar(int? id)
         {
             if (id == null)
@@ -77,6 +89,7 @@ namespace ProyectoSMP.Controllers
             return View(cumplimiento);
         }
         // GET: CumplimientoMantenimientoes/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
@@ -100,6 +113,7 @@ namespace ProyectoSMP.Controllers
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

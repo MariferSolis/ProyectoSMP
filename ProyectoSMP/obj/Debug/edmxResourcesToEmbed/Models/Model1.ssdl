@@ -115,13 +115,12 @@
       <PropertyRef Name="IdParo" />
     </Key>
     <Property Name="IdParo" Type="int" Nullable="false" />
-    <Property Name="NombreParo" Type="varchar" MaxLength="50" />
-    <Property Name="Tipo" Type="varchar" MaxLength="50" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaComienza" Type="datetime" />
-    <Property Name="FechaFin" Type="datetime" />
     <Property Name="IdMaquina" Type="int" Nullable="false" />
     <Property Name="IdMantenimiento" Type="int" />
+    <Property Name="Tipo" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+    <Property Name="FechaComienza" Type="datetime" Nullable="false" />
+    <Property Name="FechaFin" Type="datetime" />
   </EntityType>
   <EntityType Name="Provincia">
     <Key>
@@ -136,16 +135,6 @@
     </Key>
     <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TipoDeIdentificacion">
     <Key>
@@ -421,13 +410,12 @@
     <Parameter Name="Descripcion" Type="varchar" Mode="In" />
   </Function>
   <Function Name="AgregarParoDeMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="NombreParo" Type="varchar" Mode="In" />
-    <Parameter Name="Tipo" Type="varchar" Mode="In" />
-    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
-    <Parameter Name="FechaComienza" Type="datetime" Mode="In" />
-    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
     <Parameter Name="IdMaquina" Type="int" Mode="In" />
     <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
+    <Parameter Name="Tipo" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+    <Parameter Name="FechaComienza" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
   </Function>
   <Function Name="AgregarPlanMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdMantenimiento" Type="int" Mode="In" />
@@ -483,6 +471,9 @@
   <Function Name="EliminarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdEvento" Type="int" Mode="In" />
   </Function>
+  <Function Name="ExisteCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="ExisteCorreo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Correo" Type="varchar" Mode="In" />
   </Function>
@@ -490,7 +481,6 @@
     <Parameter Name="Correo" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="InformesBasic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CantidadMaquina" Type="float" Mode="InOut" />
     <Parameter Name="CantidadMantenimiento" Type="float" Mode="InOut" />
@@ -500,36 +490,6 @@
   <Function Name="MantenimientoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ParoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Provincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SMPModelStoreContainer">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
@@ -543,7 +503,6 @@
     <EntitySet Name="ParoDeMaquina" EntityType="Self.ParoDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDeIdentificacion" EntityType="Self.TipoDeIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDeSistemaDeMaquina" EntityType="Self.TipoDeSistemaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />

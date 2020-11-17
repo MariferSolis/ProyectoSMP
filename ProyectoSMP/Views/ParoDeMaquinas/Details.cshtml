@@ -12,15 +12,22 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NombreParo)
+            Mantenimiento
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NombreParo)
+            @Html.DisplayFor(model => model.Mantenimiento.NombreOperacion)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tipo)
+            Máquina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maquina.NombreMaquina)
+        </dd>
+        <dt>
+            Tipo
         </dt>
 
         <dd>
@@ -28,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Descripción
         </dt>
 
         <dd>
@@ -36,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaComienza)
+            Fecha Inició
         </dt>
 
         <dd>
@@ -44,29 +51,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaFin)
+            Fecha Finalizó
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.FechaFin)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MantenimientoDeMaquina.NumeroDeOrden)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MantenimientoDeMaquina.NumeroDeOrden)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Maquina.NombreMaquina)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Maquina.NombreMaquina)
-        </dd>
-
     </dl>
 </div>
 <p>

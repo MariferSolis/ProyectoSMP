@@ -13,17 +13,21 @@ namespace ProyectoSMP.Controllers
     public class AreaDeMaquinasController : Controller
     {
         private SMPEntities db = new SMPEntities();
+
         // GET: AreaDeMaquinas
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.AreaDeMaquina.ToList().Where(x => x.Estado == true).ToList());
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Todos()
         {
             return View(db.AreaDeMaquina.ToList());
         }
 
         // GET: AreaDeMaquinas/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +43,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: AreaDeMaquinas/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -63,6 +68,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: AreaDeMaquinas/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

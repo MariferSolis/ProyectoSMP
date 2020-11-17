@@ -18,6 +18,7 @@ namespace ProyectoSMP.Controllers
         private SMPEntities db = new SMPEntities();
 
         // GET: MantenimientoDeMaquinas
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             if (TempData["Message"] != null)
@@ -27,6 +28,7 @@ namespace ProyectoSMP.Controllers
             var mantenimientoDeMaquina = db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol);
             return View(mantenimientoDeMaquina.ToList());
         }
+        [Authorize(Roles = "Admin")]
         public FileResult Descargar(int? id)
         {
 
@@ -37,6 +39,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: MantenimientoDeMaquinas/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,6 +55,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: MantenimientoDeMaquinas/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
@@ -92,6 +96,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: MantenimientoDeMaquinas/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

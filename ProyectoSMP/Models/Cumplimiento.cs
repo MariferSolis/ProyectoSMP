@@ -11,18 +11,23 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cumplimiento
     {
         public int IdCumplimiento { get; set; }
+        [Required]
         public int IdMantenimiento { get; set; }
+        [Required]
         public System.DateTime Comienza { get; set; }
         public System.DateTime Finaliza { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<bool> Estado { get; set; }
+        [MaxLength(500)]
         public string Detalles { get; set; }
+        [MaxLength(100)]
         public string Color { get; set; }
-    
+
         public virtual Mantenimiento Mantenimiento { get; set; }
     }
 }

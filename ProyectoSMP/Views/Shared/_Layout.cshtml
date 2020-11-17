@@ -38,93 +38,108 @@
                     </div>
                     <br />
                     <br />
-                                      
-                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
-                            <div class="menu_section">
-                                <br />
-                                
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-user"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "Usuarios")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "Usuarios")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-list-alt"></i> Tipo de identificación <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "TipoDeIdentificacion")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "TipoDeIdentificacion")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-plug"></i> Máquinas <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "Maquinas")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "Maquinas")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-arrow-right"></i> Áreas <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "AreaDeMaquinas")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "AreaDeMaquinas")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-spinner"></i> Tipo de sistemas <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "TipoDeSistema")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "TipoDeSistema")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-wrench"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "MantenimientoDeMaquinas")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "MantenimientoDeMaquinas")">Crear</a></li>
-                                            <li><a href="@Url.Action("Index", "Cumplimiento")">Generar Cumplimientos</a></li>
-                                            <li><a href="@Url.Action("Index2", "Cumplimiento")">Cumplir</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-exclamation-triangle"></i> Paros <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "ParoDeMaquinas")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "ParoDeMaquinas")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-briefcase"></i> Repuestos <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "InventarioDeRepuestos")">Lista</a></li>
-                                            <li><a href="@Url.Action("Create", "InventarioDeRepuestos")">Crear</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-calendar"></i> Calendario <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="@Url.Action("Index", "Calendario")">Calendario</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-pie-chart"></i> Informes <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                           @* <li><a href="@Url.Action("Index", "Calendario")">Calendario</a></li>*@
-                                        </ul>
-                                    </li>
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                        <div class="menu_section">
+                            <br />
+
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+                                    </ul>
+                                </li>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                            <li>
+                                <a><i class="fa fa-user"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("Index", "Usuarios")">Lista</a></li>
+                                    <li><a href="@Url.Action("Create", "Usuarios")">Crear</a></li>
                                 </ul>
-                            </div>
+                            </li>
+
+                                            <li>
+                                                <a><i class="fa fa-list-alt"></i> Tipo de identificación <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Index", "TipoDeIdentificacion")">Lista</a></li>
+                                                    <li><a href="@Url.Action("Create", "TipoDeIdentificacion")">Crear</a></li>
+                                                </ul>
+                                            </li>
+                                                            <li>
+                                                                <a><i class="fa fa-plug"></i> Máquinas <span class="fa fa-chevron-down"></span></a>
+                                                                <ul class="nav child_menu">
+                                                                    <li><a href="@Url.Action("Index", "Maquinas")">Lista</a></li>
+                                                                    <li><a href="@Url.Action("Create", "Maquinas")">Crear</a></li>
+                                                                </ul>
+                                                            </li>
+                                                                            <li>
+                                                                                <a><i class="fa fa-arrow-right"></i> Áreas <span class="fa fa-chevron-down"></span></a>
+                                                                                <ul class="nav child_menu">
+                                                                                    <li><a href="@Url.Action("Index", "AreaDeMaquinas")">Lista</a></li>
+                                                                                    <li><a href="@Url.Action("Create", "AreaDeMaquinas")">Crear</a></li>
+                                                                                </ul>
+                                                                            </li>
+                                                                                            <li>
+                                                                                                <a><i class="fa fa-spinner"></i> Tipo de sistemas <span class="fa fa-chevron-down"></span></a>
+                                                                                                <ul class="nav child_menu">
+                                                                                                    <li><a href="@Url.Action("Index", "TipoDeSistema")">Lista</a></li>
+                                                                                                    <li><a href="@Url.Action("Create", "TipoDeSistema")">Crear</a></li>
+                                                                                                </ul>
+                                                                                            </li> }@* Termina el acceso de Admin*@
+                                @if (User.IsInRole("Admin") || User.IsInRole("Tecnico") || User.IsInRole("Operador"))
+                                {
+                            <li>
+                                <a><i class="fa fa-wrench"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                            <li><a href="@Url.Action("Index", "MantenimientoDeMaquinas")">Lista</a></li>
+                                                <li><a href="@Url.Action("Create", "MantenimientoDeMaquinas")">Crear</a></li>
+                                                                    <li><a href="@Url.Action("Index", "Cumplimiento")">Generar Cumplimientos</a></li>
+}
+                                    <li><a href="@Url.Action("Index2", "Cumplimiento")">Cumplir</a></li>
+                                </ul>
+                            </li>
+                                            <li>
+                                                <a><i class="fa fa-exclamation-triangle"></i> Paros <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Index", "ParoDeMaquinas")">Lista</a></li>
+                                                    <li><a href="@Url.Action("Create", "ParoDeMaquinas")">Crear</a></li>
+                                                </ul>
+                                            </li>}
+                                @if (User.IsInRole("Admin") || User.IsInRole("Almacen"))
+                                {
+                            <li>
+                                <a><i class="fa fa-briefcase"></i> Repuestos <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("Index", "InventarioDeRepuestos")">Lista</a></li>
+                                    <li><a href="@Url.Action("Create", "InventarioDeRepuestos")">Crear</a></li>
+                                </ul>
+                            </li>
+}
+                                @if (User.IsInRole("Admin") || User.IsInRole("Tecnico") || User.IsInRole("Operador")) { 
+                            <li>
+                                <a><i class="fa fa-calendar"></i> Calendario <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("Index", "Calendario")">Calendario</a></li>
+                                </ul>
+                            </li>}
+                                @if (User.IsInRole("Admin"))
+                                {
+                            <li>
+                                <a><i class="fa fa-pie-chart"></i> Informes <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    @* <li><a href="@Url.Action("Index", "Calendario")">Calendario</a></li>*@
+                                </ul>
+                            </li>}
+                            </ul>
                         </div>
-                        <!-- /menu footer buttons -->
+                    </div>
+                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -140,13 +155,7 @@
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                     <img src="~/production/images/logo.PNG" alt="">@Html.ViewContext.HttpContext.User.Identity.Name
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">                                 
                                     <a class="dropdown-item" href="@Url.Action("Salir", "Login")"><i class="fa fa-sign-out pull-right"></i> Salir</a>
                                 </div>
                             </li>

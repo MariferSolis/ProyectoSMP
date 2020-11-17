@@ -11,7 +11,8 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class InventarioDeRepuestos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,16 +20,23 @@ namespace ProyectoSMP.Models
         {
             this.Mantenimiento = new HashSet<Mantenimiento>();
         }
-    
+
         public int IdRepuesto { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Range(0, 1000000000000000000)]
         public Nullable<int> Cantidad { get; set; }
+        [Range(0, 1000000000000000000)]
         public Nullable<int> Requisición { get; set; }
+        [Range(0, 1000000000000000000)]
         public Nullable<int> Maximos { get; set; }
+        [Range(0, 1000000000000000000)]
         public Nullable<int> Minimos { get; set; }
+        [MaxLength(50)]
         public string Tipo { get; set; }
+        [MaxLength(50)]
         public string Almacen { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }
     }

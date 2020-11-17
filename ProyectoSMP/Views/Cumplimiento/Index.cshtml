@@ -87,15 +87,16 @@
                                 <td>
                                     @if (item.Estado == true)
                                     {
-                                        @Html.Label("Activo")}
-                                    @if (item.Estado == null)
-                                    {
-                                        @Html.Label("Sin Registro")
+                                        @Html.Label("Activo")
                                     }
-                                    else
+                                    else if (item.Estado == false)
                                     {
 
                                         @Html.Label("Inactivo")
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("Sin registro")
                                     }
                                 </td>
                                 <td>

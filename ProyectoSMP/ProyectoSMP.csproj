@@ -140,6 +140,7 @@
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CumplimientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\InventarioDeRepuestosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoDeMaquinasController.cs" />
@@ -193,6 +194,9 @@
     <Compile Include="Models\Distritos_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExisteCodigo_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ExisteCorreo_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -239,15 +243,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDeIdentificacion.cs">
@@ -5178,7 +5173,6 @@
     <Content Include="Views\Maquinas\Edit.cshtml" />
     <Content Include="Views\Maquinas\Index.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Create.cshtml" />
-    <Content Include="Views\ParoDeMaquinas\Delete.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Details.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Edit.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Index.cshtml" />
@@ -5216,6 +5210,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Archivos\" />
+    <Folder Include="Views\Informes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

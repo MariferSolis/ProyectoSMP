@@ -17,6 +17,7 @@ namespace ProyectoSMP.Controllers
         private SMPEntities db = new SMPEntities();
 
         // GET: ParoDeMaquinas
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Index()
         {
             var paroDeMaquina = db.ParoDeMaquina.Include(p => p.Mantenimiento).Include(p => p.Maquina);
@@ -24,6 +25,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: ParoDeMaquinas/Details/5
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +41,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: ParoDeMaquinas/Create
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Create()
         {
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
@@ -55,8 +58,8 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AgregarParoDeMaquina(paroDeMaquina.NombreParo,paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,
-                    paroDeMaquina.FechaFin,paroDeMaquina.IdMaquina,paroDeMaquina.IdMantenimiento);
+                db.AgregarParoDeMaquina(paroDeMaquina.IdMaquina,paroDeMaquina.IdMantenimiento,
+                    paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,paroDeMaquina.FechaFin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,6 +70,7 @@ namespace ProyectoSMP.Controllers
         }
 
         // GET: ParoDeMaquinas/Edit/5
+        [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,33 +104,6 @@ namespace ProyectoSMP.Controllers
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
         }
-
-        // GET: ParoDeMaquinas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ParoDeMaquina paroDeMaquina = db.ParoDeMaquina.Find(id);
-            if (paroDeMaquina == null)
-            {
-                return HttpNotFound();
-            }
-            return View(paroDeMaquina);
-        }
-
-        // POST: ParoDeMaquinas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ParoDeMaquina paroDeMaquina = db.ParoDeMaquina.Find(id);
-            db.ParoDeMaquina.Remove(paroDeMaquina);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -25,7 +25,7 @@
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.IdTipoDeIdentificacion,"Tipo de Identificación", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IdTipoDeIdentificacion, "Tipo de Identificación", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdTipoDeIdentificacion", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.IdTipoDeIdentificacion, "", new { @class = "text-danger" })
@@ -55,9 +55,14 @@
             @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    @if (ViewBag.ErrorCorreo != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorCorreo
+        </div>
+    }
     <div class="item form-group">
-        @Html.LabelFor(model => model.TipoCarga,"Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.TipoCarga, "Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.TipoCarga, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TipoCarga, "", new { @class = "text-danger" })
@@ -67,15 +72,15 @@
     <div class="item form-group">
         @Html.LabelFor(model => model.Provincia, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Provincia, new SelectList(ViewBag.ListaProvincias, "Provincia", "Nombre"), "--Provincia--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;"})
+            @Html.DropDownListFor(model => model.Provincia, new SelectList(ViewBag.ListaProvincias, "Provincia", "Nombre"), "--Provincia--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.Canton,"Cantón", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Canton, "Cantón", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Canton, new SelectList(string.Empty, "Canton", "Nombre"), "--Canton--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;"})
+            @Html.DropDownListFor(model => model.Canton, new SelectList(string.Empty, "Canton", "Nombre"), "--Canton--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             @Html.ValidationMessageFor(model => model.Canton, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -83,13 +88,13 @@
     <div class="item form-group">
         @Html.LabelFor(model => model.Distrito, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Distrito, new SelectList(string.Empty, "Distrito", "Nombre"), "--Distrito--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;"})
+            @Html.DropDownListFor(model => model.Distrito, new SelectList(string.Empty, "Distrito", "Nombre"), "--Distrito--", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
             @Html.ValidationMessageFor(model => model.Distrito, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.IdRol,"Rol", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IdRol, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("IdRol", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
@@ -106,20 +111,15 @@
         </div>
     </div>
 
+    <hr />
     <div class="item form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-default" />
-        </div>
+        <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
+        <input type="submit" value="Crear" class="btn btn-success" />
     </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Regresar", "Index")
-</div>
-@section Scripts
+</div>}
+    @section Scripts
 {
-    <script type="text/javascript">
+        <script type="text/javascript">
         $(document).ready(function () {
             $("#Provincia").change(function () {
                 $("#Canton").empty();
@@ -162,5 +162,5 @@
             })
 
         });
-    </script>
-}
+        </script>
+    }

@@ -39,7 +39,6 @@ namespace ProyectoSMP.Models
         public virtual DbSet<ParoDeMaquina> ParoDeMaquina { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoDeIdentificacion> TipoDeIdentificacion { get; set; }
         public virtual DbSet<TipoDeSistemaDeMaquina> TipoDeSistemaDeMaquina { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -288,11 +287,15 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarMaquina", nombreMaquinaParameter, idTipoSistemaParameter, idAreaParameter, codigoParameter, modeloParameter, procesoParameter, cadenciaParameter, descripcionParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarParoDeMaquina(string nombreParo, string tipo, string descripcion, Nullable<System.DateTime> fechaComienza, Nullable<System.DateTime> fechaFin, Nullable<int> idMaquina, Nullable<int> idMantenimiento)
+        public virtual ObjectResult<Nullable<int>> AgregarParoDeMaquina(Nullable<int> idMaquina, Nullable<int> idMantenimiento, string tipo, string descripcion, Nullable<System.DateTime> fechaComienza, Nullable<System.DateTime> fechaFin)
         {
-            var nombreParoParameter = nombreParo != null ?
-                new ObjectParameter("NombreParo", nombreParo) :
-                new ObjectParameter("NombreParo", typeof(string));
+            var idMaquinaParameter = idMaquina.HasValue ?
+                new ObjectParameter("IdMaquina", idMaquina) :
+                new ObjectParameter("IdMaquina", typeof(int));
+    
+            var idMantenimientoParameter = idMantenimiento.HasValue ?
+                new ObjectParameter("IdMantenimiento", idMantenimiento) :
+                new ObjectParameter("IdMantenimiento", typeof(int));
     
             var tipoParameter = tipo != null ?
                 new ObjectParameter("Tipo", tipo) :
@@ -310,15 +313,7 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("FechaFin", fechaFin) :
                 new ObjectParameter("FechaFin", typeof(System.DateTime));
     
-            var idMaquinaParameter = idMaquina.HasValue ?
-                new ObjectParameter("IdMaquina", idMaquina) :
-                new ObjectParameter("IdMaquina", typeof(int));
-    
-            var idMantenimientoParameter = idMantenimiento.HasValue ?
-                new ObjectParameter("IdMantenimiento", idMantenimiento) :
-                new ObjectParameter("IdMantenimiento", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarParoDeMaquina", nombreParoParameter, tipoParameter, descripcionParameter, fechaComienzaParameter, fechaFinParameter, idMaquinaParameter, idMantenimientoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarParoDeMaquina", idMaquinaParameter, idMantenimientoParameter, tipoParameter, descripcionParameter, fechaComienzaParameter, fechaFinParameter);
         }
     
         public virtual int AgregarPlanMantenimiento(Nullable<int> idMantenimiento, Nullable<System.DateTime> comienza, Nullable<System.DateTime> finaliza, string color)
@@ -507,6 +502,15 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarCalendario", idEventoParameter);
         }
     
+        public virtual ObjectResult<ExisteCodigo_Result> ExisteCodigo(string codigo)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ExisteCodigo_Result>("ExisteCodigo", codigoParameter);
+        }
+    
         public virtual ObjectResult<ExisteCorreo_Result> ExisteCorreo(string correo)
         {
             var correoParameter = correo != null ?
@@ -547,109 +551,6 @@ namespace ProyectoSMP.Models
         public virtual ObjectResult<Provincias_Result> Provincias()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Provincias_Result>("Provincias");
-        }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     }
 }
