@@ -68,10 +68,21 @@ namespace ProyectoSMP.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            try
+            {
+                ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
+                ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
+                ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
+                return View();
+            }
+            catch
+            {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
             return View();
+            }
+            
         }
 
         // POST: MantenimientoDeMaquinas/Create
@@ -81,6 +92,8 @@ namespace ProyectoSMP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Mantenimiento mantenimiento)
         {
+            try
+            {
             if (ModelState.IsValid)
             {
                 string path = Server.MapPath("~/Content/Archivos/");
@@ -97,11 +110,19 @@ namespace ProyectoSMP.Controllers
                 @TempData["Message"] = "Se cargaron los archivos";
                 return RedirectToAction("Index");
             }
-
+            }
+            catch
+            {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.Rol);
             
+            return View(mantenimiento); 
+            }
+            ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
+            ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.Rol);
+
             return View(mantenimiento);
         }
 

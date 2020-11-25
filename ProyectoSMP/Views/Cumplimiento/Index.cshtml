@@ -28,13 +28,14 @@
     <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
         .amarillo {
-            background: #FFD700;
+            background: #feec8d;
         }
         .verde {
-            background: #32CD32;
+            background: #aafeb5;
+            background: #bc9fe2;
         }
         .rojo {
-            background: red;
+            background: #fd9797;
         }
     </style>
 </head>
@@ -115,7 +116,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Detalles)
                                 </td>
-                                <td>
+                                <td id="color">
                                     @Html.DisplayFor(modelItem => item.Color)
                                 </td>
                                 <td>
