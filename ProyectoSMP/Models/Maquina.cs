@@ -11,7 +11,8 @@ namespace ProyectoSMP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Maquina
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,18 +21,25 @@ namespace ProyectoSMP.Models
             this.Mantenimiento = new HashSet<Mantenimiento>();
             this.ParoDeMaquina = new HashSet<ParoDeMaquina>();
         }
-    
+
         public int IdMaquina { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string NombreMaquina { get; set; }
         public Nullable<int> IdTipoSistema { get; set; }
         public Nullable<int> IdArea { get; set; }
+        [MaxLength(50)]
         public string Codigo { get; set; }
+        [MaxLength(50)]
         public string Modelo { get; set; }
+        [MaxLength(50)]
         public string Proceso { get; set; }
+        [Range(1, 1000000000000000000)]
         public Nullable<int> Cadencia { get; set; }
+        [MaxLength(50)]
         public string Descripcion { get; set; }
         public Nullable<bool> Estado { get; set; }
-    
+
         public virtual AreaDeMaquina AreaDeMaquina { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }

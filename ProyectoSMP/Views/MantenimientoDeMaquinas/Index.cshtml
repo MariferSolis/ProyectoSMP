@@ -28,7 +28,7 @@
 </head>
 <body id="page-top">
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
+        <h1 class="h3 mb-2 text-gray-800">Lista de Mantenimientos</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @if(ViewBag.Message != null)
@@ -37,14 +37,17 @@
                         @ViewBag.Message
                     </div> 
                 }
-                <h6 class="m-0 font-weight-bold text-primary">
-                    @Html.ActionLink("Nuevo Mantenimiento", "Create")
-                </h6>
+            <h6 class="m-0 font-weight-bold text-primary">
+                @Html.ActionLink("Nuevo Mantenimiento", "Create")
+            </h6>
 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Generar reporte", "Print")
+                    <hr />
+                    <h6>Sí edita un mantenimiento debe volver a ingresar el archivo de Manual de Mantenimiento.</h6>
+                    <hr />
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -82,50 +85,48 @@
 
                         @foreach (var item in Model)
                         {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Seccion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NumeroOperacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreOperacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Frecuencia)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rol.Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.InventarioDeRepuestos.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Detalles)
-                        </td>
-                        <td>
-                            @if (item.URLArchivo != null)
-                            {
-                                @Html.ActionLink("Ver Archivo", "Descargar", new { id = item.IdMantenimiento })
-                            }
-                            else
-                            {
-                            <h7>No hay Archivo</h7>
-                            }
-                            
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.IdMantenimiento }) |
-                            @Html.ActionLink("Detalles", "Details", new { id = item.IdMantenimiento })
-                        </td>
-                    </tr>}
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Seccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Frecuencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventarioDeRepuestos.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalles)
+                    </td>
+                    <td>
+                        @if (item.URLArchivo != null)
+                        {
+                @Html.ActionLink("Ver Archivo", "Descargar", new { id = item.IdMantenimiento }) }
+            else
+            {
+                <h7>No hay Archivo</h7>}
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdMantenimiento })
+                    </td>
+                </tr>
+}
 
                     </table>
                 </div>

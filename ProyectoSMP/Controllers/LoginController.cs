@@ -109,7 +109,7 @@ namespace ProyectoSMP.Controllers
                     }
                     else
                     {
-                        @TempData["Message"] = "El correo no se encientra suscrito";
+                        @TempData["Message"] = "El correo no se encuentra suscrito";
                     }
                 }
                 if (TempData["Message"] != null)

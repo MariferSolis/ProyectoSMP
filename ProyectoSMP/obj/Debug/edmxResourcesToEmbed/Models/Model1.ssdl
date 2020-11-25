@@ -490,6 +490,7 @@
   <Function Name="MantenimientoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ParoxMaquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Provincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="RepuestosPorComprar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SMPModelStoreContainer">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />

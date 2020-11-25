@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Lista de Cumplimientos</title>
+    <title>Lista de Tareas</title>
 
     <!-- Custom fonts for this template -->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,21 +26,32 @@
 
     <!-- Custom styles for this page -->
     <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <style>
+        .amarillo {
+            background: #FFD700;
+        }
+        .verde {
+            background: #32CD32;
+        }
+        .rojo {
+            background: red;
+        }
+    </style>
 </head>
 <body id="page-top">
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Lista de Cumplimientos</h1>
+        <h1 class="h3 mb-2 text-gray-800">Lista de Tareas</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    @Html.ActionLink("Nueva Cumplimiento", "Create")
+                    @Html.ActionLink("Nueva Tarea", "Create")
                 </h6>
 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Generar reporte", "Print")
+                    <hr />
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -71,7 +82,9 @@
 
                         @foreach (var item in Model)
                         {
+
                             <tr>
+
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
                                 </td>
@@ -87,12 +100,12 @@
                                 <td>
                                     @if (item.Estado == true)
                                     {
-                                        @Html.Label("Activo")
+                                        @Html.Label("Realizado")
                                     }
                                     else if (item.Estado == false)
                                     {
 
-                                        @Html.Label("Inactivo")
+                                        @Html.Label("Sin Realizar")
                                     }
                                     else
                                     {
@@ -106,8 +119,7 @@
                                     @Html.DisplayFor(modelItem => item.Color)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.IdCumplimiento }) |
-                                    @Html.ActionLink("Detalles", "Details", new { id = item.IdCumplimiento })
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.IdCumplimiento })
                                 </td>
                             </tr>
                         }
@@ -117,10 +129,27 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $("td").each(function () {
+            var value = this.innerHTML;
+            if (/amarillo/.test(value)) {
+                $(this).parent('tr').addClass('amarillo');
+            }
+        });
+        $("td").each(function () {
+            var value = this.innerHTML;
+            if (/verde/.test(value)) {
+                $(this).parent('tr').addClass('verde');
+            }
+        });
+        $("td").each(function () {
+            var value = this.innerHTML;
+            if (/rojo/.test(value)) {
+                $(this).parent('tr').addClass('rojo');
+            }
+        });
+</script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

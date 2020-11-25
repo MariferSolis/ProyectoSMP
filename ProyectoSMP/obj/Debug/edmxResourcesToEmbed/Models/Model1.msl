@@ -397,5 +397,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RepuestosPorComprar" FunctionName="SMPModel.Store.RepuestosPorComprar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMPModel.RepuestosPorComprar_Result">
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Requisición" ColumnName="Requisición" />
+          <ScalarProperty Name="Maximos" ColumnName="Maximos" />
+          <ScalarProperty Name="Minimos" ColumnName="Minimos" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

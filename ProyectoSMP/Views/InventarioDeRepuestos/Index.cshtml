@@ -34,13 +34,14 @@
             <div class="card-header py-3">
 
                 <h6 class="m-0 font-weight-bold text-primary">
-                    @Html.ActionLink("Nuevo Repuesto", "Create")
+                    @Html.ActionLink("Nuevo Repuesto", "Create") 
                 </h6>
 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Generar reporte", "Print")
+                    <hr />
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -69,33 +70,32 @@
 
                         @foreach (var item in Model)
                         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Requisición)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Maximos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Minimos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Almacen)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdRepuesto }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdRepuesto })
-                </td>
-            </tr>}
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisición)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maximos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Minimos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Almacen)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdRepuesto })
+                    </td>
+                </tr>}
 
                     </table>
                 </div>

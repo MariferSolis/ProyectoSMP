@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ProyectoSMP.Models.Usuario>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Usuarios</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    <h7>Identificación</h7>
+                </th>
+                <th>
+                    <h7>Nombre</h7>
+                </th>
+                <th>
+                    <h7>Apellidos</h7>
+                </th>
+                <th>
+                    <h7>Correo</h7>
+                </th>
+                <th>
+                    <h7>Cargo</h7>
+                </th>
+                <th>
+                    <h7>Rol</h7>
+                </th>
+                <th>
+                    <h7>Estado</h7>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Identificacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoCarga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+                    </td>
+                    <td>
+                        @if (item.Estado == true)
+                        {
+                            @Html.Label("Activo") }
+                        else
+                        {
+                            @Html.Label("Inactivo")}
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    </div>

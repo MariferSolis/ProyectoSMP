@@ -39,12 +39,10 @@ namespace ProyectoSMP.Controllers
                         v.Descripcion = e.Descripcion;
                         v.TodoElDia = e.TodoElDia;
                         v.Color = e.Color;
-                    }
-                
-                
-            }else
-                {
-                   
+                    }                
+            }
+            else
+                {                   
                     db.AgregarCalendario(e.Asunto,e.Descripcion,e.Inicia,e.Finaliza,e.Color,e.TodoElDia);
                 }
                 db.SaveChanges();

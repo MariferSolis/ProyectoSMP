@@ -35,7 +35,8 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Regresar", "Index")
+                    <hr/>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -47,7 +48,9 @@
                             <th>
                                 Estado
                             </th>
-                            <th>Acciones</th>
+                            <th>
+                                Acciones
+                            </th>
                         </tr>
 
                         @foreach (var item in Model)
@@ -68,14 +71,13 @@
                                         @Html.Label("Inactivo")}
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }) |
-                                    @Html.ActionLink("Detalles", "Details", new { id = item.IdArea })
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.IdArea })
                                 </td>
                             </tr>
                         }
 
                     </table>
-                    @Html.ActionLink("Regresar", "Index")
+
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 ﻿using ProyectoSMP.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +32,15 @@ namespace ProyectoSMP.Controllers
         {
             return View(db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).ToList());
         }
-
+        public ActionResult Report()
+        {
+            return View(db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).ToList());
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report")
+            { FileName = "Test.pdf" };
+        }
         // GET: Maquinas/Details/5
         [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
@@ -56,8 +65,8 @@ namespace ProyectoSMP.Controllers
             {
                 ViewBag.ErrorCodigo = TempData["MessageCodigo"].ToString();
             }
-            ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre");
-            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre");
+            ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre");
+            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre");
             return View();
         }
 
@@ -83,7 +92,7 @@ namespace ProyectoSMP.Controllers
                 {
                     @TempData["MessageCodigo"] = "El código ya existe debe de ingresar otro";
 
-                    return RedirectToAction("Create", maquina);
+                    return RedirectToAction("Create");
                 }
                 
             }
@@ -91,8 +100,8 @@ namespace ProyectoSMP.Controllers
             {
                 ViewBag.ErrorCodigo = TempData["MessageCodigo"].ToString();
             }
-            ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre", maquina.IdArea);
-            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+            ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
+            ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
             return View(maquina);
         }
 
@@ -109,8 +118,8 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre", maquina.IdArea);
-            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+            ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
+            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
             return View(maquina);
         }
 
@@ -127,8 +136,8 @@ namespace ProyectoSMP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdArea = new SelectList(db.AreaDeMaquina, "IdArea", "Nombre", maquina.IdArea);
-            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina, "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+            ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
+            ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
             return View(maquina);
         }
 

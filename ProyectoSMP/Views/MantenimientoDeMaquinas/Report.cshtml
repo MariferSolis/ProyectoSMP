@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProyectoSMP.Models.Mantenimiento>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Mantenimientos</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    <h7>Máquina</h7>
+                </th>
+                <th>
+                    <h7>Sección</h7>
+                </th>
+                <th>
+                    <h7>Número Operación</h7>
+                </th>
+                <th>
+                    <h7>Nombre Operación</h7>
+                </th>
+                <th>
+                    <h7>Frecuencia</h7>
+                </th>
+                <th>
+                    <h7>Rol</h7>
+                </th>
+                <th>
+                    <h7>Usuario</h7>
+                </th>
+                <th>
+                    <h7>Repuesto</h7>
+                </th>
+                <th>
+                    <h7>Detalles</h7>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Seccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Frecuencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventarioDeRepuestos.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalles)
+                    </td>
+                </tr>
+}
+
+        </table>
+        </div>
+    </div>
+

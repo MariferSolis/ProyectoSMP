@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProyectoSMP.Models.Maquina>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Maquinas</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    Nombre de Máquina
+                </th>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Modelo
+                </th>
+                <th>
+                    Proceso
+                </th>
+                <th>
+                    Cadencia
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Área
+                </th>
+                <th>
+                    Tipo de Sistema
+                </th>
+                <th>
+                    Estado
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreMaquina)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Codigo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Modelo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Proceso)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cadencia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AreaDeMaquina.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TipoDeSistemaDeMaquina.Nombre)
+    </td>
+    <td>
+        @if (item.Estado == true)
+        {
+@Html.Label("Activo") }
+else
+{
+@Html.Label("Inactivo")}
+    </td>
+</tr>}
+
+        </table>
+
+    </div>
+</div>

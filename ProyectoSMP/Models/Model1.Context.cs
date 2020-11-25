@@ -552,5 +552,10 @@ namespace ProyectoSMP.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Provincias_Result>("Provincias");
         }
+    
+        public virtual ObjectResult<RepuestosPorComprar_Result> RepuestosPorComprar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RepuestosPorComprar_Result>("RepuestosPorComprar");
+        }
     }
 }

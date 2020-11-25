@@ -91,3 +91,4 @@ C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Bou
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.xml
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csprojAssemblyReference.cache
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Rotativa.dll

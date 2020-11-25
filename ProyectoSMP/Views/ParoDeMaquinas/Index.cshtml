@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Lista Paro</title>
+    <title>Lista Fallos</title>
 
     <!-- Custom fonts for this template -->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,16 +28,17 @@
 </head>
 <body id="page-top">
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Lista de Paros</h1>
+        <h1 class="h3 mb-2 text-gray-800">Lista de Fallos</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    @Html.ActionLink("Nuevo Paro", "Create")
+                    @Html.ActionLink("Nuevo Fallo", "Create")
                 </h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Generar reporte", "Print")
+                    <hr />
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -57,38 +58,38 @@
                             </th>
                             <th>
                                 Fecha de Finalización
-                            </th>                                                       
+                            </th>
                             <th>
-                            Acciones
+                                Acciones
                             </th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaComienza)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaFin)
-                </td>                                
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdParo }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdParo }) 
-                </td>
-            </tr>}
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaComienza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdParo })
+                    </td>
+                </tr>
+}
 
                     </table>
                 </div>

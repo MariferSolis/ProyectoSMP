@@ -2,27 +2,27 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Agendar Mantenimientos</h2>
+<h2>Calendario</h2>
 <div id="calender"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
             </div>
             <div class="modal-body">
-                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                <button id="btnDelete" class="btn btn-outline-danger btn-sm pull-right">
                     <span class="glyphicon glyphicon-remove"></span> Eliminar
                 </button>
-                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                <button id="btnEdit" class="btn btn-outline-primary btn-sm pull-right" style="margin-right:5px;">
                     <span class="glyphicon glyphicon-pencil"></span> Editar
                 </button>
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
                 <form class="col-md-12 form-horizontal">
                     <input type="hidden" id="hdEventID" value="0" />
                     <div class="form-group">
-                        <label>Mantenimiento</label>
+                        <label>Asunto</label>
                         <input type="text" id="txtSubject" class="form-control" />
                     </div>
                     <div class="form-group">
@@ -77,10 +77,11 @@
                             <option value="blue">Azul</option>
                             <option value="black">Negro</option>
                             <option value="green">Verde</option>
+                            <option value="purple">Morado</option>
                         </select>
                     </div>
-                    <button type="button" id="btnSave" class="btn btn-success">Guardar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnSave" class="btn btn-outline-success">Guardar</button>                    
                 </form>
             </div>
         </div>
@@ -249,22 +250,22 @@
             $('#btnSave').click(function () {
                 //Validation/
                 if ($('#txtSubject').val().trim() == "") {
-                    alert('Subject required');
+                    alert('Requiere un asunto');
                     return;
                 }
                 if ($('#txtStart').val().trim() == "") {
-                    alert('Start date required');
+                    alert('Requiere la fecha inicio');
                     return;
                 }
                 if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
-                    alert('End date required');
+                    alert('Requiere la fecha fin');
                     return;
                 }
                 else {
                     var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm A").toDate();
                     var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm A").toDate();
                     if (startDate > endDate) {
-                        alert('Invalid end date');
+                        alert('Invalida la fehca fin');
                         return;
                     }
                 }
@@ -273,7 +274,7 @@
                     IdEvento: $('#hdEventID').val(),
                     Asunto: $('#txtSubject').val().trim(),
                     Inicia: $('#txtStart').val().trim(),
-                    Finaliza: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                    Finaliza: $('#chkIsFullDay').is(':checked') ? null: $('#txtEnd').val().trim(),
                     Descripcion: $('#txtDescription').val(),
                     Color: $('#ddThemeColor').val(),
                     TodoElDia: $('#chkIsFullDay').is(':checked')

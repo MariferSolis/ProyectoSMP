@@ -1,97 +1,73 @@
 ﻿@model ProyectoSMP.Models.ConsultarUnUsuarios_Result
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Details";
-}
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+                ViewBag.Title = "Details"; }
+        <h2>Detalles</h2>
 
-<h2>Detalles</h2>
+        <div class="table-responsive">
+            <h4>Usuario</h4>
+            <hr />
 
-<div>
-    <h4>Usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <h7>Identificación</h7>
-        </dt>
+            <h6>
+                <b>Identificación:</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.Identificacion)
-        </dd>
+                @Html.DisplayFor(model => model.Identificacion)
+            </h6>
+            <h6>
+                <b>Tipo de Identificación:</b>
 
-        <dt>
-            <h7>Tipo de Identificación</h7>
-        </dt>
+                @Html.DisplayFor(model => model.Tipo_Identificacion)
+            </h6>
+            <h6>
+                <b>Nombre:</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tipo_Identificacion)
-        </dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </h6>
+            <h6>
+                <b>Correo:</b>
 
-        <dt>
-            <h7>Nombre</h7>
-        </dt>
+                @Html.DisplayFor(model => model.Correo)
+            </h6>
+            <h6>
+                <b>Cargo:</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+                @Html.DisplayFor(model => model.TipoCarga)
+            </h6>
+            <h6>
+                <b>Provincia:</b>
 
-        <dt>
-            <h7>Correo</h7>
-        </dt>
+                @Html.DisplayFor(model => model.Provincia)
+            </h6>
+            <h6>
+                <b>Cantón:</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.Correo)
-        </dd>
+                @Html.DisplayFor(model => model.Canton)
+            </h6>
+            <h6>
+                <b>Distrito:</b>
 
-        <dt>
-            <h7>Cargo</h7>
-        </dt>
+                @Html.DisplayFor(model => model.Distrito)
+            </h6>
+            <h6>
+                <b>Rol:</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.TipoCarga)
-        </dd>
+                @Html.DisplayFor(model => model.Rol)
+            </h6>
+            <h6>
+                <b>Estado:</b>
 
-        <dt>
-            <h7>Provincia</h7>
-        </dt>
+                @if (Model.Estado == true)
+                {
+    @Html.Label("Activo") }
+else
+{
+    @Html.Label("Inactivo")}
+            </h6>
 
-        <dd>
-            @Html.DisplayFor(model => model.Provincia)
-        </dd>
-
-        <dt>
-            <h7>Caontón</h7>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Canton)
-        </dd>
-
-        <dt>
-            <h7>Distrito</h7>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Distrito)
-        </dd>
-
-        <dt>
-            <h7>Rol</h7>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rol)
-        </dd>
-        <dt>
-            <h7>Estado</h7>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.IdUsuario }) |
-    @Html.ActionLink("Regresar", "Index")
+            <hr />
+        </div>
+        <p>
+            <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
+            <button class="btn btn-outline-primary" type="button"><span class="glyphicon glyphicon-pencil"></span>@Html.ActionLink("Editar", "Edit", new { id = Model.IdUsuario }) 
+            </button>
 </p>

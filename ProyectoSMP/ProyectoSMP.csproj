@@ -60,6 +60,10 @@
       <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,7 +144,6 @@
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CumplimientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\InventarioDeRepuestosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoDeMaquinasController.cs" />
@@ -242,6 +245,9 @@
     <Compile Include="Models\Provincias_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RepuestosPorComprar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Rol.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -279,6 +285,47 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\Chart.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="docs\css\animate.min.css" />
     <Content Include="docs\css\bootstrap.min.css" />
     <Content Include="docs\css\docs.min.css" />
@@ -372,6 +419,10 @@
     <Content Include="production\typography.html" />
     <Content Include="production\widgets.html" />
     <Content Include="production\xx.html" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="docs\fonts\fonts\fontawesome-webfont.eot" />
@@ -415,6 +466,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -423,6 +475,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -5161,27 +5215,21 @@
     <Content Include="Views\AreaDeMaquinas\Edit.cshtml" />
     <Content Include="Views\AreaDeMaquinas\Index.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Create.cshtml" />
-    <Content Include="Views\InventarioDeRepuestos\Details.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Edit.cshtml" />
     <Content Include="Views\InventarioDeRepuestos\Index.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Create.cshtml" />
-    <Content Include="Views\MantenimientoDeMaquinas\Details.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Edit.cshtml" />
     <Content Include="Views\MantenimientoDeMaquinas\Index.cshtml" />
     <Content Include="Views\Maquinas\Create.cshtml" />
-    <Content Include="Views\Maquinas\Details.cshtml" />
     <Content Include="Views\Maquinas\Edit.cshtml" />
     <Content Include="Views\Maquinas\Index.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Create.cshtml" />
-    <Content Include="Views\ParoDeMaquinas\Details.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Edit.cshtml" />
     <Content Include="Views\ParoDeMaquinas\Index.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Create.cshtml" />
-    <Content Include="Views\TipoDeIdentificacion\Details.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Edit.cshtml" />
     <Content Include="Views\TipoDeIdentificacion\Index.cshtml" />
     <Content Include="Views\TipoDeSistema\Create.cshtml" />
-    <Content Include="Views\TipoDeSistema\Details.cshtml" />
     <Content Include="Views\TipoDeSistema\Edit.cshtml" />
     <Content Include="Views\TipoDeSistema\Index.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
@@ -5206,11 +5254,18 @@
     <Content Include="Views\Cumplimiento\Realizar.cshtml" />
     <Content Include="Views\Login\Recovery.cshtml" />
     <Content Include="Views\Login\StartRecovery.cshtml" />
+    <Content Include="Views\InventarioDeRepuestos\Comprar.cshtml" />
+    <Content Include="Views\Maquinas\Report.cshtml" />
+    <Content Include="Views\ParoDeMaquinas\Report.cshtml" />
+    <Content Include="Views\InventarioDeRepuestos\Report.cshtml" />
+    <Content Include="Views\InventarioDeRepuestos\ReportC.cshtml" />
+    <Content Include="Views\MantenimientoDeMaquinas\Report.cshtml" />
+    <Content Include="Views\Usuarios\Report.cshtml" />
+    <Content Include="Views\Cumplimiento\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Archivos\" />
-    <Folder Include="Views\Informes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

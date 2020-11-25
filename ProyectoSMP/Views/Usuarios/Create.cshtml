@@ -4,14 +4,12 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Usuario</h4>
+    <h4>Crear Usuario</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.Hidden("IdUsuario", 0)
@@ -113,8 +111,8 @@
 
     <hr />
     <div class="item form-group">
-        <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
-        <input type="submit" value="Crear" class="btn btn-success" />
+        <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
+        <input type="submit" value="Crear" class="btn btn-outline-success" />
     </div>
 </div>}
     @section Scripts

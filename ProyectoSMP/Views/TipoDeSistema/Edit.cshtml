@@ -1,7 +1,7 @@
 ﻿@model ProyectoSMP.Models.TipoDeSistemaDeMaquina
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
-                ViewBag.Title = "Edit"; }
+    ViewBag.Title = "Edit"; }
 
 <h2>Editar</h2>
 
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="item form-group">
-                        @Html.LabelFor(model => model.Descripcion,"Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Descripcion, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
@@ -40,13 +40,13 @@
                             </div>
                         </div>
                     </div>
-    <hr/>
+                    <hr />
                     <div class="item form-group">
                         <div>
-                            <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
+                            <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
                         </div>
                         <div>
-                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            <input type="submit" value="Guardar" class="btn btn-outline-success" />
                         </div>
                     </div>
                 </div>}

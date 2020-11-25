@@ -590,6 +590,7 @@
     <FunctionImport Name="MantenimientoxMaquina" ReturnType="Collection(SMPModel.MantenimientoxMaquina_Result)" />
     <FunctionImport Name="ParoxMaquina" ReturnType="Collection(SMPModel.ParoxMaquina_Result)" />
     <FunctionImport Name="Provincias" ReturnType="Collection(SMPModel.Provincias_Result)" />
+    <FunctionImport Name="RepuestosPorComprar" ReturnType="Collection(SMPModel.RepuestosPorComprar_Result)" />
   </EntityContainer>
   <ComplexType Name="Cantones_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
@@ -730,5 +731,15 @@
   <ComplexType Name="Provincias_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="RepuestosPorComprar_Result">
+    <Property Type="Int32" Name="IdRepuesto" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Cantidad" Nullable="true" />
+    <Property Type="Int32" Name="Requisición" Nullable="true" />
+    <Property Type="Int32" Name="Maximos" Nullable="true" />
+    <Property Type="Int32" Name="Minimos" Nullable="true" />
+    <Property Type="String" Name="Tipo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Almacen" Nullable="true" MaxLength="50" />
   </ComplexType>
 </Schema>

@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoSMP.Models;
 using ProyectoSMP.Tool;
+using Rotativa;
 
 namespace ProyectoSMP.Controllers
 {
@@ -33,7 +34,16 @@ namespace ProyectoSMP.Controllers
 
             return View(db.Usuario.ToList());
         }
+        public ActionResult Report()
+        {
 
+            return View(db.Usuario.ToList());
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report")
+            { FileName = "Test.pdf" };
+        }
         // GET: Usuarios/Details/5
         [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
@@ -76,15 +86,16 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuario.Password = CreatePassword(10);
-                var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
-                var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);
-                usuario.Password = ClaveEncriptada;
+                
                 var dato = db.ExisteCorreo(usuario.Correo).FirstOrDefault();
                 if(dato == null)
                 {
+                    usuario.Password = CreatePassword(10);
+                    var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
+                    var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);              
                     db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
-                    usuario.Password, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado);
+                    ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado);
+                    BtnCorreo(usuario.Correo,usuario.Password,usuario.Nombre,usuario.Apellidos);
                     db.SaveChanges();
                    
                     return RedirectToAction("Index");
@@ -92,7 +103,7 @@ namespace ProyectoSMP.Controllers
                 else
                 {
                     @TempData["MessageCorreo"]= "El correo ya existe debe de ingresar otro";                   
-                    return RedirectToAction("Create", usuario);
+                    return RedirectToAction("Create");
                 }
             }
             if (TempData["MessageCorreo"] != null)

@@ -1,4 +1,5 @@
 ﻿using ProyectoSMP.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,6 +21,30 @@ namespace ProyectoSMP.Controllers
         public ActionResult Index()
         {
             return View(db.InventarioDeRepuestos.ToList());
+        }
+        public ActionResult Comprar()
+        {
+            return View(db.RepuestosPorComprar().ToList());
+        }
+        public ActionResult Report()
+        {
+ 
+            return View(db.InventarioDeRepuestos.ToList());
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report")
+            { FileName = "Test.pdf" };
+        }
+        public ActionResult ReportC()
+        {
+
+            return View(db.RepuestosPorComprar().ToList());
+        }
+        public ActionResult PrintC()
+        {
+            return new ActionAsPdf("ReportC")
+            { FileName = "Test.pdf" };
         }
         [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos/Details/5

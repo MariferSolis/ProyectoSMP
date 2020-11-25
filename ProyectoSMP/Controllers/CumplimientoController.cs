@@ -1,4 +1,5 @@
 ﻿using ProyectoSMP.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -40,6 +41,15 @@ namespace ProyectoSMP.Controllers
             return File(ruta, ruta);
 
         }
+        public ActionResult Report()
+        {
+            return View(db.Cumplimiento.Include(m => m.Mantenimiento).ToList());
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report")
+            { FileName = "Test.pdf" };
+        }
         // GET: CumplimientoMantenimientoes/Details/5
         [Authorize(Roles = "Admin,Tecnico")]
         public ActionResult Details(int? id)
@@ -67,6 +77,11 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
@@ -85,6 +100,11 @@ namespace ProyectoSMP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index2");
             }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
@@ -92,6 +112,15 @@ namespace ProyectoSMP.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
             return View();
         }
@@ -105,11 +134,28 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                if (cumplimiento.Comienza<cumplimiento.Finaliza)
+                {
                 db.AgregarCumplimiento(cumplimiento.IdMantenimiento,cumplimiento.Comienza,cumplimiento.Finaliza,cumplimiento.Color);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    @TempData["Message"] = "Las fechas no coinciden";
+                    return RedirectToAction("Create", cumplimiento);
+                }             
             }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
@@ -125,6 +171,11 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
@@ -142,6 +193,11 @@ namespace ProyectoSMP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }

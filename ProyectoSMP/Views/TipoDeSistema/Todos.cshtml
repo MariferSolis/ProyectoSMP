@@ -35,6 +35,8 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @Html.ActionLink("Regresar", "Index")
+                    <hr/>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -69,14 +71,13 @@
                                         @Html.Label("Inactivo")}
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdTipoSistema }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.IdTipoSistema })
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdTipoSistema })
                                 </td>
                             </tr>
                         }
 
                     </table>
-                    @Html.ActionLink("Regresar", "Index")
+
                 </div>
             </div>
         </div>

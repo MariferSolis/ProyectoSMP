@@ -38,7 +38,8 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-
+                    @Html.ActionLink("Ver todos", "Todos") | @Html.ActionLink("Generar reporte", "Print")
+                    <hr />
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
                             <th>
@@ -111,17 +112,19 @@
                         @if (item.Estado == true)
                         {
                 @Html.Label("Activo") }
-                                else
-                                {
+            else
+            {
                 @Html.Label("Inactivo")}
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario }) 
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario })
+                        |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario })
                     </td>
-                </tr>}
+                </tr>
+}
                     </table>
-                    @Html.ActionLink("Ver inactivos", "Todos")
+
                 </div>
             </div>
         </div>

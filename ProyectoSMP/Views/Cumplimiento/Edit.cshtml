@@ -4,14 +4,12 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Cumplimiento</h4>
+        <h4>Editar Tarea</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdCumplimiento)
@@ -27,7 +25,7 @@
         <div class="item form-group">
             @Html.LabelFor(model => model.Comienza, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Comienza, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Comienza, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Comienza, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +33,7 @@
         <div class="item form-group">
             @Html.LabelFor(model => model.Finaliza, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Finaliza, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Finaliza, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Finaliza, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +41,7 @@
         <div class="item form-group">
             @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Color, new SelectList(ViewBag.ListaColores, "Value", "Text"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
                 @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,11 +49,53 @@
         <hr />
         <div class="item form-group">
             <div>
-                <button class="btn btn-default btn-default" type="button">@Html.ActionLink("Regresar", "Index")</button>
+                <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
             </div>
             <div>
-                <input type="submit" value="Guardar" class="btn btn-success" />
+                <input type="submit" value="Guardar" class="btn btn-outline-success" />
             </div>
         </div>
     </div>
+}
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $('.datepicker').datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: false,
+                    changeMonth: false,
+                    changeYear: false,
+                    /*showOn: "button",
+                    buttonImage: "images/calendar.gif",
+                    buttonImageOnly: true,
+                    minDate: '+1D',
+                    maxDate: '+3M',*/
+                    inline: true
+                });
+            });
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '<Ant',
+                nextText: 'Sig>',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+        });
+    </script>
 }

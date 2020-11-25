@@ -1,4 +1,5 @@
 ﻿using ProyectoSMP.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,16 @@ namespace ProyectoSMP.Controllers
             var paroDeMaquina = db.ParoDeMaquina.Include(p => p.Mantenimiento).Include(p => p.Maquina);
             return View(paroDeMaquina.ToList());
         }
-
+        public ActionResult Report()
+        {
+            var paroDeMaquina = db.ParoDeMaquina.Include(p => p.Mantenimiento).Include(p => p.Maquina);
+            return View(paroDeMaquina.ToList());
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report")
+            { FileName = "Test.pdf" };
+        }
         // GET: ParoDeMaquinas/Details/5
         [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Details(int? id)
@@ -44,6 +54,10 @@ namespace ProyectoSMP.Controllers
         [Authorize(Roles = "Admin,Tecnico,Operador")]
         public ActionResult Create()
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
             return View();
@@ -58,12 +72,37 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (paroDeMaquina.FechaFin!=null)
+                {
+                    if(paroDeMaquina.FechaFin<paroDeMaquina.FechaComienza){
+
+                        @TempData["Message"] = "Las fechas no coinciden";
+
+                        return RedirectToAction("Create", paroDeMaquina);
+                    }
+                    else
+                    {
+                        db.AgregarParoDeMaquina(paroDeMaquina.IdMaquina, paroDeMaquina.IdMantenimiento,
+                        paroDeMaquina.Tipo, paroDeMaquina.Descripcion, paroDeMaquina.FechaComienza, paroDeMaquina.FechaFin);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                }
+                else
+                {
                 db.AgregarParoDeMaquina(paroDeMaquina.IdMaquina,paroDeMaquina.IdMantenimiento,
-                    paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,paroDeMaquina.FechaFin);
+                paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,paroDeMaquina.FechaFin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+                }
+               
+                
             }
-
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
@@ -82,6 +121,10 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
             return View(paroDeMaquina);
@@ -96,9 +139,29 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (paroDeMaquina.FechaFin != null)
+                {
+                    if (paroDeMaquina.FechaFin < paroDeMaquina.FechaComienza)
+                    {
+
+                        @TempData["Message"] = "Las fechas no coinciden";
+
+                        return RedirectToAction("Edit", paroDeMaquina);
+                    }
+                    else
+                    {
+                        db.Entry(paroDeMaquina).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
                 db.Entry(paroDeMaquina).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
             }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);

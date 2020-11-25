@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Lista de Cumplimientos</title>
+    <title>Lista de Tareas Por Hacer</title>
 
     <!-- Custom fonts for this template -->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,16 +30,13 @@
 </head>
 <body id="page-top">
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Lista de Cumplimientos</h1>
+        <h1 class="h3 mb-2 text-gray-800">Lista de Tareas Por Hacer</h1>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <tr>
-                            <th>
-                                Id
-                            </th>
                             <th>
                                 Nombre Máquina
                             </th>
@@ -81,9 +78,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdCumplimiento)
-                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.NombreMaquina)
                                 </td>
