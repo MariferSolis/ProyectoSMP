@@ -61,6 +61,7 @@ namespace ProyectoSMP.Controllers
 
                 db.AgregarAreaDeMaquina(areaDeMaquina.Nombre, areaDeMaquina.Descripcion, areaDeMaquina.Estado);
                 db.SaveChanges();
+                db.AgregarBitacora("AreaDeMaquinas","Crear","El usuario realiza la acción de crear un área",Convert.ToInt32(Session["IdUsuario"]),DateTime.Now, "crear");
                 return RedirectToAction("Index");
             }
 
@@ -94,6 +95,7 @@ namespace ProyectoSMP.Controllers
             {
                 db.Entry(areaDeMaquina).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("AreaDeMaquinas", "Editar", "El usuario realiza la acción de editar un área", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
             }
             return View(areaDeMaquina);

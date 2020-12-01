@@ -107,7 +107,8 @@ namespace ProyectoSMP.Controllers
                 db.AgregarMantenimiento(mantenimiento.IdMaquina,mantenimiento.Seccion,mantenimiento.NumeroOperacion,mantenimiento.NombreOperacion,
                     mantenimiento.Frecuencia,mantenimiento.IdRol,mantenimiento.IdUsuario,mantenimiento.IdRepuesto,mantenimiento.Detalles,mantenimiento.URLArchivo);
                 db.SaveChanges();
-                @TempData["Message"] = "Se cargaron los archivos";
+                    db.AgregarBitacora("Mantenimiento", "Crear", "El usuario realiza la acción de crear un Mantenimiento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
+                    @TempData["Message"] = "Se cargaron los archivos";
                 return RedirectToAction("Index");
             }
             }
@@ -155,19 +156,31 @@ namespace ProyectoSMP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Mantenimiento mantenimientoDeMaquina)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (mantenimientoDeMaquina.Archivo != null)
+                if (ModelState.IsValid)
                 {
-                string path = Server.MapPath("~/Content/Archivos/");
-                string nombre = path + Path.GetFileName(mantenimientoDeMaquina.Archivo.FileName);
-                mantenimientoDeMaquina.Archivo.SaveAs(path + Path.GetFileName(mantenimientoDeMaquina.Archivo.FileName));
-                mantenimientoDeMaquina.URLArchivo = nombre;
-                }             
-                db.Entry(mantenimientoDeMaquina).State = EntityState.Modified;
-                db.SaveChanges();
-                @TempData["Message"] = "Se editaron los datos";
-                return RedirectToAction("Index");
+                    if (mantenimientoDeMaquina.Archivo != null)
+                    {
+                        string path = Server.MapPath("~/Content/Archivos/");
+                        string nombre = path + Path.GetFileName(mantenimientoDeMaquina.Archivo.FileName);
+                        mantenimientoDeMaquina.Archivo.SaveAs(path + Path.GetFileName(mantenimientoDeMaquina.Archivo.FileName));
+                        mantenimientoDeMaquina.URLArchivo = nombre;
+                    }
+                    db.Entry(mantenimientoDeMaquina).State = EntityState.Modified;
+                    db.SaveChanges();
+                    db.AgregarBitacora("Mantenimiento", "Editar", "El usuario realiza la acción de editar un Mantenimiento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
+                    @TempData["Message"] = "Se editaron los datos";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
+                ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
+                ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
+                ViewBag.ListaIdUsuario = CargaUsuario(Convert.ToInt32(mantenimientoDeMaquina.IdUsuario)).ToList();
+                return View(mantenimientoDeMaquina);
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);

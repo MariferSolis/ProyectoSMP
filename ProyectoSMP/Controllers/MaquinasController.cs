@@ -83,7 +83,8 @@ namespace ProyectoSMP.Controllers
                 if (dato==null)
                 {
                 db.AgregarMaquina(maquina.NombreMaquina,maquina.IdTipoSistema,maquina.IdArea,maquina.Codigo,maquina.Modelo,maquina.Proceso,maquina.Cadencia,maquina.Descripcion);
-                db.SaveChanges();
+                    db.AgregarBitacora("Maquinas", "Crear", "El usuario realiza la acción de crear un máquina", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
+                    db.SaveChanges();
 
                     @TempData["Message"] = "Máquina ingresada con exito";
                     return RedirectToAction("Index");
@@ -91,14 +92,15 @@ namespace ProyectoSMP.Controllers
                 else
                 {
                     @TempData["MessageCodigo"] = "El código ya existe debe de ingresar otro";
-
-                    return RedirectToAction("Create");
+                    if (TempData["MessageCodigo"] != null)
+                    {
+                        ViewBag.ErrorCodigo = TempData["MessageCodigo"].ToString();
+                    }
+                    ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
+                    ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+                    return View(maquina);
                 }
                 
-            }
-            if (TempData["MessageCodigo"] != null)
-            {
-                ViewBag.ErrorCodigo = TempData["MessageCodigo"].ToString();
             }
             ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
             ViewBag.IdTipoSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
@@ -128,13 +130,30 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdMaquina,NombreMaquina,IdTipDeSistema,IdArea,Codigo,Modelo,Proceso,Cadencia,Descripcion")] Maquina maquina)
+        public ActionResult Edit(Maquina maquina)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(maquina).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var dato = db.ExisteCodigo(maquina.Codigo).FirstOrDefault();
+                if (dato == null)
+                {
+                    db.SaveChanges();
+                    db.AgregarBitacora("Maquinas", "Editar", "El usuario realiza la acción de editar un máquina", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    @TempData["MessageCodigo"] = "El código ya existe debe de ingresar otro";
+                    if (TempData["MessageCodigo"] != null)
+                    {
+                        ViewBag.ErrorCodigo = TempData["MessageCodigo"].ToString();
+                    }
+                    ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
+                    ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);
+                    return View(maquina);
+                }
+
             }
             ViewBag.IdArea = new SelectList(db.AreaDeMaquina.Where(x => x.Estado == true).ToList(), "IdArea", "Nombre", maquina.IdArea);
             ViewBag.IdTipDeSistema = new SelectList(db.TipoDeSistemaDeMaquina.Where(x => x.Estado == true).ToList(), "IdTipoSistema", "Nombre", maquina.IdTipoSistema);

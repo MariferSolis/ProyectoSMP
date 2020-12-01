@@ -97,18 +97,21 @@ namespace ProyectoSMP.Controllers
                     ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado);
                     BtnCorreo(usuario.Correo,usuario.Password,usuario.Nombre,usuario.Apellidos);
                     db.SaveChanges();
-                   
+                    db.AgregarBitacora("Usuarios", "Crear", "El usuario realiza la acción de crear un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    @TempData["MessageCorreo"]= "El correo ya existe debe de ingresar otro";                   
-                    return RedirectToAction("Create");
+                    @TempData["MessageCorreo"]= "El correo ya existe debe de ingresar otro";
+                    if (TempData["MessageCorreo"] != null)
+                    {
+                        ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();
+                    }
+                    ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
+                    ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
+                    ViewBag.ListaProvincias = CargaProvincias();
+                    return View(usuario);
                 }
-            }
-            if (TempData["MessageCorreo"] != null)
-            {
-                ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
@@ -142,12 +145,13 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdUsuario,Identificacion,IdTipoDeIdentificacion,Nombre,Apellidos,Correo,Password,TipoCarga,Provincia,Canton,Distrito,IdRol,Estado")] Usuario usuario)
+        public ActionResult Edit(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("Usuarios", "Editar", "El usuario realiza la acción de editar un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);

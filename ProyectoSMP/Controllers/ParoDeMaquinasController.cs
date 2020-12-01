@@ -77,14 +77,20 @@ namespace ProyectoSMP.Controllers
                     if(paroDeMaquina.FechaFin<paroDeMaquina.FechaComienza){
 
                         @TempData["Message"] = "Las fechas no coinciden";
-
-                        return RedirectToAction("Create", paroDeMaquina);
+                        if (TempData["Message"] != null)
+                        {
+                            ViewBag.Error = TempData["Message"].ToString();
+                        }
+                        ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
+                        ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
+                        return View(paroDeMaquina);
                     }
                     else
                     {
                         db.AgregarParoDeMaquina(paroDeMaquina.IdMaquina, paroDeMaquina.IdMantenimiento,
                         paroDeMaquina.Tipo, paroDeMaquina.Descripcion, paroDeMaquina.FechaComienza, paroDeMaquina.FechaFin);
                         db.SaveChanges();
+                        db.AgregarBitacora("ParoDeMaquinas", "Crear", "El usuario realiza la acción de crear un fallo", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                         return RedirectToAction("Index");
                     }
 
@@ -94,14 +100,11 @@ namespace ProyectoSMP.Controllers
                 db.AgregarParoDeMaquina(paroDeMaquina.IdMaquina,paroDeMaquina.IdMantenimiento,
                 paroDeMaquina.Tipo,paroDeMaquina.Descripcion,paroDeMaquina.FechaComienza,paroDeMaquina.FechaFin);
                 db.SaveChanges();
+                db.AgregarBitacora("ParoDeMaquinas", "Crear", "El usuario realiza la acción de crear un fallo", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
                 }
                
                 
-            }
-            if (TempData["Message"] != null)
-            {
-                ViewBag.Error = TempData["Message"].ToString();
             }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
@@ -145,23 +148,26 @@ namespace ProyectoSMP.Controllers
                     {
 
                         @TempData["Message"] = "Las fechas no coinciden";
-
-                        return RedirectToAction("Edit", paroDeMaquina);
+                        if (TempData["Message"] != null)
+                        {
+                            ViewBag.Error = TempData["Message"].ToString();
+                        }
+                        ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
+                        ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);
+                        return View(paroDeMaquina);
                     }
                     else
                     {
                         db.Entry(paroDeMaquina).State = EntityState.Modified;
                         db.SaveChanges();
+                        db.AgregarBitacora("ParoDeMaquinas", "Editar", "El usuario realiza la acción de editar un fallo", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                         return RedirectToAction("Index");
                     }
                 }
                 db.Entry(paroDeMaquina).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("ParoDeMaquinas", "Editar", "El usuario realiza la acción de editar un fallo", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
-            }
-            if (TempData["Message"] != null)
-            {
-                ViewBag.Error = TempData["Message"].ToString();
             }
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", paroDeMaquina.IdMantenimiento);
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina", paroDeMaquina.IdMaquina);

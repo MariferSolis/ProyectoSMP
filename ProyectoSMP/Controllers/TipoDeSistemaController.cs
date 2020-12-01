@@ -64,6 +64,7 @@ namespace ProyectoSMP.Controllers
             {
                 db.AgregarTipoDeSistemaDeMaquina(tipoDeSistemaDeMaquina.Nombre,tipoDeSistemaDeMaquina.Descripcion,tipoDeSistemaDeMaquina.Estado);
                 db.SaveChanges();
+                db.AgregarBitacora("TipoDeSistema", "Crear", "El usuario realiza la acción de crear un tipo de sistema", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
             }
 
@@ -97,6 +98,7 @@ namespace ProyectoSMP.Controllers
             {
                 db.Entry(tipoDeSistemaDeMaquina).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("TipoDeSistema", "Editar", "El usuario realiza la acción de editar un tipo de sistema", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
             }
             return View(tipoDeSistemaDeMaquina);

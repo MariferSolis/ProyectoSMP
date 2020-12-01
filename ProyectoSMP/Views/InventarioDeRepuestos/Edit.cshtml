@@ -40,7 +40,7 @@
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.Maximos,"Máximos", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Maximos, "Máximos", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Maximos, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Maximos, "", new { @class = "text-danger" })
@@ -54,7 +54,11 @@
             @Html.ValidationMessageFor(model => model.Minimos, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    @if (ViewBag.Error != null)
+    {
+<div class="alert alert-danger" role="alert">
+    @ViewBag.Error
+</div>}
     <div class="item form-group">
         @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -64,7 +68,7 @@
     </div>
 
     <div class="item form-group">
-        @Html.LabelFor(model => model.Almacen,"Almacén", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Almacen, "Almacén", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Almacen, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Almacen, "", new { @class = "text-danger" })

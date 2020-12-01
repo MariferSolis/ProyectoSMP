@@ -37,7 +37,11 @@
                 @Html.ValidationMessageFor(model => model.Finaliza, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>}
         <div class="item form-group">
             @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

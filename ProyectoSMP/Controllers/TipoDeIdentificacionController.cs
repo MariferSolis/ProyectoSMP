@@ -60,6 +60,7 @@ namespace ProyectoSMP.Controllers
             {
                 db.AgregarTipoDeIdentificacion(tipoDeIdentificacion.Descripcion,tipoDeIdentificacion.Estado);
                 db.SaveChanges();
+                db.AgregarBitacora("TipoDeIdentificacion", "Crear", "El usuario realiza la acción de crear un tipo de identificación", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
             }
 
@@ -93,6 +94,7 @@ namespace ProyectoSMP.Controllers
             {
                 db.Entry(tipoDeIdentificacion).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("TipoDeIdentificacion", "Editar", "El usuario realiza la acción de editar un tipo de identificación", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
             }
             return View(tipoDeIdentificacion);

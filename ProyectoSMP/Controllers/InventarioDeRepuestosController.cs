@@ -77,9 +77,23 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (inventarioDeRepuestos.Maximos < inventarioDeRepuestos.Minimos)
+                {
+                    @TempData["Message"] = "La cantidad de maximos y minimos no coinciden";
+                    if (TempData["Message"] != null)
+                    {
+                        ViewBag.Error = TempData["Message"].ToString();
+                    }
+                    return View(inventarioDeRepuestos);
+                }
+                else
+                {
                 db.AgregarInventarioDeRepuestos(inventarioDeRepuestos.Nombre, inventarioDeRepuestos.Cantidad, inventarioDeRepuestos.Requisición, inventarioDeRepuestos.Maximos, inventarioDeRepuestos.Minimos, inventarioDeRepuestos.Tipo, inventarioDeRepuestos.Almacen);
                 db.SaveChanges();
+                db.AgregarBitacora("InventarioDeRepuestos", "Crear", "El usuario realiza la acción de crear un repuesto", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
+                }
+                
             }
 
             return View(inventarioDeRepuestos);
@@ -92,6 +106,7 @@ namespace ProyectoSMP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             InventarioDeRepuestos inventarioDeRepuestos = db.InventarioDeRepuestos.Find(id);
             if (inventarioDeRepuestos == null)
             {
@@ -109,9 +124,22 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inventarioDeRepuestos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (inventarioDeRepuestos.Maximos < inventarioDeRepuestos.Minimos)
+                {
+                    @TempData["Message"] = "La cantidad de maximos y minimos no coinciden";
+                    if (TempData["Message"] != null)
+                    {
+                        ViewBag.Error = TempData["Message"].ToString();
+                    }
+                    return View(inventarioDeRepuestos);
+                }
+                else
+                {
+                    db.Entry(inventarioDeRepuestos).State = EntityState.Modified;
+                    db.SaveChanges();
+                    db.AgregarBitacora("InventarioDeRepuestos", "Editar", "El usuario realiza la acción de editar un repuesto", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
+                    return RedirectToAction("Index");
+                }
             }
             return View(inventarioDeRepuestos);
         }

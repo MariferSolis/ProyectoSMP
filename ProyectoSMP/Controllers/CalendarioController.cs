@@ -44,7 +44,8 @@ namespace ProyectoSMP.Controllers
             else
                 {                   
                     db.AgregarCalendario(e.Asunto,e.Descripcion,e.Inicia,e.Finaliza,e.Color,e.TodoElDia);
-                }
+                db.AgregarBitacora("Calendario", "Crear", "El usuario realiza la acción de crear un evento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
+            }
                 db.SaveChanges();
                 status = true;
             return new JsonResult { Data = new { status = status } };
@@ -59,7 +60,8 @@ namespace ProyectoSMP.Controllers
                 {
                     db.Calendario.Remove(v);
                     db.SaveChanges();
-                    status = true;
+                db.AgregarBitacora("Calendario", "Eliminar", "El usuario realiza la acción de eliminar un evento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "eliminar");
+                status = true;
                 }            
             return new JsonResult { Data = new { status = status } };
         }

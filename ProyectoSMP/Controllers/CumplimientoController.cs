@@ -98,6 +98,7 @@ namespace ProyectoSMP.Controllers
                 cumplimiento.Fecha = DateTime.Now;
                 db.Entry(cumplimiento).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("Cumplimiento", "Realiza", "El usuario realiza la acción de crear una taear", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "realizar");
                 return RedirectToAction("Index2");
             }
             ViewBag.ListaColores = new SelectList(new[] {
@@ -138,18 +139,25 @@ namespace ProyectoSMP.Controllers
                 {
                 db.AgregarCumplimiento(cumplimiento.IdMantenimiento,cumplimiento.Comienza,cumplimiento.Finaliza,cumplimiento.Color);
                 db.SaveChanges();
+                db.AgregarBitacora("Cumplimiento", "Crear", "El usuario realiza la acción de crear una taear", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
 
                 }
                 else
                 {
                     @TempData["Message"] = "Las fechas no coinciden";
-                    return RedirectToAction("Create", cumplimiento);
+                    if (TempData["Message"] != null)
+                    {
+                        ViewBag.Error = TempData["Message"].ToString();
+                    }
+                    ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
+                    ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+                    return View(cumplimiento);
                 }             
-            }
-            if (TempData["Message"] != null)
-            {
-                ViewBag.Error = TempData["Message"].ToString();
             }
             ViewBag.ListaColores = new SelectList(new[] {
                                    new SelectListItem { Value = "verde", Text = "Verde" },
@@ -189,9 +197,29 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (cumplimiento.Comienza < cumplimiento.Finaliza)
+                {
                 db.Entry(cumplimiento).State = EntityState.Modified;
                 db.SaveChanges();
+                db.AgregarBitacora("Cumplimiento", "Editar", "El usuario realiza la acción de editar una taear", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
+                }
+                else
+                {
+                    @TempData["Message"] = "Las fechas no coinciden";
+                    if (TempData["Message"] != null)
+                    {
+                        ViewBag.Error = TempData["Message"].ToString();
+                    }
+                    ViewBag.ListaColores = new SelectList(new[] {
+                                   new SelectListItem { Value = "verde", Text = "Verde" },
+                                   new SelectListItem { Value = "amarillo", Text = "Amarillo" },
+                                   new SelectListItem { Value = "rojo", Text = "Rojo" }
+                                                               }, "Value", "Text");
+                    ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+                    return View(cumplimiento);
+                }
+                
             }
             ViewBag.ListaColores = new SelectList(new[] {
                                    new SelectListItem { Value = "verde", Text = "Verde" },

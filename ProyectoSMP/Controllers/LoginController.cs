@@ -47,8 +47,8 @@ namespace ProyectoSMP.Controllers
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
                 string hash = FormsAuthentication.Encrypt(ticket);
                 HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
-                Response.Cookies.Add(cookie);  
-
+                Response.Cookies.Add(cookie);
+                bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
                 return RedirectToAction("Index", "Home");  
             }            
         }
