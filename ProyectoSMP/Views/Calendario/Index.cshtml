@@ -4,7 +4,7 @@
 
 <h2>Calendario</h2>
 <div id="calender"></div>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label>Colores</label>
                         <select id="ddThemeColor" class="form-control">
-                            <option value="">Por Defecto</option>
+                            <option value="">Default</option>
                             <option value="#fd9797">Rojo</option>
                             <option value="#87ceeb">Azul</option>
                             <option value="#abffb6">Verde</option>
@@ -111,7 +111,7 @@
                                 title: v.Asunto,
                                 description: v.Descripcion,
                                 start: moment(v.Inicia),
-                                end: v.Fin != null ? moment(v.Finaliza) : null,
+                                end: v.Finaliza != null ? moment(v.Finaliza) : null,
                                 color: v.Color,
                                 allDay: v.TodoElDia
                             });

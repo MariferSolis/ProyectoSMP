@@ -39,11 +39,12 @@ namespace ProyectoSMP.Controllers
                         v.Descripcion = e.Descripcion;
                         v.TodoElDia = e.TodoElDia;
                         v.Color = e.Color;
-                    }                
+                }                
             }
             else
-                {                   
-                    db.AgregarCalendario(e.Asunto,e.Descripcion,e.Inicia,e.Finaliza,e.Color,e.TodoElDia);
+                {  
+                
+                db.AgregarCalendario(e.Asunto,e.Descripcion,e.Inicia,e.Finaliza,e.Color,e.TodoElDia);
                 db.AgregarBitacora("Calendario", "Crear", "El usuario realiza la acción de crear un evento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
             }
                 db.SaveChanges();
