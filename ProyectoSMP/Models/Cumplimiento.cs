@@ -19,7 +19,7 @@ namespace ProyectoSMP.Models
         [Required]
         public int IdMantenimiento { get; set; }
         [Required]
-        public System.DateTime Comienza { get; set; }      
+        public System.DateTime Comienza { get; set; }
         public System.DateTime Finaliza { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<bool> Estado { get; set; }

@@ -24,7 +24,10 @@ namespace ProyectoSMP.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Error = TempData["Message"].ToString();
+            }
             var usuario = db.ConsultarUsuarios().Where(x => x.Estado == true).ToList();
             return View(usuario.ToList());
         }
@@ -73,6 +76,10 @@ namespace ProyectoSMP.Controllers
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion");
             ViewBag.ListaProvincias = CargaProvincias();
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View();
 
         }
@@ -110,12 +117,20 @@ namespace ProyectoSMP.Controllers
                     ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
                     ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
                     ViewBag.ListaProvincias = CargaProvincias();
+                    ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
                     return View(usuario);
                 }
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View(usuario);
         }
 
@@ -132,12 +147,30 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
+            int user = Convert.ToInt32(Session["IdUsuario"]);
+            if (usuario.IdUsuario == user)
+            {
+                @TempData["Message"] = "No puedes editar tu mismo usuario";
+                if (TempData["Message"] != null)
+                {
+                    ViewBag.Error = TempData["Message"].ToString();
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
             ViewBag.ListaCantones = CargaCanton(Convert.ToChar(usuario.Provincia));
             ViewBag.ListaDistritos = CargaDistrito(Convert.ToChar(usuario.Provincia), usuario.Canton);
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text",usuario.Estado);
             return View(usuario);
+            }
+            
         }
 
         // POST: Usuarios/Edit/5
@@ -149,15 +182,33 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
+                int user = Convert.ToInt32(Session["IdUsuario"]);
+
+                if (usuario.IdUsuario==user)
+                {
+                    @TempData["Message"] = "No puedes editar tu mismo usuario";
+                    if (TempData["Message"] != null)
+                    {
+                        ViewBag.Error = TempData["Message"].ToString();
+                    }
+                    return RedirectToAction("Index");
+                }
+                else
+                {
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
                 db.AgregarBitacora("Usuarios", "Editar", "El usuario realiza la acción de editar un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
+                }
+                
             }
             ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
             ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
             ViewBag.ListaProvincias = CargaProvincias();
-         
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text", usuario.Estado);
             return View(usuario);
         }
 

@@ -83,10 +83,8 @@
                     <div class="item form-group">
                         @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Estado)
-                                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-                            </div>
+                            @Html.DropDownListFor(model => model.Estado, new SelectList(ViewBag.ListaEstado, "Value", "Text"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+                            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <hr />

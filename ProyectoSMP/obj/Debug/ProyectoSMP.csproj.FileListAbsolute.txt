@@ -51,11 +51,14 @@ C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\ros
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\roslyn\VBCSCompiler.exe
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Antlr3.Runtime.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\BouncyCastle.Crypto.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\EntityFramework.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\EntityFramework.SqlServer.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Newtonsoft.Json.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Rotativa.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Helpers.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Mvc.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Optimization.dll
@@ -66,6 +69,7 @@ C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Sys
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\WebGrease.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\EntityFramework.xml
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\EntityFramework.SqlServer.xml
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.xml
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Helpers.xml
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Mvc.xml
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\System.Web.Optimization.xml
@@ -83,12 +87,8 @@ C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.resources.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csprojAssemblyReference.cache
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csproj.CoreCompileInputs.cache
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csproj.CopyComplete
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.dll
 C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.pdb
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\BouncyCastle.Crypto.dll
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.dll
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\itextsharp.xml
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\obj\Debug\ProyectoSMP.csprojAssemblyReference.cache
-C:\Users\mfers\OneDrive\Escritorio\Nueva carpeta\ProyectoSMP\ProyectoSMP\bin\Rotativa.dll

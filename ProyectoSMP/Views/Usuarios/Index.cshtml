@@ -33,9 +33,15 @@
         <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+                @if (ViewBag.Error != null)
+                {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>}
                 <h6 class="m-0 font-weight-bold text-primary"> @Html.ActionLink("Nuevo Usuario", "Create")</h6>
 
             </div>
+            
             <div class="card-body">
                 <div class="table-responsive">
                     @Html.ActionLink("Ver todos", "Todos") | @Html.ActionLink("Generar reporte", "Print")
@@ -80,49 +86,48 @@
                         @foreach (var item in Model)
                         {
 
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Identificacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tipo_Identificacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Correo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoCarga)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Provincia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Canton)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Distrito)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rol)
-                    </td>
-                    <td>
-                        @if (item.Estado == true)
-                        {
-                @Html.Label("Activo") }
-            else
-            {
-                @Html.Label("Inactivo")}
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario })
-                        |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario })
-                    </td>
-                </tr>
-}
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo_Identificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoCarga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Canton)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distrito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rol)
+                </td>
+                <td>
+                    @if (item.Estado == true)
+                    {
+        @Html.Label("Activo") }
+    else
+    {
+        @Html.Label("Inactivo")}
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario })
+                    |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario })
+                </td>
+            </tr>}
                     </table>
 
                 </div>

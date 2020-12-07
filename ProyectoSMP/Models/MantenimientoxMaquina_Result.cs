@@ -18,6 +18,7 @@ namespace ProyectoSMP.Models
         public SqlCommand cmd;
         public SqlDataReader dr;
 
+
         public Nullable<int> Mantenimiento { get; set; }
         public string NombreMaquina { get; set; }
     }

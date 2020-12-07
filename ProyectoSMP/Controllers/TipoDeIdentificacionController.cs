@@ -46,6 +46,10 @@ namespace ProyectoSMP.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View();
         }
 
@@ -63,7 +67,10 @@ namespace ProyectoSMP.Controllers
                 db.AgregarBitacora("TipoDeIdentificacion", "Crear", "El usuario realiza la acción de crear un tipo de identificación", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                 return RedirectToAction("Index");
             }
-
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View(tipoDeIdentificacion);
         }
 
@@ -80,6 +87,10 @@ namespace ProyectoSMP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text", tipoDeIdentificacion.Estado);
             return View(tipoDeIdentificacion);
         }
 
@@ -97,6 +108,10 @@ namespace ProyectoSMP.Controllers
                 db.AgregarBitacora("TipoDeIdentificacion", "Editar", "El usuario realiza la acción de editar un tipo de identificación", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "editar");
                 return RedirectToAction("Index");
             }
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text", tipoDeIdentificacion.Estado);
             return View(tipoDeIdentificacion);
         }
 

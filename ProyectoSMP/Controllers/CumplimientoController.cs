@@ -83,6 +83,10 @@ namespace ProyectoSMP.Controllers
                                    new SelectListItem { Value = "rojo", Text = "Rojo" }
                                                                }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View(cumplimiento);
         }
 
@@ -107,6 +111,10 @@ namespace ProyectoSMP.Controllers
                                    new SelectListItem { Value = "rojo", Text = "Rojo" }
                                                                }, "Value", "Text");
             ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+            ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
             return View(cumplimiento);
         }
         // GET: CumplimientoMantenimientoes/Create
