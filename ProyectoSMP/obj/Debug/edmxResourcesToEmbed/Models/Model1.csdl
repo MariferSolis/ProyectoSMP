@@ -557,6 +557,7 @@
       <Parameter Name="Distrito" Mode="In" Type="String" />
       <Parameter Name="IdRol" Mode="In" Type="Int32" />
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
+      <Parameter Name="token" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Cantones" ReturnType="Collection(SMPModel.Cantones_Result)">
       <Parameter Name="Provincia" Mode="In" Type="String" />

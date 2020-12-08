@@ -97,12 +97,13 @@ namespace ProyectoSMP.Controllers
                 var dato = db.ExisteCorreo(usuario.Correo).FirstOrDefault();
                 if(dato == null)
                 {
+                    var dia = DateTime.Today.ToString();
                     usuario.Password = CreatePassword(10);
                     var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
-                    var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);              
+                    var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password); 
                     db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
-                    ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado);
-                    BtnCorreo(usuario.Correo,usuario.Password,usuario.Nombre,usuario.Apellidos);
+                    ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado,dia);
+                    BtnCorreo(usuario.Correo,usuario.Password,usuario.Nombre,usuario.Apellidos);  
                     db.SaveChanges();
                     db.AgregarBitacora("Usuarios", "Crear", "El usuario realiza la acción de crear un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                     return RedirectToAction("Index");
@@ -211,6 +212,34 @@ namespace ProyectoSMP.Controllers
                                                                }, "Value", "Text", usuario.Estado);
             return View(usuario);
         }
+        public ActionResult Generar(int? id)
+        {
+            Usuario usuario = db.Usuario.Find(id);
+            return View(usuario);
+            
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Generar(Usuario usuario)
+        {
+            try
+            {
+                var dia = DateTime.Today.ToString();
+                usuario.Password = CreatePassword(10);
+                var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
+                var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);
+                usuario.token_recovery = dia;
+                usuario.Password = ClaveEncriptada;
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -228,6 +257,8 @@ namespace ProyectoSMP.Controllers
                 "Correo: " + correo + ".\n" +
                 "Contraseña: " + contraseña + ".\n" +
                 "Por su seguridad no mantenga esta información al acceso de terceras personas.\n" +
+                "Tenga en cuenta que esta contraseña solo funcionara el dia de hoy, si el dia termina y no ha cambiado su contraseña" +
+                " por favor contacte con un Administrador para que le brinde una nueva \n" +
                 "Este mensaje es generado automáticamente, favor no responder a esta dirección de correo electrónico.";
 
             SmtpClient smtp = new SmtpClient();

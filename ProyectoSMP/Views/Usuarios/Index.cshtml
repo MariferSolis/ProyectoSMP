@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<ProyectoSMP.Models.ConsultarUsuarios_Result>
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index";
-}
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index"; }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +26,7 @@
     <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
+
 <body id="page-top">
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
@@ -35,13 +34,13 @@
             <div class="card-header py-3">
                 @if (ViewBag.Error != null)
                 {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.Error
-            </div>}
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>}
                 <h6 class="m-0 font-weight-bold text-primary"> @Html.ActionLink("Nuevo Usuario", "Create")</h6>
 
             </div>
-            
+
             <div class="card-body">
                 <div class="table-responsive">
                     @Html.ActionLink("Ver todos", "Todos") | @Html.ActionLink("Generar reporte", "Print")
@@ -117,24 +116,24 @@
                 <td>
                     @if (item.Estado == true)
                     {
-        @Html.Label("Activo") }
-    else
-    {
-        @Html.Label("Inactivo")}
+    @Html.Label("Activo") }
+else
+{
+@Html.Label("Inactivo")}
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario })
                     |
                     @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario })
                 </td>
-            </tr>}
+            </tr>
+}
                     </table>
 
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/vendor/jquery/jquery.min.js"></script>

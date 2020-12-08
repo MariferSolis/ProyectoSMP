@@ -372,7 +372,7 @@ namespace ProyectoSMP.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarTipoDeSistemaDeMaquina", nombreParameter, descripcionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> AgregarUsuario(string identificacion, Nullable<int> idTipoDeIdentificacion, string nombre, string apellidos, string correo, string password, string tipoCarga, string provincia, string canton, string distrito, Nullable<int> idRol, Nullable<bool> estado)
+        public virtual ObjectResult<Nullable<int>> AgregarUsuario(string identificacion, Nullable<int> idTipoDeIdentificacion, string nombre, string apellidos, string correo, string password, string tipoCarga, string provincia, string canton, string distrito, Nullable<int> idRol, Nullable<bool> estado, string token)
         {
             var identificacionParameter = identificacion != null ?
                 new ObjectParameter("Identificacion", identificacion) :
@@ -422,7 +422,11 @@ namespace ProyectoSMP.Models
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarUsuario", identificacionParameter, idTipoDeIdentificacionParameter, nombreParameter, apellidosParameter, correoParameter, passwordParameter, tipoCargaParameter, provinciaParameter, cantonParameter, distritoParameter, idRolParameter, estadoParameter);
+            var tokenParameter = token != null ?
+                new ObjectParameter("token", token) :
+                new ObjectParameter("token", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AgregarUsuario", identificacionParameter, idTipoDeIdentificacionParameter, nombreParameter, apellidosParameter, correoParameter, passwordParameter, tipoCargaParameter, provinciaParameter, cantonParameter, distritoParameter, idRolParameter, estadoParameter, tokenParameter);
         }
     
         public virtual ObjectResult<Cantones_Result> Cantones(string provincia)

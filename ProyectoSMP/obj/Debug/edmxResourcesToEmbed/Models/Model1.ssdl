@@ -456,6 +456,7 @@
     <Parameter Name="Distrito" Type="char" Mode="In" />
     <Parameter Name="IdRol" Type="int" Mode="In" />
     <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="token" Type="varchar" Mode="In" />
   </Function>
   <Function Name="Cantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Provincia" Type="char" Mode="In" />

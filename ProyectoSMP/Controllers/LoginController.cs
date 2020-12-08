@@ -41,15 +41,39 @@ namespace ProyectoSMP.Controllers
             }
             else
             {
-                Session["IdUsuario"] = dato.IdUsuario.ToString();
-                System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString()+" "+dato.Apellidos.ToString();
-                var username = existe.Correo;
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
-                string hash = FormsAuthentication.Encrypt(ticket);
-                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
-                Response.Cookies.Add(cookie);
-                bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
-                return RedirectToAction("Index", "Home");  
+                if (dato.token_recovery != null)
+                {
+                    if (dato.token_recovery != DateTime.Today.ToString())
+                    {
+                        ViewBag.Error = "Debe de cambiar la contraseña diríjase a olvido de contraseña y proceda el cambio";
+                        return View(existe);
+
+                    }
+                    else
+                    {
+                        Session["IdUsuario"] = dato.IdUsuario.ToString();
+                        System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString() + " " + dato.Apellidos.ToString();
+                        var username = existe.Correo;
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
+                        string hash = FormsAuthentication.Encrypt(ticket);
+                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
+                        Response.Cookies.Add(cookie);
+                        bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    Session["IdUsuario"] = dato.IdUsuario.ToString();
+                    System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString() + " " + dato.Apellidos.ToString();
+                    var username = existe.Correo;
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
+                    string hash = FormsAuthentication.Encrypt(ticket);
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
+                    Response.Cookies.Add(cookie);
+                    bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
+                    return RedirectToAction("Index", "Home");
+                }
             }            
         }
         public ActionResult Reenviar()
@@ -98,28 +122,19 @@ namespace ProyectoSMP.Controllers
                 using (bd)
                 {
                     var oUser = bd.Usuario.Where(d => d.Correo == model.Email).FirstOrDefault();
+
                     if (oUser != null)
                     {
+
                         oUser.token_recovery = token;
                         bd.Entry(oUser).State = System.Data.Entity.EntityState.Modified;
                         bd.SaveChanges();
-                        @TempData["Message1"] = "Revisa tu correo y ingresa al link para cambiar tu contraseña";
                         //enviar mail
-                        SendEmail(oUser.Correo, token);
-                    }
-                    else
-                    {
-                        @TempData["Message"] = "El correo no se encuentra suscrito";
+                        SendEmail(oUser.Correo, token);             
+
                     }
                 }
-                if (TempData["Message"] != null)
-                {
-                    ViewBag.Message = TempData["Message"].ToString();
-                }
-                if (TempData["Message1"] != null)
-                {
-                    ViewBag.Message1 = TempData["Message1"].ToString();
-                }
+
                 return View();
             }
             catch (Exception ex)
