@@ -116,13 +116,13 @@ namespace ProyectoSMP.Controllers
             {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.IdRol);
             
             return View(mantenimiento); 
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.IdRol);
 
             return View(mantenimiento);
         }
@@ -144,7 +144,7 @@ namespace ProyectoSMP.Controllers
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.IdRol);
             ViewBag.ListaIdUsuario = CargaUsuario(Convert.ToInt32(mantenimientoDeMaquina.IdUsuario)).ToList();
             return View(mantenimientoDeMaquina);
         }
@@ -178,13 +178,13 @@ namespace ProyectoSMP.Controllers
             {
                 ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
                 ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
-                ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
+                ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.IdRol);
                 ViewBag.ListaIdUsuario = CargaUsuario(Convert.ToInt32(mantenimientoDeMaquina.IdUsuario)).ToList();
                 return View(mantenimientoDeMaquina);
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimientoDeMaquina.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimientoDeMaquina.IdMaquina);
-            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.Rol);
+            ViewBag.Rol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimientoDeMaquina.IdRol);
             ViewBag.ListaIdUsuario = CargaUsuario(Convert.ToInt32(mantenimientoDeMaquina.IdUsuario)).ToList();
             return View(mantenimientoDeMaquina);
         }

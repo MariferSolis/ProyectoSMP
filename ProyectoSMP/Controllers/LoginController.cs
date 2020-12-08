@@ -51,6 +51,8 @@ namespace ProyectoSMP.Controllers
                     }
                     else
                     {
+                        if (dato.Estado==true)
+                        {
                         Session["IdUsuario"] = dato.IdUsuario.ToString();
                         System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString() + " " + dato.Apellidos.ToString();
                         var username = existe.Correo;
@@ -60,11 +62,20 @@ namespace ProyectoSMP.Controllers
                         Response.Cookies.Add(cookie);
                         bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
                         return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Usuario inactivo";
+                            return View(existe);
+                        }
+                        
                     }
                 }
                 else
                 {
-                    Session["IdUsuario"] = dato.IdUsuario.ToString();
+                    if (dato.Estado == true)
+                    {
+                        Session["IdUsuario"] = dato.IdUsuario.ToString();
                     System.Web.HttpContext.Current.Session["Name"] = dato.Nombre.ToString() + " " + dato.Apellidos.ToString();
                     var username = existe.Correo;
                     FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(30), Convert.ToBoolean(existe.Recordarme), FormsAuthentication.FormsCookiePath);
@@ -73,6 +84,12 @@ namespace ProyectoSMP.Controllers
                     Response.Cookies.Add(cookie);
                     bd.AgregarBitacora("Login", "Login", "El usuario realiza la acción de un login", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "Login");
                     return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Usuario inactivo";
+                        return View(existe);
+                    }
                 }
             }            
         }
