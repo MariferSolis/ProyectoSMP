@@ -147,8 +147,13 @@ namespace ProyectoSMP.Controllers
                         bd.Entry(oUser).State = System.Data.Entity.EntityState.Modified;
                         bd.SaveChanges();
                         //enviar mail
-                        SendEmail(oUser.Correo, token);             
-
+                        SendEmail(oUser.Correo, token);
+                        ViewBag.Message1 = "Revise su correo";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "El Correo no existe";
+                        return View(model);
                     }
                 }
 
