@@ -13,7 +13,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class TipoDeIdentificacionController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: TipoDeIdentificacions
         [Authorize(Roles = "Admin")]

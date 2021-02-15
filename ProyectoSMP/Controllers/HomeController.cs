@@ -22,7 +22,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
         public ActionResult Index(MantenimientoxMaquina_Result man)
         {
 

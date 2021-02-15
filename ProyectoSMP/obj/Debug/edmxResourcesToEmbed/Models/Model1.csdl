@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SMPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="SMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AreaDeMaquina">
     <Key>
       <PropertyRef Name="IdArea" />
@@ -42,9 +42,9 @@
     <Property Name="Provincia" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Canton1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Provincia1" Relationship="Self.FK__Canton__Provinci__3E52440B" FromRole="Canton" ToRole="Provincia" />
-    <NavigationProperty Name="Provincia2" Relationship="Self.FK__Canton__Provinci__3F466844" FromRole="Canton" ToRole="Provincia" />
-    <NavigationProperty Name="Distrito" Relationship="Self.FK__Distrito__403A8C7D" FromRole="Canton" ToRole="Distrito" />
+    <NavigationProperty Name="Provincia1" Relationship="Self.FK__Canton__Provinci__787EE5A0" FromRole="Canton" ToRole="Provincia" />
+    <NavigationProperty Name="Provincia2" Relationship="Self.FK__Canton__Provinci__797309D9" FromRole="Canton" ToRole="Provincia" />
+    <NavigationProperty Name="Distrito" Relationship="Self.FK__Distrito__7B5B524B" FromRole="Canton" ToRole="Distrito" />
   </EntityType>
   <EntityType Name="Cumplimiento">
     <Key>
@@ -70,7 +70,7 @@
     <Property Name="Canton" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Distrito1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Canton1" Relationship="Self.FK__Distrito__403A8C7D" FromRole="Distrito" ToRole="Canton" />
+    <NavigationProperty Name="Canton1" Relationship="Self.FK__Distrito__7B5B524B" FromRole="Distrito" ToRole="Canton" />
   </EntityType>
   <EntityType Name="InventarioDeRepuestos">
     <Key>
@@ -147,8 +147,8 @@
     </Key>
     <Property Name="Provincia1" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Canton" Relationship="Self.FK__Canton__Provinci__3E52440B" FromRole="Provincia" ToRole="Canton" />
-    <NavigationProperty Name="Canton1" Relationship="Self.FK__Canton__Provinci__3F466844" FromRole="Provincia" ToRole="Canton" />
+    <NavigationProperty Name="Canton" Relationship="Self.FK__Canton__Provinci__787EE5A0" FromRole="Provincia" ToRole="Canton" />
+    <NavigationProperty Name="Canton1" Relationship="Self.FK__Canton__Provinci__797309D9" FromRole="Provincia" ToRole="Canton" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -158,16 +158,6 @@
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_Rol" FromRole="Rol" ToRole="Mantenimiento" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TipoDeIdentificacion">
     <Key>
@@ -222,7 +212,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Canton__Provinci__3E52440B">
+  <Association Name="FK__Canton__Provinci__787EE5A0">
     <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
     <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
     <ReferentialConstraint>
@@ -234,7 +224,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Canton__Provinci__3F466844">
+  <Association Name="FK__Canton__Provinci__797309D9">
     <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
     <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
     <ReferentialConstraint>
@@ -246,7 +236,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Distrito__403A8C7D">
+  <Association Name="FK__Distrito__7B5B524B">
     <End Role="Canton" Type="Self.Canton" Multiplicity="1" />
     <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
     <ReferentialConstraint>
@@ -380,7 +370,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SMPEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="SMEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AreaDeMaquina" EntityType="Self.AreaDeMaquina" />
     <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
     <EntitySet Name="Calendario" EntityType="Self.Calendario" />
@@ -393,7 +383,6 @@
     <EntitySet Name="ParoDeMaquina" EntityType="Self.ParoDeMaquina" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" />
     <EntitySet Name="Rol" EntityType="Self.Rol" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="TipoDeIdentificacion" EntityType="Self.TipoDeIdentificacion" />
     <EntitySet Name="TipoDeSistemaDeMaquina" EntityType="Self.TipoDeSistemaDeMaquina" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
@@ -401,15 +390,15 @@
       <End Role="AreaDeMaquina" EntitySet="AreaDeMaquina" />
       <End Role="Maquina" EntitySet="Maquina" />
     </AssociationSet>
-    <AssociationSet Name="FK__Canton__Provinci__3E52440B" Association="Self.FK__Canton__Provinci__3E52440B">
+    <AssociationSet Name="FK__Canton__Provinci__787EE5A0" Association="Self.FK__Canton__Provinci__787EE5A0">
       <End Role="Provincia" EntitySet="Provincia" />
       <End Role="Canton" EntitySet="Canton" />
     </AssociationSet>
-    <AssociationSet Name="FK__Canton__Provinci__3F466844" Association="Self.FK__Canton__Provinci__3F466844">
+    <AssociationSet Name="FK__Canton__Provinci__797309D9" Association="Self.FK__Canton__Provinci__797309D9">
       <End Role="Provincia" EntitySet="Provincia" />
       <End Role="Canton" EntitySet="Canton" />
     </AssociationSet>
-    <AssociationSet Name="FK__Distrito__403A8C7D" Association="Self.FK__Distrito__403A8C7D">
+    <AssociationSet Name="FK__Distrito__7B5B524B" Association="Self.FK__Distrito__7B5B524B">
       <End Role="Canton" EntitySet="Canton" />
       <End Role="Distrito" EntitySet="Distrito" />
     </AssociationSet>
@@ -453,15 +442,6 @@
       <End Role="TipoDeIdentificacion" EntitySet="TipoDeIdentificacion" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <FunctionImport Name="ActualizarCalendario">
-      <Parameter Name="IdEvento" Mode="In" Type="Int32" />
-      <Parameter Name="Asunto" Mode="In" Type="String" />
-      <Parameter Name="Descripcion" Mode="In" Type="String" />
-      <Parameter Name="Comienza" Mode="In" Type="DateTime" />
-      <Parameter Name="Fin" Mode="In" Type="DateTime" />
-      <Parameter Name="Color" Mode="In" Type="String" />
-      <Parameter Name="TodoDia" Mode="In" Type="Boolean" />
-    </FunctionImport>
     <FunctionImport Name="AgregarAreaDeMaquina" ReturnType="Collection(Int32)">
       <Parameter Name="Nombre" Mode="In" Type="String" />
       <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -559,42 +539,42 @@
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
       <Parameter Name="token" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Cantones" ReturnType="Collection(SMPModel.Cantones_Result)">
+    <FunctionImport Name="Cantones" ReturnType="Collection(SMModel.Cantones_Result)">
       <Parameter Name="Provincia" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ConsultarCalendario" ReturnType="Collection(SMPModel.ConsultarCalendario_Result)" />
-    <FunctionImport Name="ConsultarCumplixUsuario" ReturnType="Collection(SMPModel.ConsultarCumplixUsuario_Result)">
+    <FunctionImport Name="ConsultarCalendario" ReturnType="Collection(SMModel.ConsultarCalendario_Result)" />
+    <FunctionImport Name="ConsultarCumplixUsuario" ReturnType="Collection(SMModel.ConsultarCumplixUsuario_Result)">
       <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ConsultarRolxUsuario" ReturnType="Collection(String)">
       <Parameter Name="correo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ConsultarUnUsuarios" ReturnType="Collection(SMPModel.ConsultarUnUsuarios_Result)">
+    <FunctionImport Name="ConsultarUnUsuarios" ReturnType="Collection(SMModel.ConsultarUnUsuarios_Result)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(SMPModel.ConsultarUsuarios_Result)" />
-    <FunctionImport Name="ConsultarUsuariosxRol" ReturnType="Collection(SMPModel.ConsultarUsuariosxRol_Result)">
+    <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(SMModel.ConsultarUsuarios_Result)" />
+    <FunctionImport Name="ConsultarUsuariosxRol" ReturnType="Collection(SMModel.ConsultarUsuariosxRol_Result)">
       <Parameter Name="IdRol" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="CumpNoCump" ReturnType="Collection(SMPModel.CumpNoCump_Result)" />
-    <FunctionImport Name="Distritos" ReturnType="Collection(SMPModel.Distritos_Result)">
+    <FunctionImport Name="CumpNoCump" ReturnType="Collection(SMModel.CumpNoCump_Result)" />
+    <FunctionImport Name="Distritos" ReturnType="Collection(SMModel.Distritos_Result)">
       <Parameter Name="Provincia" Mode="In" Type="String" />
       <Parameter Name="Canton" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="EliminarCalendario">
       <Parameter Name="IdEvento" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="ExisteCodigo" ReturnType="Collection(SMPModel.ExisteCodigo_Result)">
+    <FunctionImport Name="ExisteCodigo" ReturnType="Collection(SMModel.ExisteCodigo_Result)">
       <Parameter Name="Codigo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ExisteCodigoEdit" ReturnType="Collection(SMPModel.ExisteCodigoEdit_Result)">
+    <FunctionImport Name="ExisteCodigoEdit" ReturnType="Collection(SMModel.ExisteCodigoEdit_Result)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="Codigo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ExisteCorreo" ReturnType="Collection(SMPModel.ExisteCorreo_Result)">
+    <FunctionImport Name="ExisteCorreo" ReturnType="Collection(SMModel.ExisteCorreo_Result)">
       <Parameter Name="Correo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ExisteUsuario" ReturnType="Collection(SMPModel.ExisteUsuario_Result)">
+    <FunctionImport Name="ExisteUsuario" ReturnType="Collection(SMModel.ExisteUsuario_Result)">
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
@@ -604,40 +584,10 @@
       <Parameter Name="MantenimientoCumplido" Mode="InOut" Type="Double" />
       <Parameter Name="CantidadParo" Mode="InOut" Type="Double" />
     </FunctionImport>
-    <FunctionImport Name="MantenimientoxMaquina" ReturnType="Collection(SMPModel.MantenimientoxMaquina_Result)" />
-    <FunctionImport Name="ParoxMaquina" ReturnType="Collection(SMPModel.ParoxMaquina_Result)" />
-    <FunctionImport Name="Provincias" ReturnType="Collection(SMPModel.Provincias_Result)" />
-    <FunctionImport Name="RepuestosPorComprar" ReturnType="Collection(SMPModel.RepuestosPorComprar_Result)" />
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SMPModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SMPModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="MantenimientoxMaquina" ReturnType="Collection(SMModel.MantenimientoxMaquina_Result)" />
+    <FunctionImport Name="ParoxMaquina" ReturnType="Collection(SMModel.ParoxMaquina_Result)" />
+    <FunctionImport Name="Provincias" ReturnType="Collection(SMModel.Provincias_Result)" />
+    <FunctionImport Name="RepuestosPorComprar" ReturnType="Collection(SMModel.RepuestosPorComprar_Result)" />
   </EntityContainer>
   <ComplexType Name="Cantones_Result">
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="1" />
@@ -800,16 +750,5 @@
     <Property Type="Int32" Name="Minimos" Nullable="true" />
     <Property Type="String" Name="Tipo" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Almacen" Nullable="true" MaxLength="50" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

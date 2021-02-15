@@ -16,7 +16,7 @@ namespace ProyectoSMP.Controllers
     public class LoginController : Controller
     {
 
-        SMPEntities bd = new SMPEntities();
+        SMEntities bd = new SMEntities();
 
         [AllowAnonymous]
         public ActionResult Login()

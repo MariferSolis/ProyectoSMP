@@ -34,8 +34,6 @@ namespace ProyectoSMP.Models
         [MaxLength(50)]
         public string Apellidos { get; set; }
         [Required]
-        [MaxLength(200)]
-        [EmailAddress]
         public string Correo { get; set; }
         public string Password { get; set; }
         [Required]

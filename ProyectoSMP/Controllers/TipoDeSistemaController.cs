@@ -14,7 +14,7 @@ namespace ProyectoSMP.Controllers
     public class TipoDeSistemaController : Controller
     {
         
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: TipoDeSistemaDeMaquinas
         [Authorize(Roles = "Admin")]

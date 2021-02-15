@@ -10,7 +10,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class CalendarioController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
         // GET: Calendario
         public ActionResult Index()
         {

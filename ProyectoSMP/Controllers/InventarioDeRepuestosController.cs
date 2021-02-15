@@ -14,7 +14,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class InventarioDeRepuestosController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos

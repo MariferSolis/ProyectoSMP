@@ -15,7 +15,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class CumplimientoController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: CumplimientoMantenimientoes
         [Authorize(Roles = "Admin")]

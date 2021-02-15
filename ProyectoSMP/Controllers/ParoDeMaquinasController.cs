@@ -15,7 +15,7 @@ namespace ProyectoSMP.Controllers
     public class ParoDeMaquinasController : Controller
     {
         
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: ParoDeMaquinas
         [Authorize(Roles = "Admin,Tecnico,Operador")]

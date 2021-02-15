@@ -9,7 +9,7 @@ namespace ProyectoSMP.Tool
 {
     public class CustomRoleProvider : RoleProvider
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)

@@ -12,7 +12,7 @@ namespace ProyectoSMP.Controllers
     [Authorize]
     public class AreaDeMaquinasController : Controller
     {
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: AreaDeMaquinas
         [Authorize(Roles = "Admin")]

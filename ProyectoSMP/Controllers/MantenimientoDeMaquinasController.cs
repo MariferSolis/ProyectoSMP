@@ -16,7 +16,7 @@ namespace ProyectoSMP.Controllers
     public class MantenimientoDeMaquinasController : Controller
     {
 
-        private SMPEntities db = new SMPEntities();
+        private SMEntities db = new SMEntities();
 
         // GET: MantenimientoDeMaquinas
         [Authorize(Roles = "Admin")]
