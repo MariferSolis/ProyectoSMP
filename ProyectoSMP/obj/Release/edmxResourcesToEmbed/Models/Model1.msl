@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SMModelStoreContainer" CdmEntityContainer="SMEntities">
+    <EntitySetMapping Name="AreaDeMaquina">
+      <EntityTypeMapping TypeName="SMModel.AreaDeMaquina">
+        <MappingFragment StoreEntitySet="AreaDeMaquina">
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bitacora">
+      <EntityTypeMapping TypeName="SMModel.Bitacora">
+        <MappingFragment StoreEntitySet="Bitacora">
+          <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />
+          <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+          <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendario">
+      <EntityTypeMapping TypeName="SMModel.Calendario">
+        <MappingFragment StoreEntitySet="Calendario">
+          <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Inicia" ColumnName="Inicia" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="TodoElDia" ColumnName="TodoElDia" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Canton">
+      <EntityTypeMapping TypeName="SMModel.Canton">
+        <MappingFragment StoreEntitySet="Canton">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton1" ColumnName="Canton" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cumplimiento">
+      <EntityTypeMapping TypeName="SMModel.Cumplimiento">
+        <MappingFragment StoreEntitySet="Cumplimiento">
+          <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distrito">
+      <EntityTypeMapping TypeName="SMModel.Distrito">
+        <MappingFragment StoreEntitySet="Distrito">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito1" ColumnName="Distrito" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventarioDeRepuestos">
+      <EntityTypeMapping TypeName="SMModel.InventarioDeRepuestos">
+        <MappingFragment StoreEntitySet="InventarioDeRepuestos">
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Requisición" ColumnName="Requisición" />
+          <ScalarProperty Name="Maximos" ColumnName="Maximos" />
+          <ScalarProperty Name="Minimos" ColumnName="Minimos" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mantenimiento">
+      <EntityTypeMapping TypeName="SMModel.Mantenimiento">
+        <MappingFragment StoreEntitySet="Mantenimiento">
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Maquina">
+      <EntityTypeMapping TypeName="SMModel.Maquina">
+        <MappingFragment StoreEntitySet="Maquina">
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="IdTipoSistema" ColumnName="IdTipoSistema" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+          <ScalarProperty Name="Cadencia" ColumnName="Cadencia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParoDeMaquina">
+      <EntityTypeMapping TypeName="SMModel.ParoDeMaquina">
+        <MappingFragment StoreEntitySet="ParoDeMaquina">
+          <ScalarProperty Name="IdParo" ColumnName="IdParo" />
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaComienza" ColumnName="FechaComienza" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provincia">
+      <EntityTypeMapping TypeName="SMModel.Provincia">
+        <MappingFragment StoreEntitySet="Provincia">
+          <ScalarProperty Name="Provincia1" ColumnName="Provincia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="SMModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SMModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeIdentificacion">
+      <EntityTypeMapping TypeName="SMModel.TipoDeIdentificacion">
+        <MappingFragment StoreEntitySet="TipoDeIdentificacion">
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeSistemaDeMaquina">
+      <EntityTypeMapping TypeName="SMModel.TipoDeSistemaDeMaquina">
+        <MappingFragment StoreEntitySet="TipoDeSistemaDeMaquina">
+          <ScalarProperty Name="IdTipoSistema" ColumnName="IdTipoSistema" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="SMModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AgregarAreaDeMaquina" FunctionName="SMModel.Store.AgregarAreaDeMaquina" />
+    <FunctionImportMapping FunctionImportName="AgregarBitacora" FunctionName="SMModel.Store.AgregarBitacora" />
+    <FunctionImportMapping FunctionImportName="AgregarCalendario" FunctionName="SMModel.Store.AgregarCalendario" />
+    <FunctionImportMapping FunctionImportName="AgregarCumplimiento" FunctionName="SMModel.Store.AgregarCumplimiento" />
+    <FunctionImportMapping FunctionImportName="AgregarInventarioDeRepuestos" FunctionName="SMModel.Store.AgregarInventarioDeRepuestos" />
+    <FunctionImportMapping FunctionImportName="AgregarMantenimiento" FunctionName="SMModel.Store.AgregarMantenimiento" />
+    <FunctionImportMapping FunctionImportName="AgregarMaquina" FunctionName="SMModel.Store.AgregarMaquina" />
+    <FunctionImportMapping FunctionImportName="AgregarParoDeMaquina" FunctionName="SMModel.Store.AgregarParoDeMaquina" />
+    <FunctionImportMapping FunctionImportName="AgregarPlanMantenimiento" FunctionName="SMModel.Store.AgregarPlanMantenimiento" />
+    <FunctionImportMapping FunctionImportName="AgregarTipoDeIdentificacion" FunctionName="SMModel.Store.AgregarTipoDeIdentificacion" />
+    <FunctionImportMapping FunctionImportName="AgregarTipoDeSistemaDeMaquina" FunctionName="SMModel.Store.AgregarTipoDeSistemaDeMaquina" />
+    <FunctionImportMapping FunctionImportName="AgregarUsuario" FunctionName="SMModel.Store.AgregarUsuario" />
+    <FunctionImportMapping FunctionImportName="BuscarCumplimiento" FunctionName="SMModel.Store.BuscarCumplimiento">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarCumplimiento_Result">
+          <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
+          <ScalarProperty Name="Mantenimiento" ColumnName="Mantenimiento" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarCumplixUsuario" FunctionName="SMModel.Store.BuscarCumplixUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarCumplixUsuario_Result">
+          <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Detalles1" ColumnName="Detalles1" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Detalles2" ColumnName="Detalles2" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarMantenimiento" FunctionName="SMModel.Store.BuscarMantenimiento">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarMantenimiento_Result">
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarMantenimientos" FunctionName="SMModel.Store.BuscarMantenimientos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarMantenimientos_Result">
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarMaquina" FunctionName="SMModel.Store.BuscarMaquina">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarMaquina_Result">
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+          <ScalarProperty Name="Cadencia" ColumnName="Cadencia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarParoDeMaquina" FunctionName="SMModel.Store.BuscarParoDeMaquina">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarParoDeMaquina_Result">
+          <ScalarProperty Name="IdParo" ColumnName="IdParo" />
+          <ScalarProperty Name="Máquina" ColumnName="Máquina" />
+          <ScalarProperty Name="Mantenimiento" ColumnName="Mantenimiento" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaComienza" ColumnName="FechaComienza" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarRepuesto" FunctionName="SMModel.Store.BuscarRepuesto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarRepuesto_Result">
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Requisición" ColumnName="Requisición" />
+          <ScalarProperty Name="Maximos" ColumnName="Maximos" />
+          <ScalarProperty Name="Minimos" ColumnName="Minimos" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarUsuario" FunctionName="SMModel.Store.BuscarUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.BuscarUsuario_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Cantones" FunctionName="SMModel.Store.Cantones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.Cantones_Result">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarCalendario" FunctionName="SMModel.Store.ConsultarCalendario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarCalendario_Result">
+          <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Inicia" ColumnName="Inicia" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="TodoElDia" ColumnName="TodoElDia" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarCumplixUsuario" FunctionName="SMModel.Store.ConsultarCumplixUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarCumplixUsuario_Result">
+          <ScalarProperty Name="IdCumplimiento" ColumnName="IdCumplimiento" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Detalles1" ColumnName="Detalles1" />
+          <ScalarProperty Name="URLArchivo" ColumnName="URLArchivo" />
+          <ScalarProperty Name="Comienza" ColumnName="Comienza" />
+          <ScalarProperty Name="Finaliza" ColumnName="Finaliza" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Detalles2" ColumnName="Detalles2" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarMantenimientoxMaquina" FunctionName="SMModel.Store.ConsultarMantenimientoxMaquina">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarMantenimientoxMaquina_Result">
+          <ScalarProperty Name="IdMantenimiento" ColumnName="IdMantenimiento" />
+          <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarMaquinaListaTareas" FunctionName="SMModel.Store.ConsultarMaquinaListaTareas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarMaquinaListaTareas_Result">
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarRolxUsuario" FunctionName="SMModel.Store.ConsultarRolxUsuario" />
+    <FunctionImportMapping FunctionImportName="ConsultarUnUsuarios" FunctionName="SMModel.Store.ConsultarUnUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarUnUsuarios_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Tipo_Identificacion" ColumnName="Tipo Identificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuarios" FunctionName="SMModel.Store.ConsultarUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarUsuarios_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Tipo_Identificacion" ColumnName="Tipo Identificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuariosxRol" FunctionName="SMModel.Store.ConsultarUsuariosxRol">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ConsultarUsuariosxRol_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CumpNoCump" FunctionName="SMModel.Store.CumpNoCump">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.CumpNoCump_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Distritos" FunctionName="SMModel.Store.Distritos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.Distritos_Result">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarCalendario" FunctionName="SMModel.Store.EliminarCalendario" />
+    <FunctionImportMapping FunctionImportName="ExisteCodigo" FunctionName="SMModel.Store.ExisteCodigo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ExisteCodigo_Result">
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="IdTipoSistema" ColumnName="IdTipoSistema" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+          <ScalarProperty Name="Cadencia" ColumnName="Cadencia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ExisteCodigoEdit" FunctionName="SMModel.Store.ExisteCodigoEdit">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ExisteCodigoEdit_Result">
+          <ScalarProperty Name="IdMaquina" ColumnName="IdMaquina" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+          <ScalarProperty Name="IdTipoSistema" ColumnName="IdTipoSistema" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+          <ScalarProperty Name="Cadencia" ColumnName="Cadencia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ExisteCorreo" FunctionName="SMModel.Store.ExisteCorreo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ExisteCorreo_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ExisteIdentificación" FunctionName="SMModel.Store.ExisteIdentificación">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ExisteIdentificación_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ExisteUsuario" FunctionName="SMModel.Store.ExisteUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ExisteUsuario_Result">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="IdTipoDeIdentificacion" ColumnName="IdTipoDeIdentificacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TipoCarga" ColumnName="TipoCarga" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InformesBasic" FunctionName="SMModel.Store.InformesBasic" />
+    <FunctionImportMapping FunctionImportName="ListaRol" FunctionName="SMModel.Store.ListaRol">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ListaRol_Result">
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MantenimientoxMaquina" FunctionName="SMModel.Store.MantenimientoxMaquina">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.MantenimientoxMaquina_Result">
+          <ScalarProperty Name="Mantenimiento" ColumnName="Mantenimiento" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ParoxMaquina" FunctionName="SMModel.Store.ParoxMaquina">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.ParoxMaquina_Result">
+          <ScalarProperty Name="Paro" ColumnName="Paro" />
+          <ScalarProperty Name="NombreMaquina" ColumnName="NombreMaquina" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Provincias" FunctionName="SMModel.Store.Provincias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.Provincias_Result">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RepuestosPorComprar" FunctionName="SMModel.Store.RepuestosPorComprar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.RepuestosPorComprar_Result">
+          <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Requisición" ColumnName="Requisición" />
+          <ScalarProperty Name="Maximos" ColumnName="Maximos" />
+          <ScalarProperty Name="Minimos" ColumnName="Minimos" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SMModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SMModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SMModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SMModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SMModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SMModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SMModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SMModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

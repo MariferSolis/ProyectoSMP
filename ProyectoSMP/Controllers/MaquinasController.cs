@@ -18,18 +18,26 @@ namespace ProyectoSMP.Controllers
 
         // GET: Maquinas
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(/*string cadena*/)
         {
             if (TempData["Message"] != null)
             {
                 ViewBag.Message = TempData["Message"].ToString();
             }
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
             var maquina = db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).Where(x => x.Estado == true).ToList();
             return View(maquina.ToList());
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult Todos()
+        public ActionResult Todos(/*string cadena*/)
         {
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
             return View(db.Maquina.Include(m => m.AreaDeMaquina).Include(m => m.TipoDeSistemaDeMaquina).ToList());
         }
         public ActionResult Report()

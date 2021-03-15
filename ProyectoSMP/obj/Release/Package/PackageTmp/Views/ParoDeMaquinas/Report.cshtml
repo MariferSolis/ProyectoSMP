@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyectoSMP.Models.ParoDeMaquina>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Fallos</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    Máquina
+                </th>
+                <th>
+                    Mantenimiento asociado
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Fecha de Inicio
+                </th>
+                <th>
+                    Fecha de Finalización
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.NombreMaquina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaComienza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                </tr>
+            }
+
+        </table>
+</div>
+    </div>

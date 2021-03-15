@@ -1,0 +1,73 @@
+﻿@model ProyectoSMP.Models.ConsultarUnUsuarios_Result
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+                ViewBag.Title = "Details"; }
+        <h2>Detalles</h2>
+
+        <div class="table-responsive">
+            <h4>Usuario</h4>
+            <hr />
+
+            <h6>
+                <b>Identificación:</b>
+
+                @Html.DisplayFor(model => model.Identificacion)
+            </h6>
+            <h6>
+                <b>Tipo de Identificación:</b>
+
+                @Html.DisplayFor(model => model.Tipo_Identificacion)
+            </h6>
+            <h6>
+                <b>Nombre:</b>
+
+                @Html.DisplayFor(model => model.Nombre)
+            </h6>
+            <h6>
+                <b>Correo:</b>
+
+                @Html.DisplayFor(model => model.Correo)
+            </h6>
+            <h6>
+                <b>Cargo:</b>
+
+                @Html.DisplayFor(model => model.TipoCarga)
+            </h6>
+            <h6>
+                <b>Provincia:</b>
+
+                @Html.DisplayFor(model => model.Provincia)
+            </h6>
+            <h6>
+                <b>Cantón:</b>
+
+                @Html.DisplayFor(model => model.Canton)
+            </h6>
+            <h6>
+                <b>Distrito:</b>
+
+                @Html.DisplayFor(model => model.Distrito)
+            </h6>
+            <h6>
+                <b>Rol:</b>
+
+                @Html.DisplayFor(model => model.Rol)
+            </h6>
+            <h6>
+                <b>Estado:</b>
+
+                @if (Model.Estado == true)
+                {
+    @Html.Label("Activo") }
+else
+{
+    @Html.Label("Inactivo")}
+            </h6>
+
+            <hr />
+        </div>
+        <p>
+            <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
+            <button class="btn btn-outline-primary" type="button"><span class="glyphicon glyphicon-pencil"></span>@Html.ActionLink("Editar", "Edit", new { id = Model.IdUsuario }) 
+            </button>
+</p>

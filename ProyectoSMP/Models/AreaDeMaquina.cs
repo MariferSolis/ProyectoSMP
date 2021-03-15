@@ -29,6 +29,8 @@ namespace ProyectoSMP.Models
         [MaxLength(50)]
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
+        [MaxLength(20)]
+        public string Codigo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Maquina> Maquina { get; set; }

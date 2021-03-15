@@ -20,14 +20,18 @@ namespace ProyectoSMP.Controllers
 
         // GET: MantenimientoDeMaquinas
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(/*string cadena*/)
         {
             if (TempData["Message"] != null)
             {
                 ViewBag.Message = TempData["Message"].ToString();
             }
-            var mantenimientoDeMaquina = db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol);
-            return View(mantenimientoDeMaquina.ToList());
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
+            var mantenimientoDeMaquina = db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol).ToList();
+            return View(mantenimientoDeMaquina);
         }
         [Authorize(Roles = "Admin")]
         public FileResult Descargar(int? id)
@@ -41,7 +45,7 @@ namespace ProyectoSMP.Controllers
         public ActionResult Report()
         {
 
-            return View(db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol));
+            return View(db.Mantenimiento.Include(m => m.InventarioDeRepuestos).Include(m => m.Maquina).Include(m => m.Rol).ToList());
         }
         public ActionResult Print()
         {
@@ -72,15 +76,15 @@ namespace ProyectoSMP.Controllers
             {
                 ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
                 ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
-                ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
+                ViewBag.IdRol = new SelectList(db.Rol.Where(x => x.IdRol != 4), "IdRol", "Descripcion");
                 return View();
             }
             catch
             {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre");
             ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion");
-            return View();
+            ViewBag.IdRol = new SelectList(db.Rol.Where(x => x.IdRol != 4), "IdRol", "Descripcion");
+                return View();
             }
             
         }
@@ -96,16 +100,19 @@ namespace ProyectoSMP.Controllers
             {
             if (ModelState.IsValid)
             {
-                string path = Server.MapPath("~/Content/Archivos/");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                string nombre = path + Path.GetFileName(mantenimiento.Archivo.FileName);
-                mantenimiento.Archivo.SaveAs(path + Path.GetFileName(mantenimiento.Archivo.FileName));
-                mantenimiento.URLArchivo = nombre;
+                    if (mantenimiento.Archivo != null)
+                    {
+                        string path = Server.MapPath("~/Content/Archivos/");
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string nombre = path + Path.GetFileName(mantenimiento.Archivo.FileName);
+                        mantenimiento.Archivo.SaveAs(path + Path.GetFileName(mantenimiento.Archivo.FileName));
+                        mantenimiento.URLArchivo = nombre;
+                    }
                 db.AgregarMantenimiento(mantenimiento.IdMaquina,mantenimiento.Seccion,mantenimiento.NumeroOperacion,mantenimiento.NombreOperacion,
-                    mantenimiento.Frecuencia,mantenimiento.IdRol,mantenimiento.IdUsuario,mantenimiento.IdRepuesto,mantenimiento.Detalles,mantenimiento.URLArchivo);
+                    mantenimiento.Frecuencia,mantenimiento.IdRol,mantenimiento.IdUsuario,mantenimiento.IdRepuesto,mantenimiento.Detalles,mantenimiento.URLArchivo,mantenimiento.Duracion);
                 db.SaveChanges();
                     db.AgregarBitacora("Mantenimiento", "Crear", "El usuario realiza la acción de crear un Mantenimiento", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
                     @TempData["Message"] = "Se cargaron los archivos";
@@ -116,13 +123,13 @@ namespace ProyectoSMP.Controllers
             {
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.IdRol);
+            ViewBag.IdRol = new SelectList(db.Rol.Where(x => x.IdRol != 4), "IdRol", "Descripcion", mantenimiento.IdRol);
             
             return View(mantenimiento); 
             }
             ViewBag.IdRepuesto = new SelectList(db.InventarioDeRepuestos, "IdRepuesto", "Nombre", mantenimiento.IdRepuesto);
             ViewBag.IdMaquina = new SelectList(db.Maquina.Where(x => x.Estado == true).ToList(), "IdMaquina", "NombreMaquina", mantenimiento.IdMaquina);
-            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", mantenimiento.IdRol);
+            ViewBag.IdRol = new SelectList(db.Rol.Where(x => x.IdRol != 4), "IdRol", "Descripcion", mantenimiento.IdRol);
 
             return View(mantenimiento);
         }

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ProyectoSMP.Models.InventarioDeRepuestos>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Repuestos</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Requisición
+                </th>
+                <th>
+                    Máximos
+                </th>
+                <th>
+                    Minimos
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Almacén
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requisición)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Maximos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Minimos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Almacen)
+        </td>
+    </tr>
+}
+
+        </table>
+        </div>
+    </div>
+

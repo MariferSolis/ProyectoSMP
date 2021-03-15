@@ -17,6 +17,8 @@ namespace ProyectoSMP.Models
     {
         public int IdCumplimiento { get; set; }
         [Required]
+        public int IdMaquina { get; set; }
+        [Required]
         public int IdMantenimiento { get; set; }
         [Required]
         public System.DateTime Comienza { get; set; }
@@ -29,5 +31,6 @@ namespace ProyectoSMP.Models
         public string Color { get; set; }
 
         public virtual Mantenimiento Mantenimiento { get; set; }
+        public virtual Maquina Maquina { get; set; }
     }
 }

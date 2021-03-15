@@ -14,7 +14,7 @@ namespace ProyectoSMP.Models
 
     public class MantenimientoxMaquina_Result
     {
-        public SqlConnection Conexion = new SqlConnection("Server=DESKTOP-PC5S6Q1\\MARIA;Database= SMP;Integrated Security =true ");
+        public SqlConnection Conexion = new SqlConnection("Server=smbd.database.windows.net,1433;Initial Catalog=SM;Persist Security Info=False;User ID=Administrador;Password=Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         public SqlCommand cmd;
         public SqlDataReader dr;
 

@@ -7,12 +7,9 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.Services.Description;
-
 using System.Data;
 using System.Data.Entity;
-
 using System.Net;
-
 using System.Data.SqlClient;
 using System.Collections;
 using System.Data.Entity.ModelConfiguration.Configuration;
@@ -33,31 +30,22 @@ namespace ProyectoSMP.Controllers
             List<int> Cump = new List<int>();
             List<int> NoCump = new List<int>();
             man.cmd = new SqlCommand("MantenimientoxMaquina", man.Conexion);
-
             man.cmd.CommandType = CommandType.StoredProcedure;
-
             man.Conexion.Open();
             man.dr = man.cmd.ExecuteReader();
-
             while (man.dr.Read())
             {
-
                 Mantenimiento.Add(man.dr.GetInt32(0));
                 NombreMaq.Add(man.dr.GetString(1));
-
             }
             man.dr.Close();
             man.cmd = new SqlCommand("CumpNoCump", man.Conexion);
             man.cmd.CommandType = CommandType.StoredProcedure;
-
-
             man.dr = man.cmd.ExecuteReader();
             while (man.dr.Read())
             {
-
                 Cump.Add(man.dr.GetInt32(1));
                 NoCump.Add(man.dr.GetInt32(0));
-
             }
             man.dr.Close();
             man.cmd = new SqlCommand("ParoxMaquina", man.Conexion);
@@ -65,10 +53,8 @@ namespace ProyectoSMP.Controllers
             man.dr = man.cmd.ExecuteReader();
             while (man.dr.Read())
             {
-
                 Paro.Add(man.dr.GetInt32(0));
                 NombreMaquina.Add(man.dr.GetString(1));
-
             }
             man.dr.Close();
             ViewBag.NombreMaq = NombreMaq;

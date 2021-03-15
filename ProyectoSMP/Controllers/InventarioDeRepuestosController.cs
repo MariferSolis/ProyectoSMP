@@ -18,9 +18,13 @@ namespace ProyectoSMP.Controllers
 
         [Authorize(Roles = "Admin,Tecnico,Almacen")]
         // GET: InventarioDeRepuestos
-        public ActionResult Index()
+        public ActionResult Index(string cadena)
         {
-            return View(db.InventarioDeRepuestos.ToList());
+            if (cadena == null)
+            {
+                cadena = "";
+            }
+            return View(db.BuscarRepuesto(cadena).ToList());
         }
         public ActionResult Comprar()
         {

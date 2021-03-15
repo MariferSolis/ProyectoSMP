@@ -22,20 +22,27 @@ namespace ProyectoSMP.Controllers
 
         // GET: Usuarios
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(/*string cadena*/)
         {
             if (TempData["Message"] != null)
             {
                 ViewBag.Error = TempData["Message"].ToString();
             }
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
             var usuario = db.ConsultarUsuarios().Where(x => x.Estado == true).ToList();
             return View(usuario.ToList());
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult Todos()
+        public ActionResult Todos(string cadena)
         {
-
-            return View(db.Usuario.ToList());
+            if (cadena == null)
+            {
+                cadena = "";
+            }
+            return View(db.BuscarUsuario(cadena).ToList());
         }
         public ActionResult Report()
         {
@@ -93,24 +100,45 @@ namespace ProyectoSMP.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 var dato = db.ExisteCorreo(usuario.Correo).FirstOrDefault();
-                if(dato == null)
+                var id = db.ExisteIdentificación(usuario.Identificacion).FirstOrDefault();
+                if (id == null)
                 {
-                    var dia = DateTime.Today.ToString();
-                    usuario.Password = CreatePassword(10);
-                    var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
-                    var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password); 
-                    db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
-                    ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado,dia);
-                    BtnCorreo(usuario.Correo,usuario.Password,usuario.Nombre,usuario.Apellidos);  
-                    db.SaveChanges();
-                    db.AgregarBitacora("Usuarios", "Crear", "El usuario realiza la acción de crear un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
-                    return RedirectToAction("Index");
+                    if (dato == null)
+                    {
+                        var dia = DateTime.Today.ToString();
+                        usuario.Password = CreatePassword(10);
+                        var SecretKey = ConfigurationManager.AppSettings["SecretKey"];
+                        var ClaveEncriptada = Seguridad.EncryptString(SecretKey, usuario.Password);
+                        db.AgregarUsuario(usuario.Identificacion, usuario.IdTipoDeIdentificacion, usuario.Nombre, usuario.Apellidos, usuario.Correo,
+                        ClaveEncriptada, usuario.TipoCarga, usuario.Provincia, usuario.Canton, usuario.Distrito, usuario.IdRol, usuario.Estado, dia);
+                        BtnCorreo(usuario.Correo, usuario.Password, usuario.Nombre, usuario.Apellidos);
+                        db.SaveChanges();
+                        db.AgregarBitacora("Usuarios", "Crear", "El usuario realiza la acción de crear un tipo de usuario", Convert.ToInt32(Session["IdUsuario"]), DateTime.Now, "crear");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        @TempData["MessageCorreo"] = "El correo ya existe debe de ingresar otro";
+                        if (TempData["MessageCorreo"] != null)
+                        {
+                            ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();
+                        }
+                        ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Descripcion", usuario.IdRol);
+                        ViewBag.IdTipoDeIdentificacion = new SelectList(db.TipoDeIdentificacion.Where(x => x.Estado == true).ToList(), "IdTipoIdentificacion", "Descripcion", usuario.IdTipoDeIdentificacion);
+                        ViewBag.ListaProvincias = CargaProvincias();
+                        ViewBag.ListaEstado = new SelectList(new[] {
+                                   new SelectListItem { Value = "true", Text = "Activo" },
+                                   new SelectListItem { Value = "false", Text = "Inactivo" }
+                                                               }, "Value", "Text");
+                        return View(usuario);
+                    }
+
                 }
                 else
                 {
-                    @TempData["MessageCorreo"]= "El correo ya existe debe de ingresar otro";
+                    @TempData["MessageCorreo"] = "La Identificación ya existe debe de ingresar una valida";
                     if (TempData["MessageCorreo"] != null)
                     {
                         ViewBag.ErrorCorreo = TempData["MessageCorreo"].ToString();

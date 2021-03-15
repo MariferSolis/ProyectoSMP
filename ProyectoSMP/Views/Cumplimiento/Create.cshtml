@@ -8,53 +8,60 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Nueva Tarea</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.Hidden("IdCumplimiento", 0)
-
-        <div class="item form-group">
-            @Html.LabelFor(model => model.IdMantenimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdMantenimiento", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdMantenimiento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="item form-group">
-            @Html.LabelFor(model => model.Comienza, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comienza, new { htmlAttributes = new { @class = "datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.Comienza, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="item form-group">
-            @Html.LabelFor(model => model.Finaliza, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Finaliza, new { htmlAttributes = new { @class = "datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.Finaliza, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.Error
-            </div>}
-        <div class="item form-group">
-            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Color, new SelectList(ViewBag.ListaColores, "Value", "Text"), "Seleccione un color...", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
-                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <hr />
-        <div class="item form-group">
-            <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
-            <input type="submit" value="Crear" class="btn btn-outline-success" />
+<div class="form-horizontal">
+    <h4>Nueva Tarea</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.Hidden("IdCumplimiento", 0)
+    <div class="item form-group">
+        @Html.LabelFor(model => model.IdMaquina, "Máquina", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("IdMaquina", null, "Seleccione una Maquina...", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdMaquina, "", new { @class = "text-danger" })*@
+            @Html.DropDownListFor(model => model.IdMaquina, new SelectList(ViewBag.IdMaquina, "IdMaquina", "NombreMaquina"), "Seleccione una Máquina...", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
         </div>
     </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.IdMantenimiento, "Mantenimiento", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdMantenimiento, new SelectList(" "), "Seleccione un Mantenimiento...", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.Comienza, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comienza, new { htmlAttributes = new { @class = "datepicker form-control" } })
+            @Html.ValidationMessageFor(model => model.Comienza, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="item form-group">
+        @Html.LabelFor(model => model.Finaliza, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Finaliza, new { htmlAttributes = new { @class = "datepicker form-control" } })
+            @Html.ValidationMessageFor(model => model.Finaliza, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>}
+    <div class="item form-group">
+        @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Color, new SelectList(ViewBag.ListaColores, "Value", "Text"), "Seleccione un color...", new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+            @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <div class="item form-group">
+        <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
+        <input type="submit" value="Crear" class="btn btn-outline-success" />
+    </div>
+</div>
 
 
 }
@@ -98,5 +105,27 @@
             };
             $.datepicker.setDefaults($.datepicker.regional['es']);
         });
+
+    </script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#IdMaquina").change(function () {
+            $("#IdMantenimiento").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ConsultarMantenimientoxMaquinas")',
+                dataType: 'json',
+                data: { IdMaquina: $("#IdMaquina").val() },
+                success: function (mantenimientos) {
+                    $.each(mantenimientos, function (i, mantenimiento) {
+                        $("#IdMantenimiento").append('<option value="' + mantenimiento.IdMantenimiento + '">' +
+                            mantenimiento.NombreOperacion + '</option>');
+
+                    });
+                },
+            })
+        });
+    });
     </script>
 }

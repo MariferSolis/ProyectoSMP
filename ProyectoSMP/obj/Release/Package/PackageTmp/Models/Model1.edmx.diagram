@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="30653148873e45d99ae92a7d9ba9f6de" Name="Diagram1">
+        <EntityTypeShape EntityType="SMModel.AreaDeMaquina" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Bitacora" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Calendario" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Canton" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Cumplimiento" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Distrito" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.InventarioDeRepuestos" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Mantenimiento" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Maquina" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.ParoDeMaquina" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Provincia" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Rol" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.TipoDeIdentificacion" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.TipoDeSistemaDeMaquina" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMModel.Usuario" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="SMModel.FK_Maquina_AreaDeMaquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK__Canton__Provinci__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK__Canton__Provinci__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK__Distrito__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Cumplimiento_Mantenimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Mantenimiento_InventarioDeRepuestos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Mantenimiento_Maquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Mantenimiento_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Mantenimiento_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_ParoDeMaquina_Mantenimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Maquina_TipoDeSistemaDeMaquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_ParoDeMaquina_Maquina" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Usuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="SMModel.FK_Usuario_TipoDeIdentificacion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

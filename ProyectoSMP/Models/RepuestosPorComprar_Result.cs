@@ -21,5 +21,7 @@ namespace ProyectoSMP.Models
         public Nullable<int> Minimos { get; set; }
         public string Tipo { get; set; }
         public string Almacen { get; set; }
+        public Nullable<double> Precio { get; set; }
+        public string Proveedor { get; set; }
     }
 }

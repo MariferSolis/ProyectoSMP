@@ -1,4 +1,5 @@
 ﻿using ProyectoSMP.Models;
+using ProyectoSMP.Models.ViewModels;
 using ProyectoSMP.Tool;
 using System;
 using System.Collections.Generic;
@@ -121,11 +122,11 @@ namespace ProyectoSMP.Controllers
         public ActionResult StartRecovery()
         {
             
-            ProyectoSMP.Models.ViewModels.RecoveryViewModel model = new ProyectoSMP.Models.ViewModels.RecoveryViewModel();
+            RecoveryViewModel model = new RecoveryViewModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult StartRecovery(ProyectoSMP.Models.ViewModels.RecoveryViewModel model)
+        public ActionResult StartRecovery(RecoveryViewModel model)
         {
             try
             {
@@ -223,7 +224,7 @@ namespace ProyectoSMP.Controllers
             ViewBag.Message = "Contraseña modificada con éxito";
             return View("Login");
         }
-        string urlDomain = "https://localhost:44310/";
+        string urlDomain = "http://smprats.azurewebsites.net/";
         #region HELPERS
         private string GetSha256(string str)
         {

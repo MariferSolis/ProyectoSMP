@@ -19,8 +19,12 @@ namespace ProyectoSMP.Controllers
 
         // GET: ParoDeMaquinas
         [Authorize(Roles = "Admin,Tecnico,Operador")]
-        public ActionResult Index()
+        public ActionResult Index(/*string cadena*/)
         {
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
             var paroDeMaquina = db.ParoDeMaquina.Include(p => p.Mantenimiento).Include(p => p.Maquina);
             return View(paroDeMaquina.ToList());
         }

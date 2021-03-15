@@ -63,7 +63,7 @@ namespace ProyectoSMP.Controllers
             if (ModelState.IsValid)
             {
 
-                db.AgregarAreaDeMaquina(areaDeMaquina.Nombre, areaDeMaquina.Descripcion, areaDeMaquina.Estado);
+                db.AgregarAreaDeMaquina(areaDeMaquina.Nombre, areaDeMaquina.Codigo, areaDeMaquina.Descripcion, areaDeMaquina.Estado);
                 db.SaveChanges();
                 db.AgregarBitacora("AreaDeMaquinas","Crear","El usuario realiza la acción de crear un área",Convert.ToInt32(Session["IdUsuario"]),DateTime.Now, "crear");
                 return RedirectToAction("Index");
@@ -100,7 +100,7 @@ namespace ProyectoSMP.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdArea,Nombre,Descripcion,Estado")] AreaDeMaquina areaDeMaquina)
+        public ActionResult Edit([Bind(Include = "IdArea,Nombre,Codigo,Descripcion,Estado")] AreaDeMaquina areaDeMaquina)
         {
             if (ModelState.IsValid)
             {

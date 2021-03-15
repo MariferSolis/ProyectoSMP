@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ProyectoSMP.Models.Cumplimiento>
+@{ Layout = null;
+    ViewBag.Title = "Reporte"; }
+<div class="card-body">
+    <div class="table-responsive">
+        <table width="100%" cellspacing="0" border="1">
+            <th><img src="~/production/images/logo.PNG" /></th>
+            <th><h3>INDUSTRIAS DE OPTICA PRATS COSTA RICA</h3></th>
+            <th><h2>Reporte de Tareas</h2></th>
+        </table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+            <tr>
+                <th>
+                    Mantenimiento
+                </th>
+                <th>
+                    Comienza
+                </th>
+                <th>
+                    Finaliza
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Detalles
+                </th>
+                <th>
+                    Color
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mantenimiento.NombreOperacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comienza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Finaliza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @if (item.Estado == true)
+                        {
+                            @Html.Label("Realizado")
+                        }
+                        else if (item.Estado == false)
+                        {
+
+                            @Html.Label("Sin Realizar")
+                        }
+                        else
+                        {
+                            @Html.Label("Sin registro")
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalles)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    </div>

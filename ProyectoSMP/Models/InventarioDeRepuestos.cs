@@ -36,6 +36,8 @@ namespace ProyectoSMP.Models
         public string Tipo { get; set; }
         [MaxLength(50)]
         public string Almacen { get; set; }
+        public double Precio { get; set; }
+        public string Proveedor { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mantenimiento> Mantenimiento { get; set; }

@@ -26,13 +26,13 @@ namespace ProyectoSMP.Models
         public int IdMantenimiento { get; set; }
         [Required]
         public int IdMaquina { get; set; }
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Seccion { get; set; }
         [Range(1, 1000000000000000000)]
         public Nullable<int> NumeroOperacion { get; set; }
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string NombreOperacion { get; set; }
-        [Range(1, 100)]
+        [Range(1, 1000000000000)]
         public Nullable<int> Frecuencia { get; set; }
         public Nullable<int> IdRol { get; set; }
         public Nullable<int> IdUsuario { get; set; }
@@ -40,6 +40,8 @@ namespace ProyectoSMP.Models
         public string Detalles { get; set; }
         public string URLArchivo { get; set; }
         public HttpPostedFileBase Archivo { get; set; }
+        [Range(1, 1000000000000)]
+        public int Duracion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cumplimiento> Cumplimiento { get; set; }

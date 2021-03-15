@@ -1,0 +1,47 @@
+﻿@model ProyectoSMP.Models.TipoDeSistemaDeMaquina
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create"; }
+
+<h2>Crear</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Tipo de Sistema</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.Hidden("IdTipoSistema", 0)
+
+                    <div class="item form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        @Html.LabelFor(model => model.Descripcion,"Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Estado, new SelectList(ViewBag.ListaEstado, "Value", "Text"), new { @class = "form-control", style = "font-size: 1.3em; font-weight:700;" })
+                            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="item form-group">
+                        <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Regresar", "Index")</button>
+                        <input type="submit" value="Crear" class="btn btn-outline-success" />
+                    </div>
+                </div>
+                }
+<hr />

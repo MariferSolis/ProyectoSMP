@@ -19,17 +19,24 @@ namespace ProyectoSMP.Controllers
 
         // GET: CumplimientoMantenimientoes
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(/*string cadena*/)
         {
-            var cumpli = db.Cumplimiento.Include(m => m.Mantenimiento).ToList();  
+            //if (cadena == null)
+            //{
+            //    cadena = "";
+            //}
+            var cumpli = db.Cumplimiento.Include(m => m.Mantenimiento).Include(m => m.Maquina).ToList();  
             return View(cumpli);
         }
         [Authorize(Roles = "Admin,Tecnico,Operador")]
-        public ActionResult Index2()
+        public ActionResult Index2(string cadena)
         {
             var usuario = Session["IdUsuario"];
-
-            var plan = db.ConsultarCumplixUsuario(Convert.ToInt32(usuario)).ToList();
+            if (cadena == null)
+            {
+                cadena = "";
+            }
+            var plan = db.BuscarCumplixUsuario(Convert.ToInt32(usuario), cadena).ToList();
             return View(plan);
         }
         [Authorize(Roles = "Admin,Tecnico,Operador")]
@@ -130,7 +137,11 @@ namespace ProyectoSMP.Controllers
                                    new SelectListItem { Value = "amarillo", Text = "Amarillo" },
                                    new SelectListItem { Value = "rojo", Text = "Rojo" }
                                                                }, "Value", "Text");
-            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
+            ViewBag.IdMaquina = db.ConsultarMaquinaListaTareas();
+            //ViewBag.IdMaquina = new SelectList(db.Maquina, "IdMaquina", "NombreMaquina");
+            //ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion");
+            //Aqui va el buscar mantenimientos por maquina
+
             return View();
         }
       
@@ -163,7 +174,7 @@ namespace ProyectoSMP.Controllers
                                    new SelectListItem { Value = "amarillo", Text = "Amarillo" },
                                    new SelectListItem { Value = "rojo", Text = "Rojo" }
                                                                }, "Value", "Text");
-                    ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+                    ViewBag.IdMaquina = db.ConsultarMaquinaListaTareas();
                     return View(cumplimiento);
                 }             
             }
@@ -172,7 +183,8 @@ namespace ProyectoSMP.Controllers
                                    new SelectListItem { Value = "amarillo", Text = "Amarillo" },
                                    new SelectListItem { Value = "rojo", Text = "Rojo" }
                                                                }, "Value", "Text");
-            ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
+            ViewBag.IdMaquina = db.ConsultarMaquinaListaTareas();
+            //ViewBag.IdMantenimiento = new SelectList(db.Mantenimiento, "IdMantenimiento", "NombreOperacion", cumplimiento.IdMantenimiento);
             return View(cumplimiento);
         }
         [Authorize(Roles = "Admin")]
@@ -245,6 +257,17 @@ namespace ProyectoSMP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public List<ConsultarMantenimientoxMaquina_Result> ConsultarMantenimientoxMaquina(int IdMaquina)
+        {
+            List<ConsultarMantenimientoxMaquina_Result> usuarios = db.ConsultarMantenimientoxMaquina(IdMaquina).ToList();
+            return usuarios;
+        }
+        public JsonResult ConsultarMantenimientoxMaquinas(int IdMaquina)
+        {
+            List<ConsultarMantenimientoxMaquina_Result> usuarios = db.ConsultarMantenimientoxMaquina(IdMaquina).ToList();
+
+            return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
     }
 }
